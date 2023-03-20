@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>모바일 학생증</title>
+</head>
+<body>
+    <h1>모바일 학생증</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="data">ID:</label>
+        <input type="text" name="studentid" id="studentid">
+        <label for="data">password:</label>
+        <input type="password" name="password" id="password">
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>

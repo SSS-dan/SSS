@@ -1,0 +1,14 @@
+<!-- lecture_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>강의 시간표</h1>
+  <a href="{% url 'lecture_new' %}">새 강의 추가</a>
+  <ul>
+    {% for lecture in lectures %}
+      <li><a href="{% url 'lecture_detail' lecture.id %}">{{ lecture.title }}</a></li>
+    {% empty %}
+      <li>등록된 강의가 없습니다.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

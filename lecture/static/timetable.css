@@ -1,0 +1,35 @@
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+td {
+  border: 1px solid #ccc;
+  padding: 5px;
+  text-align: center;
+  width: 120px;
+}
+
+th {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  background-color: #f2f2f2;
+  width: 120px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.timetable-container {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.timetable-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}

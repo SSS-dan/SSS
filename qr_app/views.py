@@ -24,6 +24,7 @@ def generate_qr_code(id):
 
 def qr_code(request):
     if request.method == 'POST':
+        #백엔드 : 세인트 아이디 비번이 맞는지
         student_id = request.POST.get('studentid')
         image_bytes = generate_qr_code(student_id)
         context = {'qr_code': 'data:image/png;base64,' + base64.b64encode(image_bytes).decode()}

@@ -20,4 +20,5 @@ from django.urls import include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('qr_code/', include('qr_app.urls')),
+    path('lecture/',include('lecture.urls')),
 ]

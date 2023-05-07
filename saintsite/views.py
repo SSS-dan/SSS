@@ -16,3 +16,4 @@ def my_login_view(request):
         # GET 요청 처리
         pass
     return render(request, 'login.html')
+

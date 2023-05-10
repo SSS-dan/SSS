@@ -62,7 +62,7 @@ class Course(models.Model):
     day = models.IntegerField()
     start_time = models.TimeField()
     end_time = models.TimeField()
-    classroom = models.CharField(max_lengh=15)
+    classroom = models.CharField(max_length=15)
     advisor = models.CharField(max_length=30)
     major = models.CharField(max_length=30, null=True)
     objects = models.Manager()

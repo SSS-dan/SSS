@@ -9,7 +9,7 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['username',]
+    REQUIRED_FIELDS = []
 
 class NewUserAccountManager(BaseUserManager):
 

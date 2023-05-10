@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 # Create your models here.
 
@@ -70,9 +71,10 @@ class Course(models.Model):
     def get_course_by_id(cls, course_id, semester):
         return Course.objects.filter(course_id=course_id, semester=semester).first()
 
-    def update_time(self, new_day, new_time):
+    def update_time(self, new_day, start_hour, start_minute, end_hour, end_minute):
         self.day = new_day
-        self.time = new_time
+        self.start_time = datetime.time(start_hour, start_minute)
+        self.end_time = datetime.time(end_hour, end_minute)
         self.save()
 
     def update_classroom(self, new_classroom):
@@ -88,6 +90,7 @@ class Takes(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, primary_key=True)
     middle_grade = models.FloatField()
     final_grade = models.FloatField()
+    real = models.BooleanField()
     objects = models.Manager()
 
     @classmethod

@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from requests import Response
 # 경고 비활성화
 from urllib3.exceptions import InsecureRequestWarning
+
 requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
 
 

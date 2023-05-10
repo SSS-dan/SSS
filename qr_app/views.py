@@ -2,7 +2,6 @@ import base64
 import qrcode
 import datetime as dt
 from io import BytesIO
-from PIL import Image
 from django.http import HttpResponse
 from django.shortcuts import render
 import requests
@@ -21,7 +20,7 @@ def generate_qr_code(id):
 
     # 이미지 바이트로 변환
     buffer = BytesIO()
-    img.save(buffer, format='PNG')
+    img.save(buffer)
     image_bytes = buffer.getvalue()
     return image_bytes
 

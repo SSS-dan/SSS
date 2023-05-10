@@ -57,8 +57,8 @@ class Major(models.Model):
 
 
 class Course(models.Model):
-    course_id = models.CharField(max_length=10, primary_key=True)
-    semester = models.IntegerField(primary_key=True)
+    course_id = models.CharField(max_length=10)
+    semester = models.IntegerField()
     day = models.IntegerField()
     start_time = models.TimeField()
     end_time = models.TimeField()
@@ -86,8 +86,8 @@ class Course(models.Model):
 
 
 class Takes(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE, primary_key=True, related_name='takes')
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, primary_key=True)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='takes')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     middle_grade = models.FloatField()
     final_grade = models.FloatField()
     real = models.BooleanField()

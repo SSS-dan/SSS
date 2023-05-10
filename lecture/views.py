@@ -4,7 +4,8 @@ from .models import Lecture
 from .forms import LectureForm
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
-from models import *
+from pybo.models import *
+
 
 def lecture_list(request):
     lectures = Lecture.objects.all()
@@ -17,9 +18,11 @@ def lecture_list(request):
     context = {'lectures':lectures, 'times': times, 'days': days}
     return render(request, 'timetable.html', context)
 
+
 def lecture_detail(request, lecture_id):
     lecture = Course.get_course_by_id(lecture_id)
     return render(request, 'lecture_detail.html', {'lecture': lecture})
+
 
 @login_required
 def lecture_new(request):
@@ -35,6 +38,7 @@ def lecture_new(request):
         form = Takes()
     return render(request, 'lecture/create.html', {'form': form})
 
+
 def lecture_edit(request, lecture_id):
     lecture = Course.get_course_by_id(lecture_id)
     if request.method == 'POST':
@@ -46,6 +50,7 @@ def lecture_edit(request, lecture_id):
     else:
         form = LectureForm(instance=lecture)
     return render(request, 'lecture_edit.html', {'form': form})
+
 
 def lecture_delete(request, lecture_id):
     lecture = Course.get_course_by_id(lecture_id)

@@ -5,6 +5,7 @@ from requests import Response
 from urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
 
+
 def get_saint_cookies(id, pw):
     """
     모바일 세인트 로그인 후 쿠키를 받아오는 함수

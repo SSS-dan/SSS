@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'pybo.apps.PyboConfig',
     'lecture',
     'qr_app',
     'django.contrib.admin',
@@ -127,7 +128,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTHENTICATION_BACKENDS = (
     # ... your other backends
-    'config.auth_backend.PasswordlessAuthBackend',
+    'config.auth_backend.Passwordlessauthbackend',
 )
 
 AUTH_USER_MODEL = 'qr_app.NewUser'

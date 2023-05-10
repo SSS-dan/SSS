@@ -7,6 +7,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 import requests
 from bs4 import BeautifulSoup
+from models import *
 
 
 def generate_qr_code(id):

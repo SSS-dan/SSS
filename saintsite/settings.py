@@ -130,4 +130,4 @@ AUTHENTICATION_BACKENDS = (
     'saintsite.auth_backend.PasswordlessAuthBackend',
 )
 
-#AUTH_USER_MODEL = 'qr_app.Student'
+AUTH_USER_MODEL = 'qr_app.NewUser'

@@ -115,6 +115,7 @@ class Takes(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, primary_key=True)
     middle_grade = models.FloatField()
     final_grade = models.FloatField()
+    
 
     def delete_takes(self):
         self.delete()

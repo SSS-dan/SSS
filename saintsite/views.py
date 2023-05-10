@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from saintsite.crawl_saint import get_saint_cookies, pretty_print_takes_info, get_takes_info, get_student_info
 from saintsite.crawl_courses import crawl_courses
-#from .forms import StudentForm
+from qr_app.forms import RegisterForm
 
 
 def my_login_view(request):
@@ -17,8 +17,8 @@ def my_login_view(request):
             login(request, user)
             return redirect('home')
         else:
-            #form = StudentForm(request.POST)
-            #form.save()
+            form = RegisterForm(username=username)
+            form.save()
             return redirect('home')
     else:
         # GET 요청 처리

@@ -13,41 +13,41 @@ def lecture_list(request):
     days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
     # lectures 쿼리셋 객체 생성
     user = request.user
-    lectures = Lecture.objects.filter(user=user)
+    lectures = Student.get_student_by_id(user.username).Takes.course
     context = {'lectures':lectures, 'times': times, 'days': days}
     return render(request, 'timetable.html', context)
 
 def lecture_detail(request, lecture_id):
-    lecture = get_object_or_404(Lecture, pk=lecture_id)
+    lecture = Course.get_course_by_id(lecture_id)
     return render(request, 'lecture_detail.html', {'lecture': lecture})
 
 @login_required
 def lecture_new(request):
     print(request.user)
     if request.method == 'POST':
-        form = LectureForm(request.POST)
+        form = Takes(request.POST)
         if form.is_valid():
             lecture = form.save(commit=False)
-            lecture.user_id = request.user  # 로그인한 사용자의 정보로 채워줌
+            lecture.student = request.user.username  # 로그인한 사용자의 정보로 채워줌
             lecture.save()
             return redirect('timetable')
     else:
-        form = LectureForm()
+        form = Takes()
     return render(request, 'lecture/create.html', {'form': form})
 
 def lecture_edit(request, lecture_id):
-    lecture = get_object_or_404(Lecture, pk=lecture_id)
+    lecture = Course.get_course_by_id(lecture_id)
     if request.method == 'POST':
-        form = LectureForm(request.POST, instance=lecture)
+        form = Course(request.POST) 
         if form.is_valid():
             lecture = form.save(commit=False)
             lecture.save()
-            return redirect('lecture_detail', lecture_id=lecture.pk)
+            return redirect('lecture_detail', lecture_id=lecture.course_id)
     else:
         form = LectureForm(instance=lecture)
     return render(request, 'lecture_edit.html', {'form': form})
 
 def lecture_delete(request, lecture_id):
-    lecture = get_object_or_404(Lecture, pk=lecture_id)
+    lecture = Course.get_course_by_id(lecture_id)
     lecture.delete()
     return redirect('lecture_list')

@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
-from saintsite.crawl_saint import get_saint_cookies, pretty_print_takes_info, get_takes_info, get_student_info
-from saintsite.crawl_courses import crawl_courses
+from .crawl_saint import get_saint_cookies, pretty_print_takes_info, get_takes_info, get_student_info
+from .crawl_courses import crawl_courses
 from qr_app.forms import RegisterForm
 
 

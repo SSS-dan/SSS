@@ -4,6 +4,7 @@ from .models import Lecture
 from .forms import LectureForm
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
+from models import *
 
 def lecture_list(request):
     lectures = Lecture.objects.all()

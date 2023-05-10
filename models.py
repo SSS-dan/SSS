@@ -1,11 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import BaseUserManager, PermissionsMixin, AbstractBaseUser
+
 # Create your models here.
 
 
 class Department(models.Model):
     name = models.CharField(max_length=30, primary_key=True)
-    #head = models.ForeignKey('Professor', on_delete=models.CASCADE)
+    head = models.ForeignKey('Professor', on_delete=models.CASCADE)
 
     def update_head(self, new_head):
         self.head = new_head
@@ -18,7 +18,7 @@ class Department(models.Model):
 class Professor(models.Model):
     name = models.CharField(max_length=30)
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
-    lab = models.CharField(max_length=15)
+    lab = models.CharField(max_lengh=15)
 
     def update_student_state(self, new_state):
         self.state = new_state
@@ -28,8 +28,8 @@ class Professor(models.Model):
         self.delete()
 
 
-class Student(AbstractBaseUser, models.Model):
-    student_id = models.IntegerField()
+class Student(models.Model):
+    student_id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=30)
     state = models.IntegerField()
     year = models.IntegerField()
@@ -37,7 +37,7 @@ class Student(AbstractBaseUser, models.Model):
     advisor = models.ForeignKey(Professor, on_delete=models.CASCADE)
     login_cookie = models.CharField(max_length=50)
     objects = models.Manager()
-    USERNAME_FIELD = 'student_id'
+
     @classmethod
     def get_student_by_id(cls, student_id):
         return cls.objects.get(student_id=student_id)
@@ -72,7 +72,7 @@ class Student(AbstractBaseUser, models.Model):
 
 class Major(models.Model):
     student_id = models.ForeignKey(Student, on_delete=models.CASCADE, primary_key=True)
-    major = models.ForeignKey(Department, on_delete=models.CASCADE)
+    major = models.ForeignKey(Department, on_delete=models.CASCADE, primary_key=True)
     objects = models.Manager()
 
     @classmethod
@@ -85,10 +85,10 @@ class Major(models.Model):
 
 class Course(models.Model):
     course_id = models.CharField(max_length=10, primary_key=True)
-    semester = models.IntegerField()
+    semester = models.IntegerField(primary_key=True)
     day = models.IntegerField()
     time = models.IntegerField()
-    classroom = models.CharField(max_length=15)
+    classroom = models.CharField(max_lengh=15)
     professor_id = models.ForeignKey(Professor, on_delete=models.CASCADE)
     major = models.ForeignKey(Department, on_delete=models.CASCADE, null=True)
     objects = models.Manager()
@@ -112,7 +112,7 @@ class Course(models.Model):
 
 class Takes(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE, primary_key=True, related_name='takes')
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, primary_key=True)
     middle_grade = models.FloatField()
     final_grade = models.FloatField()
 

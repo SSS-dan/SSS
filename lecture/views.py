@@ -1,14 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Lecture
-from .forms import LectureForm
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 from pybo.models import *
 
 
 def lecture_list(request):
-    lectures = Lecture.objects.all()
     times = ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00']
     # days 리스트 정의
     days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
@@ -48,8 +45,7 @@ def lecture_edit(request, lecture_id):
             lecture.save()
             return redirect('lecture_detail', lecture_id=lecture.course_id)
     else:
-        form = LectureForm(instance=lecture)
-    return render(request, 'lecture_edit.html', {'form': form})
+        return render(request, 'lecture_edit.html', {'form': form})
 
 
 def lecture_delete(request, lecture_id):

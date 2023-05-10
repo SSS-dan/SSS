@@ -24,4 +24,5 @@ urlpatterns = [
     path('lecture/',include('lecture.urls')),
     path('', include('django.contrib.auth.urls')),
     path('logins/', my_login_view, name='my_login_view'),
+    path('pybo/', include('pybo.urls')),
 ]

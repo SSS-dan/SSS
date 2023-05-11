@@ -128,7 +128,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTHENTICATION_BACKENDS = (
     # ... your other backends
-    'config.auth_backend.Passwo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         rdlessAuthbackend',
+    'config.auth_backend.PasswordlessAuthbackend',
 )
 
 AUTH_USER_MODEL = 'qr_app.NewUser'

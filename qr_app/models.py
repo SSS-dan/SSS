@@ -2,15 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.core.validators import RegexValidator
 
-
-class NewUser(AbstractBaseUser, PermissionsMixin):
-
-    username = models.CharField(max_length=150, unique=True)
-    is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=False)
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = []
-
 class NewUserAccountManager(BaseUserManager):
 
     def create_superuser(self,username, password, **other_fields):
@@ -41,3 +32,12 @@ class NewUserAccountManager(BaseUserManager):
             user.save()
 
         return user
+    
+class NewUser(AbstractBaseUser, PermissionsMixin):
+    
+    username = models.CharField(max_length=150, unique=True)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False)
+    objects = NewUserAccountManager()
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = []

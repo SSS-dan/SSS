@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from .crawl_saint import get_saint_cookies, pretty_print_takes_info, get_takes_info, get_student_info
 from .crawl_courses import crawl_courses
-from qr_app.forms import RegisterForm
+from qr_app.models import NewUser
 
 
 def my_login_view(request):
@@ -15,11 +15,12 @@ def my_login_view(request):
         user = authenticate(username=username)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('qr_code')
         else:
-            form = RegisterForm(username=username)
+            form = NewUser()
+            form.username = username
             form.save()
-            return redirect('home')
+            return redirect('qr_code')
     else:
         # GET 요청 처리
         pass

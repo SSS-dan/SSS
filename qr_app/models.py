@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 from django.core.validators import RegexValidator
 
 class NewUserAccountManager(BaseUserManager):
-
+    
     def create_superuser(self,username, password, **other_fields):
         other_fields.setdefault('is_staff', True)
         other_fields.setdefault('is_superuser', True)
@@ -32,6 +32,7 @@ class NewUserAccountManager(BaseUserManager):
             user.save()
 
         return user
+    
     
 class NewUser(AbstractBaseUser, PermissionsMixin):
     

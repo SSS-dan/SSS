@@ -16,7 +16,7 @@ def my_login_view(request):
         user = PasswordlessAuthBackend().authenticate(username=username,cookies=cookies)
         # login 함수 호출
         auth_login(request, user)
-        return redirect('qr_app:qr_code')
+        return redirect('/')
     else:
         # GET 요청 처리
         pass

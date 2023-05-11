@@ -4,7 +4,7 @@ from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 from pybo.models import *
 from datetime import datetime,time
-
+from qr_app.models import User
 
 def lecture_list(request):
     times = ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00']
@@ -14,8 +14,8 @@ def lecture_list(request):
     days = [0 , 1, 2, 3, 4]
     # lectures 쿼리셋 객체 생성
     user = request.user
-    print(user.username)
-    lectures = Student.get_takes(user.username)
+    print(user.student_id)
+    lectures = User.get_takes(user.student_id)
     lec = []
     for i in lectures.all():
         temp = {}
@@ -48,12 +48,12 @@ def lecture_new(request):
         form.classroom = request.POST['classroom']
         form.advisor = request.POST['advisor']
         form.major=None
-        #form.student = Student.get_student_by_id(request.user.username)
+        #form.student = Student.get_student_by_id(request.user.student_id)
         #if form.is_valid():
         print(form)
         form.save()
         lecture = Takes()
-        lecture.student = Student.get_student_by_id(request.user.username)
+        lecture.student = User.get_student_by_id(request.user.student_id)
         lecture.course=form
         lecture.middle_grade=None
         lecture.final_grade = None
@@ -69,7 +69,7 @@ def lecture_select(request):
     if request.method is 'POST':
         form = Takes(request.POST)
         form.semester = 2124
-        form.student = request.user.username
+        form.student = request.user.student_id
         form.real = True
         #if form.is_valid():
         lecture = form.save(commit=False)

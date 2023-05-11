@@ -8,7 +8,7 @@ import requests
 from bs4 import BeautifulSoup
 from pybo.models import *
 from config.crawl_courses import crawl_courses
-
+from qr_app.models import User
 
 def generate_qr_code(id):
     # QR 코드 생성
@@ -32,7 +32,7 @@ def generate_qr_code(id):
 
 def qr_code(request):
     if request.user.is_authenticated:
-        image_bytes = generate_qr_code(request.user.username)
+        image_bytes = generate_qr_code(request.user.student_id)
         context = {'qr_code': 'data:image/png;base64,' + base64.b64encode(image_bytes).decode()}
         # print(crawl_courses('23', '1'))
         return render(request, 'qr_code.html', context=context)
@@ -42,12 +42,12 @@ def qr_code(request):
 def mainpage(request):
     user = request.user
     if user.is_authenticated:
-        image_bytes = generate_qr_code(request.user.username)
+        image_bytes = generate_qr_code(request.user.student_id)
         context = {
-            'username': request.user.username,
-            'student': Student.objects.get(student_id=request.user.username),
+            'username': request.user.student_id,
+            'student': User.objects.get(student_id=request.user.student_id),
             'qr_code': 'data:image/png;base64,' + base64.b64encode(image_bytes).decode()
         }
         return render(request, 'index.html', context=context)
     else:
-        return render(request, 'index.html', {"username": request.user.username})
+        return render(request, 'index.html')

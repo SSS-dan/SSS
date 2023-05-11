@@ -1,5 +1,4 @@
 from django.db import models
-from pybo.models import Student
 
 
 class Post(models.Model):

@@ -3,42 +3,57 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 from django.core.validators import RegexValidator
 
 
-class NewUser(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=150, unique=True)
+class User(AbstractBaseUser, PermissionsMixin):
+    student_id = models.CharField(max_length=15, primary_key=True, unique=True, default='')
+    name = models.CharField(max_length=30, default='')
+    state = models.IntegerField(default=0)
+    year = models.IntegerField(null=True)
+    semester = models.IntegerField(null=True)
+    major = models.CharField(max_length=100, null=True)
+    advisor = models.CharField(max_length=30, null=True)
+    login_cookie = models.CharField(max_length=50, null=True)
+    objects = models.Manager()
+
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
-    USERNAME_FIELD = 'username'
+    USERNAME_FIELD = 'student_id'
     REQUIRED_FIELDS = []
 
+    @classmethod
+    def get_student_by_id(cls, student_id):
+        return cls.objects.get(student_id=student_id)
 
-class NewUserAccountManager(BaseUserManager):
+    @classmethod
+    def get_login_cookie(cls, student_id):
+        return cls.objects.get(student_id=student_id).login_cookie
 
-    def create_superuser(self, username, password, **other_fields):
-        other_fields.setdefault('is_staff', True)
-        other_fields.setdefault('is_superuser', True)
-        other_fields.setdefault('is_active', True)
+    def update_student_major(self, new_major):
+        self.major = new_major
+        self.save()
 
-        if other_fields.get('is_staff') is not True:
-            raise ValueError('Superuser must be assigned to is_staff=True')
+    def update_student_name(self, new_name):
+        self.name = new_name
+        self.save()
 
-        if other_fields.get('is_superuser') is not True:
-            raise ValueError('Superuser must be assigned to is_superuser=True')
-        user = self.create_user(username, password, **other_fields)
-        user.set_password(password)
-        user.save()
-        return user
+    def update_student_state(self, new_state):
+        self.state = new_state
+        self.save()
 
-    def create_user(self, username, password, **other_fields):
-        if not email:
-            raise ValueError('Email address is required!')
-        email = self.normalize_email(email)
-        if password is not None:
-            user = self.model(username=username, password=password, **other_fields)
-            user.save()
-        else:
-            user = self.model(username=username, password=password, **other_fields)
-            user.set_unusable_password()
-            user.save()
+    def update_student_grade(self, new_year, new_semester):
+        self.year = new_year
+        self.semester = new_semester
+        self.save()
 
-        return user
+    def update_student_cookie(self, new_cookie):
+        self.cookie = new_cookie
+        self.save()
+
+    def delete_student(self):
+        self.delete()
+
+    @classmethod
+    def get_takes(cls, student_id):
+        return cls.objects.get(student_id=student_id).takes
+
+

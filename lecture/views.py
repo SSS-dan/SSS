@@ -26,12 +26,14 @@ def lecture_detail(request, lecture_id):
 def lecture_new(request):
     print(request.user)
     if request.method == 'POST':
-        print(request.POST)
+        #print(request.POST['name'])
         form = Course(course_id = None, semester = 3, name = request.POST['name'], day = request.POST['day'], start_time = request.POST['start_time'], end_time = request.POST['end_time'], classroom = request.POST['classroom'], advisor = request.POST['advisor'], major=None)
         #form.student = Student.get_student_by_id(request.user.username)
         #if form.is_valid():
+        print(form)
         form.save()
         lecture = Takes(student = Student.get_student_by_id(request.user.username),course=form,middle_grade=None, final_grade = None, real=False)
+        lecture.save()
         print(123)
         return redirect('timetable')
     else:

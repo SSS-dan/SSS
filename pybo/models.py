@@ -5,11 +5,12 @@ import datetime
 
 
 class Student(models.Model):
-    student_id = models.IntegerField(primary_key=True)
+    student_id = models.CharField(max_length=15, primary_key=True)
     name = models.CharField(max_length=30)
     state = models.IntegerField()
     year = models.IntegerField()
     semester = models.IntegerField()
+    major = models.CharField(max_length=100, null=True)
     advisor = models.CharField(max_length=30)
     login_cookie = models.CharField(max_length=50)
     objects = models.Manager()
@@ -45,19 +46,6 @@ class Student(models.Model):
     @classmethod
     def get_takes(cls, student_id):
         return cls.objects.get(student_id=student_id).takes
-
-    @classmethod
-    def get_major(cls, student_id):
-        return cls.objects.get(student_id=student_id).majors
-
-
-class Major(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='majors')
-    major = models.CharField(max_length=30)
-    objects = models.Manager()
-
-    def delete_major(self):
-        self.delete()
 
 
 class Course(models.Model):
@@ -101,4 +89,4 @@ class Takes(models.Model):
         self.delete()
 
 
-__all__ = ['Student', 'Major', 'Course', 'Takes']
+__all__ = ['Student', 'Course', 'Takes']

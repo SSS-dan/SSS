@@ -96,7 +96,7 @@ def crawl_courses(year, semester):
     try:
         target_url = "http://sis109.sogang.ac.kr/sap/bc/webdynpro/sap/zcmw9016?sap-language=KO&sap-cssurl=http%3a%2f%2fsaint.sogang.ac.kr%3a80%2fcom.sap.portal.design.urdesigndata%2fthemes%2fportal%2fcustom_tradeshow_01%2fls%2fls_sf3.css%3fv%3d10.30.7.261448.1491647873000#%20%3Chttp://sis109.sogang.ac.kr/sap/bc/webdynpro/sap/zcmw9016?sap-language=KO&sap-cssurl=http://saint.sogang.ac.kr:80/com.sap.portal.design.urdesigndata/themes/portal/custom_tradeshow_01/ls/ls_sf3.css?v%3d10.30.7.261448.1491647873000#"
         options = Options()
-        options.add_argument("--headless")
+        # options.add_argument("--headless")
         options.add_argument("window-size=1400,1500")
         driver = webdriver.Chrome(options=options)
 

@@ -14,18 +14,18 @@ class PasswordlessAuthBackend(ModelBackend):
         try:
             user = User_model.objects.get(username=username)
             student = Student.get_student_by_id(username)
-            print("이미 있음")
+            #print("이미 있음")
         except User_model.DoesNotExist:
             user = User_model(username=username)
             user.save()
-            info = get_student_info(cookies)
             student = Student()
+        #print(info)
         student.student_id = username
-        student.name = info.성명
+        student.name = info['성명']
         student.state = 1
-        student.year = int(info.현학기[0])
-        student.semester = int(info.현학기.split("/")[-1].strip().replace("학기",""))
-        student.advisor = info.지도교수
+        student.year = int(info['현학년/학기'][0])
+        student.semester = int(info['현학년/학기'].split("/")[-1].strip().replace("학기",""))
+        student.advisor = info['지도교수']
         student.login_cookie = cookies
         student.save()
         return user

@@ -1,56 +1,30 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Sogang Portal</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f3f3f3;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background-color: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        h1 {
-            margin-bottom: 30px;
-        }
-        a {
-            display: inline-block;
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        img {
-            margin-top: 20px;
-            width: 150px;
-            height: 150px;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
 </head>
-<body>
-    <div class="container">
-        <h1>학생 정보</h1>
-        <form method="POST">
-            {% csrf_token %}
-            {% if user.is_authenticated %}
-                <p>LOGGED IN!!!</p>
-                <p>print username : {{ username }}</p>
-                <img src="{{ qr_code }}" alt="QR Code">
-            {% else %}
-                <p>NOT LOGGED IN!!!</p>
-                <a href="{% url 'my_login_view' %}">로그인 페이지 이동</a>
-            {% endif %}
-        </form>
-    </div>
+<body class="bg-gray-200 flex items-center justify-center h-screen m-0">
+<div class="bg-white p-10 rounded shadow-md text-center">
+    <h1 class="mb-8 text-3xl">학생 정보</h1>
+    {% csrf_token %}
+    {% if user.is_authenticated %}
+        <p class="text-green-500">LOGGED IN!!!</p>
+        <p class="text-xl">학번 : {{ username }}</p>
+        <p class="text-xl">{{ student.name }}</p>
+        <p class="text-xl">전공: {{ student.major }}</p>  {{ TODO }}
+        <p class="text-xl">지도교수: {{ student.advisor }}</p>
+        <p class="text-xl">학년: {{ student.year }}</p>
+        <p class="text-xl">학기: {{ student.semester }}</p>
+
+        <img class="mt-4 w-36 h-36" src="{{ qr_code }}" alt="QR Code">
+    {% else %}
+        <p class="text-red-500">NOT LOGGED IN!!!</p>
+        <a class="inline-block bg-blue-500 text-white px-4 py-2 rounded text-decoration-none"
+           href="{% url 'my_login_view' %}">로그인 페이지 이동</a>
+    {% endif %}
+</div>
 </body>
 </html>

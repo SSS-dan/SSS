@@ -40,13 +40,14 @@ def qr_code(request):
 
 
 def mainpage(request):
-    # return render passing username
-    image_bytes = generate_qr_code(request.user.username)
-    context = {
-        'username': request.user.username,
-
-        'qr_code': 'data:image/png;base64,' + base64.b64encode(image_bytes).decode()
-    }
-
-    return render(request, 'index.html', context=context)
-    # return render(request, 'index.html', {"username": request.user.username})
+    user = request.user
+    if user.is_authenticated:
+        image_bytes = generate_qr_code(request.user.username)
+        context = {
+            'username': request.user.username,
+            'student': Student.objects.get(student_id=request.user.username),
+            'qr_code': 'data:image/png;base64,' + base64.b64encode(image_bytes).decode()
+        }
+        return render(request, 'index.html', context=context)
+    else:
+        return render(request, 'index.html', {"username": request.user.username})

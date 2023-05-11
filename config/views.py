@@ -12,7 +12,7 @@ def my_login_view(request):
         password = request.POST.get('password')
         cookies = get_saint_cookies(username, password)
         if cookies is None:
-            return render(request, 'logins.html')
+            return render(request, 'login.html')
         user = PasswordlessAuthBackend().authenticate(username=username,cookies=cookies)
         # login 함수 호출
         auth_login(request, user)
@@ -20,5 +20,5 @@ def my_login_view(request):
     else:
         # GET 요청 처리
         pass
-    return render(request, 'logins.html')
+    return render(request, 'login.html')
 

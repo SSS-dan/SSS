@@ -55,10 +55,11 @@ class Student(models.Model):
 class Course(models.Model):
     course_id = models.CharField(max_length=10, null=True)
     semester = models.IntegerField()
+    name = models.CharField(max_length=30, null=True)
     day = models.IntegerField()
     start_time = models.TimeField()
     end_time = models.TimeField()
-    classroom = models.CharField(max_length=15)
+    classroom = models.CharField(max_length=15, default='')
     advisor = models.CharField(max_length=30)
     major = models.CharField(max_length=30, null=True)
     objects = models.Manager()
@@ -66,6 +67,10 @@ class Course(models.Model):
     @classmethod
     def get_course_by_id(cls, course_id, semester):
         return cls.objects.get(course_id=course_id, semester=semester)
+
+    def update_name(self, new_name):
+        self.name = new_name
+        self.save()
 
     def update_time(self, new_day, start_hour, start_minute, end_hour, end_minute):
         self.day = new_day

@@ -25,4 +25,5 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('logins/', my_login_view, name='my_login_view'),
     path('pybo/', include('pybo.urls')),
+    path('posts/', include('posts.urls')),
 ]

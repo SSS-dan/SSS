@@ -1,35 +1,37 @@
-<div class="post">
-  <h2>{{ post.title }}</h2>
-  <p>{{ post.content }}</p>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/output.css' %}">
+
+<div class="post bg-white shadow p-4 rounded mb-6">
+  <h2 class="text-2xl font-bold mb-2">{{ post.title }}</h2>
+  <p class="text-gray-700">{{ post.content }}</p>
 </div>
 
+<hr class="my-4">
 
+<h3 class="text-xl font-bold mb-2">댓글</h3>
 
-<hr>
-
-<h3>댓글</h3>
-
+<div class="space-y-4">
 {% for comment in comments %}
-  <div class="comment">
-    <p>{{ comment.content }}</p>
-    <p>{{ comment.author.name }}</p>
-    <p>{{ comment.created_at }}</p>
+  <div class="comment bg-gray-100 p-4 rounded">
+    <p class="text-gray-700">{{ comment.content }}</p>
+    <p class="text-sm text-gray-500">{{ comment.author.name }}</p>
+    <p class="text-sm text-gray-500">{{ comment.created_at }}</p>
   </div>
 {% empty %}
-  <p>댓글이 없습니다.</p>
+  <p class="text-gray-500">댓글이 없습니다.</p>
 {% endfor %}
+</div>
 
-<hr>
+<hr class="my-4">
 
-<h3>댓글 작성</h3>
-<form method="post" action="{% url 'post_detail' post_id=post.id %}">
+<h3 class="text-xl font-bold mb-2">댓글 작성</h3>
+<form method="post" class="space-y-4 border-gray-300" action="{% url 'post_detail' post_id=post.id %}">
   {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">댓글 작성</button>
+  <div class="form">{{ form.as_p }}</div>
+  <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded text-decoration-none hover:bg-blue-700">댓글 작성</button>
 </form>
 
-
 <!-- 목록 버튼 -->
-<form method="get" action="{% url 'post_list' %}">
-  <button type="submit">목록</button>
+<form method="get" class="mt-4" action="{% url 'post_list' %}">
+  <button type="submit" class="bg-gray-500 text-white px-4 py-2 rounded text-decoration-none hover:bg-gray-700">목록</button>
 </form>

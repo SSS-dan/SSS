@@ -30,6 +30,6 @@ def qr_code(request):
     if request.user.is_authenticated:
         image_bytes = generate_qr_code(request.user.username)
         context = {'qr_code': 'data:image/png;base64,' + base64.b64encode(image_bytes).decode()}
-        print(crawl_courses('2023', '1'))
+        # print(crawl_courses('23', '1'))
         return render(request, 'qr_code.html', context=context)
     return render(request, 'index.html')

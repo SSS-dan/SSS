@@ -42,15 +42,19 @@ class Student(models.Model):
     def delete_student(self):
         self.delete()
 
-
-class Major(models.Model):
-    student_id = models.ForeignKey(Student, on_delete=models.CASCADE, primary_key=True)
-    major = models.CharField(max_length=30)
-    objects = models.Manager()
+    @classmethod
+    def get_takes(cls, student_id):
+        return cls.objects.get(student_id=student_id).takes
 
     @classmethod
-    def get_major_by_id(cls, student_id):
-        return Major.objects.filter(student_id=student_id).major
+    def get_major(cls, student_id):
+        return cls.objects.get(student_id=student_id).majors
+
+
+class Major(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='majors')
+    major = models.CharField(max_length=30)
+    objects = models.Manager()
 
     def delete_major(self):
         self.delete()
@@ -69,7 +73,7 @@ class Course(models.Model):
 
     @classmethod
     def get_course_by_id(cls, course_id, semester):
-        return Course.objects.filter(course_id=course_id, semester=semester).first()
+        return cls.objects.get(course_id=course_id, semester=semester)
 
     def update_time(self, new_day, start_hour, start_minute, end_hour, end_minute):
         self.day = new_day
@@ -92,10 +96,6 @@ class Takes(models.Model):
     final_grade = models.FloatField()
     real = models.BooleanField()
     objects = models.Manager()
-
-    @classmethod
-    def get_takes(cls, student_id):
-        return Takes.objects.filter(student_id=student_id)
 
     def delete_takes(self):
         self.delete()

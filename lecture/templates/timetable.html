@@ -20,9 +20,9 @@
       <td>{{ time }}</td>
       {% for day in days %}
       <td>
-        {% for lecture in lectures %}
-        {% if lecture.day == day and lecture.start_time <= time and lecture.end_time >= time %}
-        {{ lecture.name }}
+        {% for i in lectures %}
+        {% if i.day == day and i.start_time <= time and i.end_time >= time %}
+        {{ i.name }}
         {% endif %}
         {% endfor %}
       </td>

@@ -1,5 +1,7 @@
 from django.contrib.auth.backends import ModelBackend
 from qr_app.models import NewUser
+from pybo.models import *
+from .crawl_saint import get_saint_cookies, pretty_print_takes_info, get_takes_info, get_student_info
 
 User_model = NewUser
 
@@ -7,14 +9,25 @@ class PasswordlessAuthBackend(ModelBackend):
     """Log in to Django without providing a password.
 
     """
-    def authenticate(self, username=None):
-        print(123)
+    def authenticate(self, username=None, cookies=None):
+        info = get_student_info(cookies)
         try:
             user = User_model.objects.get(username=username)
+            student = Student.get_student_by_id(username)
             print("이미 있음")
         except User_model.DoesNotExist:
             user = User_model(username=username)
             user.save()
+            info = get_student_info(cookies)
+            student = Student()
+        student.student_id = username
+        student.name = info.성명
+        student.state = 1
+        student.year = int(info.현학기[0])
+        student.semester = int(info.현학기.split("/")[-1].strip().replace("학기",""))
+        student.advisor = info.지도교수
+        student.login_cookie = cookies
+        student.save()
         return user
 
 

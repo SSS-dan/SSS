@@ -1,19 +1,26 @@
 from django.contrib.auth.backends import ModelBackend
-from django.contrib.auth.models import User
+from qr_app.models import NewUser
 
+User_model = NewUser()
 
 class PasswordlessAuthBackend(ModelBackend):
     """Log in to Django without providing a password.
 
     """
     def authenticate(self, username=None):
-        try:
-            return User.objects.get(username=username)
-        except User.DoesNotExist:
-            return None
+        print(123)
+        return 123
+        '''try:
+            user = User_model.objects.get(username=username)
+            print(user)
+        except User_model.DoesNotExist:
+            user = NewUser(username=username)
+            user.save()
+        return user
+            '''
 
     def get_user(self, user_id):
         try:
-            return User.objects.get(pk=user_id)
-        except User.DoesNotExist:
+            return User_model.objects.get(pk=user_id)
+        except User_model.DoesNotExist:
             return None

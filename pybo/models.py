@@ -49,7 +49,7 @@ class Student(models.Model):
 
     @classmethod
     def get_takes(cls, student_id):
-        return cls.objects.filter(student_id=student_id).takes
+        return cls.objects.get(student_id=student_id).takes
 
 
 class Course(models.Model):

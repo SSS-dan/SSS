@@ -23,6 +23,10 @@ class Student(models.Model):
     def get_login_cookie(cls, student_id):
         return cls.objects.get(student_id=student_id).login_cookie
 
+    def update_student_major(self, new_major):
+        self.major = new_major
+        self.save()
+
     def update_student_name(self, new_name):
         self.name = new_name
         self.save()
@@ -45,11 +49,11 @@ class Student(models.Model):
 
     @classmethod
     def get_takes(cls, student_id):
-        return cls.objects.get(student_id=student_id).takes
+        return cls.objects.filter(student_id=student_id).takes
 
 
 class Course(models.Model):
-    course_id = models.CharField(max_length=10)
+    course_id = models.CharField(max_length=10, null=True)
     semester = models.IntegerField()
     day = models.IntegerField()
     start_time = models.TimeField()
@@ -80,8 +84,8 @@ class Course(models.Model):
 class Takes(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='takes')
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    middle_grade = models.FloatField()
-    final_grade = models.FloatField()
+    middle_grade = models.FloatField(null=True)
+    final_grade = models.FloatField(null=True)
     real = models.BooleanField()
     objects = models.Manager()
 

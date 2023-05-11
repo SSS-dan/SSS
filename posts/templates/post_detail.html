@@ -1,0 +1,35 @@
+<div class="post">
+  <h2>{{ post.title }}</h2>
+  <p>{{ post.content }}</p>
+</div>
+
+
+
+<hr>
+
+<h3>댓글</h3>
+
+{% for comment in comments %}
+  <div class="comment">
+    <p>{{ comment.content }}</p>
+    <p>{{ comment.author.name }}</p>
+    <p>{{ comment.created_at }}</p>
+  </div>
+{% empty %}
+  <p>댓글이 없습니다.</p>
+{% endfor %}
+
+<hr>
+
+<h3>댓글 작성</h3>
+<form method="post" action="{% url 'post_detail' post_id=post.id %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">댓글 작성</button>
+</form>
+
+
+<!-- 목록 버튼 -->
+<form method="get" action="{% url 'post_list' %}">
+  <button type="submit">목록</button>
+</form>

@@ -1,0 +1,12 @@
+<!-- 게시글 목록 -->
+{% for post in posts %}
+  <div class="post">
+    <h2><a href="{% url 'post_detail' post_id=post.id %}">{{ post.title }}</a></h2>
+  </div>
+{% empty %}
+  <p>게시글이 없습니다.</p>
+{% endfor %}
+
+
+<!-- 게시글 작성 버튼 -->
+<a href="{% url 'create_post' %}">게시글 작성</a>

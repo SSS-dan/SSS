@@ -1,17 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>모바일 학생증</title>
+    <title>Sogang Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 30px;
+        }
+        a {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        img {
+            margin-top: 20px;
+            width: 150px;
+            height: 150px;
+        }
+    </style>
 </head>
 <body>
-    <h1>모바일 학생증</h1>
-    <form method="POST">
-        {% csrf_token %}
-        <label for="data">ID:</label>
-        <input type="text" name="studentid" id="studentid">
-        <label for="data">password:</label>
-        <input type="password" name="password" id="password">
-        <button type="submit">Login</button>
-    </form>
+    <div class="container">
+        <h1>학생 정보</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {% if user.is_authenticated %}
+                <p>LOGGED IN!!!</p>
+                <p>print username : {{ username }}</p>
+                <img src="{{ qr_code }}" alt="QR Code">
+            {% else %}
+                <p>NOT LOGGED IN!!!</p>
+                <a href="{% url 'my_login_view' %}">로그인 페이지 이동</a>
+            {% endif %}
+        </form>
+    </div>
 </body>
 </html>

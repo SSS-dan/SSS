@@ -23,6 +23,10 @@ def generate_qr_code(id):
     buffer = BytesIO()
     img.save(buffer)
     image_bytes = buffer.getvalue()
+
+    # Debugging
+    print(f"generate_qr_code called with id: {id}, image_bytes length: {len(image_bytes)}")
+
     return image_bytes
 
 
@@ -33,3 +37,16 @@ def qr_code(request):
         # print(crawl_courses('23', '1'))
         return render(request, 'qr_code.html', context=context)
     return render(request, 'index.html')
+
+
+def mainpage(request):
+    # return render passing username
+    image_bytes = generate_qr_code(request.user.username)
+    context = {
+        'username': request.user.username,
+
+        'qr_code': 'data:image/png;base64,' + base64.b64encode(image_bytes).decode()
+    }
+
+    return render(request, 'index.html', context=context)
+    # return render(request, 'index.html', {"username": request.user.username})

@@ -11,7 +11,8 @@ def lecture_list(request):
     days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
     # lectures 쿼리셋 객체 생성
     user = request.user
-    lectures = Student.get_student_by_id(user.username).Takes.course
+    print(user.username)
+    lectures = Student.get_takes(user.username).course
     context = {'lectures':lectures, 'times': times, 'days': days}
     return render(request, 'timetable.html', context)
 
@@ -25,15 +26,31 @@ def lecture_detail(request, lecture_id):
 def lecture_new(request):
     print(request.user)
     if request.method == 'POST':
-        form = Takes(request.POST)
-        if form.is_valid():
-            lecture = form.save(commit=False)
-            lecture.student = request.user.username  # 로그인한 사용자의 정보로 채워줌
-            lecture.save()
-            return redirect('timetable')
+        print(request.POST)
+        form = Course(course_id = None, semester = 3, name = request.POST['name'], day = request.POST['day'], start_time = request.POST['start_time'], end_time = request.POST['end_time'], classroom = request.POST['classroom'], advisor = request.POST['advisor'], major=None)
+        #form.student = Student.get_student_by_id(request.user.username)
+        #if form.is_valid():
+        form.save()
+        lecture = Takes(student = Student.get_student_by_id(request.user.username),course=form,middle_grade=None, final_grade = None, real=False)
+        print(123)
+        return redirect('timetable')
     else:
         form = Takes()
     return render(request, 'lecture/create.html', {'form': form})
+
+def lecture_select(request):
+    if request.method is 'POST':
+        form = Takes(request.POST)
+        form.semester = 2124
+        form.student = request.user.username
+        form.real = True
+        #if form.is_valid():
+        lecture = form.save(commit=False)
+        lecture.save()
+        return redirect('timetable')
+    else:
+        form = Takes()
+    return render(request, 'lecture_select.html', {'form':form})
 
 
 def lecture_edit(request, lecture_id):

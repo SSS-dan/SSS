@@ -21,7 +21,7 @@
       {% for day in days %}
       <td>
         {% for lecture in lectures %}
-        {% if lecture.day_of_week == day and lecture.start_time <= time and lecture.end_time >= time %}
+        {% if lecture.day == day and lecture.start_time <= time and lecture.end_time >= time %}
         {{ lecture.name }}
         {% endif %}
         {% endfor %}

@@ -110,7 +110,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'ASIA/SEOUL'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 

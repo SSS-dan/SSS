@@ -1,9 +1,8 @@
 from django.urls import path
-
-from . import views
+from qr_app import views as qr_app
 
 app_name = 'pybo'
 
 urlpatterns = [
-    path('', views.index),
+    path('', qr_app.mainpage),
 ]

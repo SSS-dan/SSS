@@ -119,20 +119,20 @@ def crawl_courses(year, semester):
         sleep(0.5)
         driver.find_element(By.XPATH, r'//*[@id="WD4A"]').click()
 
-        # 학기 선택
+            # 학기 선택
         sleep(0.5)
         driver.find_element(By.XPATH, semester_xpath).click()
-        # WD4C WD4D WD4E WD4F
+            # WD4C WD4D WD4E WD4F
 
-        # 소속구분 Form 선택 후 클릭
+            # 소속구분 Form 선택 후 클릭
         sleep(0.5)
         driver.find_element(By.XPATH, r'//*[@id="WD7E"]').click()
 
-        # 학부 클릭
+            # 학부 클릭
         sleep(0.5)
         driver.find_element(By.XPATH, r'//*[@id="WD80"]').click()
 
-        # 검색 클릭
+            # 검색 클릭
         sleep(1.5)
         driver.find_element(By.XPATH, r'//*[@id="WDB4"]').click()
         contentTable = '//*[@id="WDB8-contentTBody"]/tr[3]'
@@ -141,7 +141,7 @@ def crawl_courses(year, semester):
         print('Resource fetching done')
         print('Saving data...')
 
-        # 스크래핑
+            # 스크래핑
         html = driver.page_source
         result_df = lxmlToDataframe(html)
         result_df = preprocessor(result_df)

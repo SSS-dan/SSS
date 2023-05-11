@@ -3,17 +3,28 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 from pybo.models import *
+from datetime import datetime,time
 
 
 def lecture_list(request):
     times = ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00']
+    for i in range(len(times)):
+        times[i] = datetime.strptime(times[i], '%H:%M').time()
     # days 리스트 정의
-    days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+    days = [0 , 1, 2, 3, 4]
     # lectures 쿼리셋 객체 생성
     user = request.user
     print(user.username)
-    lectures = Student.get_takes(user.username).course
-    context = {'lectures':lectures, 'times': times, 'days': days}
+    lectures = Student.get_takes(user.username)
+    lec = []
+    for i in lectures.all():
+        temp = {}
+        temp['day'] = 1
+        temp['start_time'] = i.course.start_time
+        temp['end_time'] = i.course.end_time
+        temp['name'] = i.course.name
+        lec.append(temp)
+    context = {'lectures' : lec,'times': times, 'days': days}
     return render(request, 'timetable.html', context)
 
 
@@ -27,15 +38,29 @@ def lecture_new(request):
     print(request.user)
     if request.method == 'POST':
         #print(request.POST['name'])
-        form = Course(course_id = None, semester = 3, name = request.POST['name'], day = request.POST['day'], start_time = request.POST['start_time'], end_time = request.POST['end_time'], classroom = request.POST['classroom'], advisor = request.POST['advisor'], major=None)
+        form = Course()
+        form.course_id = None
+        form.semester = 3
+        form.name = request.POST['name']
+        form.day = request.POST['day']
+        form.start_time = request.POST['start_time']
+        form.end_time = request.POST['end_time']
+        form.classroom = request.POST['classroom']
+        form.advisor = request.POST['advisor']
+        form.major=None
         #form.student = Student.get_student_by_id(request.user.username)
         #if form.is_valid():
         print(form)
         form.save()
-        lecture = Takes(student = Student.get_student_by_id(request.user.username),course=form,middle_grade=None, final_grade = None, real=False)
+        lecture = Takes()
+        lecture.student = Student.get_student_by_id(request.user.username)
+        lecture.course=form
+        lecture.middle_grade=None
+        lecture.final_grade = None
+        lecture.real=False
         lecture.save()
         print(123)
-        return redirect('timetable')
+        return redirect('lecture_list')
     else:
         form = Takes()
     return render(request, 'lecture/create.html', {'form': form})

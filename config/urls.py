@@ -19,11 +19,11 @@ from django.urls import include
 from config.views import my_login_view
 
 urlpatterns = [
+    path('', include('pybo.urls'), name='home'),
     path('admin/', admin.site.urls),
     path('qr_code/', include('qr_app.urls')),
     path('lecture/',include('lecture.urls')),
-    path('', include('django.contrib.auth.urls')),
-    path('logins/', my_login_view, name='my_login_view'),
+    path('login/', my_login_view, name='my_login_view'),
     path('pybo/', include('pybo.urls')),
     path('posts/', include('posts.urls')),
 ]

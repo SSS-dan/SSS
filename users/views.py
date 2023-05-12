@@ -8,7 +8,7 @@ import requests
 from bs4 import BeautifulSoup
 from pybo.models import *
 from config.crawl_courses import crawl_courses
-from qr_app.models import User
+from users.models import User
 
 def generate_qr_code(id):
     # QR 코드 생성

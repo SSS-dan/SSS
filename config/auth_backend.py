@@ -1,5 +1,5 @@
 from django.contrib.auth.backends import ModelBackend
-from qr_app.models import User
+from users.models import User
 from pybo.models import *
 from .crawl_saint import get_saint_cookies, pretty_print_takes_info, get_takes_info, get_student_info
 

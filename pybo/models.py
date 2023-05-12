@@ -1,6 +1,6 @@
 from django.db import models
 import datetime
-from qr_app.models import User
+from users.models import User
 
 # Create your models here.
 

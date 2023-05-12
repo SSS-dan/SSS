@@ -29,7 +29,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'qr_app',
+    'users',
     'posts.apps.PostsConfig',
     'pybo.apps.PyboConfig',
     'lecture',
@@ -130,4 +130,4 @@ AUTHENTICATION_BACKENDS = (
     'config.auth_backend.PasswordlessAuthBackend',
 )
 
-AUTH_USER_MODEL = 'qr_app.User'
+AUTH_USER_MODEL = 'users.User'

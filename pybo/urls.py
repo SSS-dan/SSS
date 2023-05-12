@@ -1,5 +1,5 @@
 from django.urls import path
-from qr_app import views as qr_app
+from users import views as qr_app
 
 app_name = 'pybo'
 

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from qr_app.models import User as Student
+from users.models import User as Student
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 

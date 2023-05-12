@@ -4,7 +4,7 @@ from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 from pybo.models import *
 from datetime import datetime,time
-from qr_app.models import User
+from users.models import User
 
 def lecture_list(request):
     times = ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00']

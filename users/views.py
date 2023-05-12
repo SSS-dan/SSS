@@ -10,6 +10,7 @@ from pybo.models import *
 from config.crawl_courses import crawl_courses
 from users.models import User
 
+
 def generate_qr_code(id):
     # QR 코드 생성
     qr = qrcode.QRCode(version=1, box_size=10, border=5)

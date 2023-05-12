@@ -14,7 +14,7 @@
 {% for comment in comments %}
   <div class="comment bg-gray-100 p-4 rounded">
     <p class="text-gray-700">{{ comment.content }}</p>
-    <p class="text-sm text-gray-500">{{ comment.author.name }}</p>
+    <p class="text-sm text-gray-500">{{ comment.author.student_id }}</p>
     <p class="text-sm text-gray-500">{{ comment.created_at }}</p>
   </div>
 {% empty %}

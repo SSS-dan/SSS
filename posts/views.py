@@ -8,7 +8,9 @@ def create_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
-            form.save()
+            post = form.save(commit=False)
+            post.author = request.user  # 현재 인증된 사용자를 작성자로 설정
+            post.save()
             return redirect('post_list')
     else:
         form = PostForm()
@@ -35,7 +37,7 @@ def post_detail(request, post_id):
             # 폼이 유효한 경우, 댓글을 생성합니다.
             comment = form.save(commit=False)
             comment.post = post
-            comment.author = Student.objects.get(id=request.user.username)
+            comment.author = request.user
             comment.save()
             return redirect('post_detail', post_id=post_id)
     else:

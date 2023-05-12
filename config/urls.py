@@ -24,6 +24,5 @@ urlpatterns = [
     path('qr_code/', include('users.urls')),
     path('lecture/',include('lecture.urls')),
     path('login/', my_login_view, name='my_login_view'),
-    path('pybo/', include('pybo.urls')),
     path('posts/', include('posts.urls')),
 ]

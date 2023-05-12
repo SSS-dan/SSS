@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from users.models import User as Student
-from .models import Post, Comment
-from .forms import PostForm, CommentForm
+from users.models import User
+from .models import Post, Comment, PostsUser
+from .forms import PostForm, CommentForm, NicknameForm
 
 
 def create_post(request):
@@ -20,6 +20,9 @@ def create_post(request):
 
 def post_list(request):
     # 모든 게시글을 가져와서 템플릿에 전달합니다.
+    if not request.user.post_manage.exists():
+        return nickname(request)
+
     posts = Post.objects.all()
     return render(request, 'post_list.html', {'posts': posts})
 
@@ -45,3 +48,20 @@ def post_detail(request, post_id):
         form = CommentForm()
 
     return render(request, 'post_detail.html', {'post': post, 'comments': comments, 'form': form})
+
+
+def nickname(request):
+    if request.method == 'POST':
+        form = NicknameForm(request.POST)
+        if form.is_valid():
+            nick = form.save(commit=False)
+            nick.user = request.user
+            nick.save()
+            # 닉네임을 활용한 추가 동작 수행
+            # 예: 사용자 모델에 닉네임 저장
+
+            return redirect('post_list')  # 닉네임 입력 후 create_post 페이지로 이동
+    else:
+        form = NicknameForm()
+
+    return render(request, 'nickname.html', {'form': form})

@@ -82,6 +82,7 @@ fabric.properties
 ### Python template
 # Byte-compiled / optimized / DLL files
 __pycache__/
+**/__pycache__/ # ignore all pycache
 *.py[cod]
 *$py.class
 

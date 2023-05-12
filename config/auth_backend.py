@@ -12,20 +12,23 @@ class PasswordlessAuthBackend(ModelBackend):
         try:
             user = User.objects.get(student_id=student_id)
             student = User.get_student_by_id(student_id)
-            #print("이미 있음")
+            print("기존 사용자 로그인")
         except User.DoesNotExist:
             user = User(student_id=student_id)
             user.save()
-            student = User()
+            # student = User()
+            print("새 사용자 만듦")
         #print(info)
-        student.student_id = student_id
-        student.name = info['성명']
-        student.state = 1
-        student.year = int(info['현학년/학기'][0])
-        student.semester = int(info['현학년/학기'].split("/")[-1].strip().replace("학기",""))
-        student.advisor = info['지도교수']
-        student.login_cookie = cookies
-        student.save()
+        user.student_id = student_id
+        user.name = info['성명']
+        user.state = 1
+        user.year = int(info['현학년/학기'][0])
+        user.semester = int(info['현학년/학기'].split("/")[-1].strip().replace("학기",""))
+        user.advisor = info['지도교수']
+        user.major = info['전공']
+        user.login_cookie = cookies
+        user.save()
+        print(f"{user.student_id} 정보 업데이트 함.")
         return user
 
 

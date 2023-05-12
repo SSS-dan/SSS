@@ -57,7 +57,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR/ '**/templates'],
+        'DIRS': [BASE_DIR/ 'pybo/templates', BASE_DIR/ 'lecture/templates', BASE_DIR/ 'posts/templates', BASE_DIR/ 'users/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

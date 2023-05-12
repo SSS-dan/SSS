@@ -48,35 +48,30 @@ def lecture_new(request):
         form.classroom = request.POST['classroom']
         form.advisor = request.POST['advisor']
         form.major=None
-        #form.student = Student.get_student_by_id(request.user.student_id)
-        #if form.is_valid():
-        print(form)
-        form.save()
-        lecture = Takes()
-        lecture.student = User.get_student_by_id(request.user.student_id)
-        lecture.course=form
-        lecture.middle_grade=None
-        lecture.final_grade = None
-        lecture.real=False
-        lecture.save()
-        print(123)
+        if form.is_valid():
+            form.save()
+            lecture = Takes()
+            lecture.student = User.get_student_by_id(request.user.student_id)
+            lecture.course=form
+            lecture.middle_grade=None
+            lecture.final_grade = None
+            lecture.real=False
+            if lecture.is_valid():
+                lecture.save()
+            #else :
+        #else :
         return redirect('lecture_list')
     else:
         form = Takes()
     return render(request, 'lecture/create.html', {'form': form})
 
 def lecture_select(request):
-    if request.method is 'POST':
-        form = Takes(request.POST)
-        form.semester = 2124
-        form.student = request.user.student_id
-        form.real = True
-        #if form.is_valid():
-        lecture = form.save(commit=False)
-        lecture.save()
+    form = Course.objects.all()
+    if request.method == 'POST':
+
         return redirect('timetable')
     else:
-        form = Takes()
+        form = Course.objects.all()
     return render(request, 'lecture_select.html', {'form':form})
 
 

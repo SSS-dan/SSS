@@ -22,3 +22,6 @@ def my_login_view(request):
         pass
     return render(request, 'login.html')
 
+
+def offline(request):
+    return render(request, 'offline.html')

@@ -16,13 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
-from config.views import my_login_view
+from config.views import my_login_view, offline
+from users.views import mainpage  # import your view at the top
 
 urlpatterns = [
-    path('', include('pybo.urls'), name='home'),
     path('admin/', admin.site.urls),
     path('qr_code/', include('users.urls')),
     path('lecture/',include('lecture.urls')),
     path('login/', my_login_view, name='login'),
     path('posts/', include('posts.urls')),
+    path('offline/', offline, name='offline'),
+    path(r'', mainpage, name='home'),
+    path('', include('pwa.urls')),
 ]

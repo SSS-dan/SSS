@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'django_apscheduler',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 AUTH_USER_MODEL = 'users.User'
+
+CRONJOBS = [
+    ('*/5 * * * *', 'users.cron.get_current_courses')
+]

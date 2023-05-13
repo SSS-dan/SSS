@@ -18,7 +18,10 @@ class Course(models.Model):
 
     @classmethod
     def get_course_by_id(cls, course_id, semester):
-        return cls.objects.get(course_id=course_id, semester=semester)
+        try :
+            return cls.objects.get(course_id=course_id, semester=semester)
+        except cls.DoesNotExist:
+            return None
 
     def update_name(self, new_name):
         self.name = new_name

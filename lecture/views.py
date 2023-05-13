@@ -6,6 +6,7 @@ from pybo.models import *
 from datetime import datetime,time
 from users.models import User
 
+
 def lecture_list(request):
     times = ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00']
     for i in range(len(times)):
@@ -29,9 +30,17 @@ def lecture_list(request):
 
 
 def lecture_detail(request, lecture_id):
-    lecture = Course.get_course_by_id(lecture_id)
-    return render(request, 'lecture_detail.html', {'lecture': lecture})
-
+    print(lecture_id)
+    lec = Course.get_course_by_id(lecture_id, 231)
+    lecture = Takes()
+    lecture.student = User.get_student_by_id(request.user.student_id)
+    print(lec)
+    lecture.course=lec
+    lecture.middle_grade=None
+    lecture.final_grade = None
+    lecture.real=False
+    lecture.save()
+    return redirect('lecture_list')
 
 @login_required
 def lecture_new(request):
@@ -67,12 +76,20 @@ def lecture_new(request):
 
 def lecture_select(request):
     form = Course.objects.all()
+    lec = []
+    for i in form.all():
+        temp = {}
+        temp['day'] = 1
+        temp['start_time'] = i.start_time
+        temp['end_time'] = i.end_time
+        temp['name'] = i.name
+        temp['id']=i.course_id
+        lec.append(temp)
     if request.method == 'POST':
-
-        return redirect('timetable')
+        return redirect('lecture_list')
     else:
         form = Course.objects.all()
-    return render(request, 'lecture_select.html', {'form':form})
+    return render(request, 'lecture_select.html', {'lectures':lec})
 
 
 def lecture_edit(request, lecture_id):

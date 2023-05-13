@@ -7,7 +7,7 @@
     <h1>강의 목록</h1>
     <ul>
         {% for lecture in lectures %}
-            <li><a href="/lecture/{{ lecture.course_id }}">{{ lecture.name }}</a></li>
+            <li><a href="{% url 'lecture_detail' lecture.id %}">{{ lecture.name }}</a></li>
         {% endfor %} 
     </ul>
 </body>

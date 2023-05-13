@@ -12,6 +12,8 @@ cryptography==37.0.2
 Django==4.2.1
 django-apscheduler==0.6.2
 django-extensions==3.2.1
+django-progressive-web-app==0.1.1
+django-pwa==1.1.0
 exceptiongroup==1.1.1
 h11==0.14.0
 idna==3.4

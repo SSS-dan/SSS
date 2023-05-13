@@ -104,32 +104,25 @@ def crawl_courses(year, semester):
         driver.implicitly_wait(30)  # 30초 기다림 (페이지 로딩 시간)
         year_xpath = f'//*[@id="{years[year]}"]'
         semester_xpath = f'//*[@id="{semesters[semester]}"]'
-
         # 개설년도 Form 선택 후 클릭
         sleep(0.5)
         driver.find_element(By.XPATH, r'//*[@id="WD25"]').click()
-
         # 개설년도 클릭
         sleep(0.5)
         driver.find_element(By.XPATH, year_xpath).click()
-
         # 학기 Form 선택 후 클릭
         sleep(0.5)
         driver.find_element(By.XPATH, r'//*[@id="WD4A"]').click()
-
         # 학기 선택
         sleep(0.5)
         driver.find_element(By.XPATH, semester_xpath).click()
         # WD4C WD4D WD4E WD4F
-
         # 소속구분 Form 선택 후 클릭
         sleep(0.5)
         driver.find_element(By.XPATH, r'//*[@id="WD7E"]').click()
-
         # 학부 클릭
         sleep(0.5)
         driver.find_element(By.XPATH, r'//*[@id="WD80"]').click()
-
         # 검색 클릭
         sleep(1.5)
         driver.find_element(By.XPATH, r'//*[@id="WDB4"]').click()
@@ -138,7 +131,6 @@ def crawl_courses(year, semester):
         element = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, contentTable)))
         print('Resource fetching done')
         print('Saving data...')
-
         # 스크래핑
         html = driver.page_source
         # print("==html===")
@@ -198,7 +190,6 @@ firstTotalTime = []
 secondTotalTime = []
 classrooms = []
 
-
 def split_day_time_classroom(x):
     """
     요일, 시간, 강의실을 분리하여 저장
@@ -206,7 +197,7 @@ def split_day_time_classroom(x):
     @return: 요일, 시간, 강의실을 분리하여 저장
     """
     arr = x.split(" / ")
-    if arr[0] == '' or arr[0] == '\xa0':
+    if len(arr) == 0 or arr[0] == '' or arr[0] == '\xa0':
         firstDays.append('')
         secondDays.append('')
         firstStartTime.append('')
@@ -223,14 +214,23 @@ def split_day_time_classroom(x):
             firstDays.append(arr1[0])
             secondDays.append(arr2[0])
 
-            firstTotalTime.append(arr1[1])
-            secondTotalTime.append(arr2[1])
+            if len(arr1) > 1:
+                firstTotalTime.append(arr1[1])
+                firstStartTime.append(arr1[1].split('~')[0])
+                firstEndTime.append(arr1[1].split('~')[1])
+            else:
+                firstTotalTime.append('')
+                firstStartTime.append('')
+                firstEndTime.append('')
 
-            firstStartTime.append(arr1[1].split('~')[0])
-            firstEndTime.append(arr1[1].split('~')[1])
-
-            secondStartTime.append(arr2[1].split('~')[0])
-            secondEndTime.append(arr2[1].split('~')[1])
+            if len(arr2) > 1:
+                secondTotalTime.append(arr2[1])
+                secondStartTime.append(arr2[1].split('~')[0])
+                secondEndTime.append(arr2[1].split('~')[1])
+            else:
+                secondTotalTime.append('')
+                secondStartTime.append('')
+                secondEndTime.append('')
 
             if len(arr2) == 3 and arr2[2] != '':
                 classrooms.append(arr2[2])
@@ -242,19 +242,26 @@ def split_day_time_classroom(x):
             firstDays.append(arr[0])
             secondDays.append(arr[0])
 
-            firstTotalTime.append(arr[1])
-            secondTotalTime.append(arr[1])
-
-            firstStartTime.append(arr[1].split('~')[0])
-            firstEndTime.append(arr[1].split('~')[1])
-
-            secondStartTime.append(arr[1].split('~')[0])
-            secondEndTime.append(arr[1].split('~')[1])
+            if len(arr) > 1:
+                firstTotalTime.append(arr[1])
+                secondTotalTime.append(arr[1])
+                firstStartTime.append(arr[1].split('~')[0])
+                firstEndTime.append(arr[1].split('~')[1])
+                secondStartTime.append(arr[1].split('~')[0])
+                secondEndTime.append(arr[1].split('~')[1])
+            else:
+                firstTotalTime.append('')
+                secondTotalTime.append('')
+                firstStartTime.append('')
+                firstEndTime.append('')
+                secondStartTime.append('')
+                secondEndTime.append('')
 
             if len(arr) == 3 and arr[2] != '':
                 classrooms.append(arr[2])
             else:
                 classrooms.append('')
+
 
 
 def preprocessor(df):

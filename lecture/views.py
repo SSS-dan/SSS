@@ -20,7 +20,7 @@ def lecture_list(request):
     lec = []
     for i in lectures.all():
         temp = {}
-        temp['day'] = 1
+        temp['day'] = i.course.day
         temp['start_time'] = i.course.start_time
         temp['end_time'] = i.course.end_time
         temp['name'] = i.course.name
@@ -49,7 +49,7 @@ def lecture_new(request):
         #print(request.POST['name'])
         form = Course()
         form.course_id = None
-        form.semester = 3
+        form.semester = 231
         form.name = request.POST['name']
         form.day = request.POST['day']
         form.start_time = request.POST['start_time']
@@ -78,13 +78,14 @@ def lecture_select(request):
     form = Course.objects.all()
     lec = []
     for i in form.all():
-        temp = {}
-        temp['day'] = 1
-        temp['start_time'] = i.start_time
-        temp['end_time'] = i.end_time
-        temp['name'] = i.name
-        temp['id']=i.course_id
-        lec.append(temp)
+        if i.course_id is not None :
+            temp = {}
+            temp['day'] = i.day
+            temp['start_time'] = i.start_time
+            temp['end_time'] = i.end_time
+            temp['name'] = i.name
+            temp['id']=i.course_id
+            lec.append(temp)
     if request.method == 'POST':
         return redirect('lecture_list')
     else:
@@ -93,7 +94,7 @@ def lecture_select(request):
 
 
 def lecture_edit(request, lecture_id):
-    lecture = Course.get_course_by_id(lecture_id)
+    lecture = Course.get_course_by_id(lecture_id,231)
     if request.method == 'POST':
         form = Course(request.POST) 
         if form.is_valid():
@@ -105,6 +106,6 @@ def lecture_edit(request, lecture_id):
 
 
 def lecture_delete(request, lecture_id):
-    lecture = Course.get_course_by_id(lecture_id)
-    lecture.delete()
+    #lecture = Course.get_course_by_id(lecture_id,231)
+    #lecture.delete()
     return redirect('lecture_list')

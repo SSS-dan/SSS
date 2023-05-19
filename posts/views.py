@@ -66,3 +66,16 @@ def nickname(request):
         form = NicknameForm()
 
     return render(request, 'nickname.html', {'form': form})
+
+
+def delete_post(request, item_id):
+    item = get_object_or_404(Post, pk=item_id)  # 삭제할 데이터베이스 객체를 가져옵니다.
+    item.delete_post()
+    return redirect('post_list')  # 삭제 성공 후 리다이렉션할 URL을 지정합니다.
+
+
+def delete_comment(request, item_id):
+    item = get_object_or_404(Comment, pk=item_id)  # 삭제할 데이터베이스 객체를 가져옵니다.
+    post_id = item.post.id
+    item.delete_comment()
+    return redirect('post_detail', post_id)  # 삭제 성공 후 리다이렉션할 URL을 지정합니다.

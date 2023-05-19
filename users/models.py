@@ -12,6 +12,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     major = models.CharField(max_length=100, null=True)
     advisor = models.CharField(max_length=30, null=True)
     login_cookie = models.CharField(max_length=50, null=True)
+    nickname = models.CharField(max_length=30, default='', null=True)
     objects = models.Manager()
 
     is_staff = models.BooleanField(default=False)

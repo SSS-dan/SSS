@@ -1,10 +1,11 @@
 from django import forms
-from .models import Comment, Post, PostsUser
+from .models import Comment, Post
+from users.models import User
 
 
 class NicknameForm(forms.ModelForm):
     class Meta:
-        model = PostsUser
+        model = User
         fields = ['nickname']
 
 

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>강의 목록</title>
+</head>
+<body>
+    <h1>강의 목록</h1>
+    <ul>
+        {% for lecture in lectures %}
+            <li><a href="{% url 'lecture_detail' lecture.id %}">{{ lecture.name }} {{ lecture.id }}</a></li>
+        {% endfor %} 
+    </ul>
+</body>
+</html>

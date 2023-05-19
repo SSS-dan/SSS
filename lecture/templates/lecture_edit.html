@@ -1,0 +1,11 @@
+<!-- lecture_edit.html -->
+
+
+{% block content %}
+  <h1>{{ form.instance.title|default:'새 강의 등록' }}</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">저장</button>
+  </form>
+{% endblock %}

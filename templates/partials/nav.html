@@ -1,0 +1,15 @@
+{% load static %}
+
+<div class="fixed top-0 w-full z-50">
+    <ul class="flex items-center text-sm font-medium flex">
+        {% if user.is_authenticated %}
+            <li class="mr-3 sm:mr-6 sm:text-sm">
+                <a href="{% url "post_list" %}">Posts</a>
+            </li>
+        {% else %}
+            <li class="mr-3 sm:mr-6">
+                <a href="{% url 'login' %}">Login</a>
+            </li>
+        {% endif %}
+    </ul>
+</div>

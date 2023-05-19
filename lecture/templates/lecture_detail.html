@@ -1,0 +1,11 @@
+<!-- lecture_detail.html -->
+
+
+{% block content %}
+  <h1>{{ lecture.title }}</h1>
+  <p>강사: {{ lecture.instructor }}</p>
+  <p>시작 시간: {{ lecture.start_time }}</p>
+  <p>종료 시간: {{ lecture.end_time }}</p>
+  <a href="{% url 'lecture_edit' lecture.id %}">수정</a>
+  <a href="{% url 'lecture_delete' lecture.id %}">삭제</a>
+{% endblock %}

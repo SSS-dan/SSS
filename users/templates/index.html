@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+{% load pwa %}
+{% load static %}
+<head>
+    {% progressive_web_app_meta %}
+    <title>Sogang Portal</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <meta
+            name="viewport"
+			content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0"
+    />
+
+
+</head>
+<body class="bg-gray-200 flex flex-col items-center justify-center h-screen m-0">
+
+    {% include "partials/nav.html" %}
+    {% block content %}{% endblock %}
+
+    <div class="bg-white p-10 rounded shadow-md text-center">
+        <h1 class="mb-8 text-3xl">학생 정보</h1>
+        {% csrf_token %}
+        {% if user.is_authenticated %}
+            <p class="text-green-500">LOGGED IN!!!</p>
+            <p class="text-xl">학번 : {{ username }}</p>
+            <p class="text-xl">{{ student.name }}</p>
+            <p class="text-xl">전공: {{ student.major }}</p>
+            <p class="text-xl">지도교수: {{ student.advisor }}</p>
+            <p class="text-xl">학년: {{ student.year }}</p>
+            <p class="text-xl">학기: {{ student.semester }}</p>
+
+            <img class="mt-4 w-36 h-36" src="{{ qr_code }}" alt="QR Code">
+        {% else %}
+            <p class="text-red-500">NOT LOGGED IN!!!</p>
+            <a class="inline-block bg-blue-500 text-white px-4 py-2 rounded text-decoration-none"
+               href="{% url 'login' %}">로그인 페이지 이동</a>
+        {% endif %}
+    </div>
+</body>
+</html>

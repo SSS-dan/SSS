@@ -1,0 +1,29 @@
+from django.db import models
+from users.models import User
+
+
+class PostsUser(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default='', related_name='post_manage')
+    nickname = models.CharField(max_length=30, default='')
+    posts_num = models.IntegerField(default=0)
+    comments_num = models.IntegerField(default=0)
+
+
+class Post(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, default='', related_name='posts')
+
+    def delete_post(self):
+        self.delete()
+
+
+class Comment(models.Model):
+    post = models.ForeignKey('Post', on_delete=models.CASCADE, related_name='comments')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, default='', related_name='comments')
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def delete_comment(self):
+        self.delete()

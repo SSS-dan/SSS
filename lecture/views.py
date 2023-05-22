@@ -57,17 +57,15 @@ def lecture_new(request):
         form.classroom = request.POST['classroom']
         form.advisor = request.POST['advisor']
         form.major=None
-        if form.is_valid():
-            form.save()
-            lecture = Takes()
-            lecture.student = User.get_student_by_id(request.user.student_id)
-            lecture.course=form
-            lecture.middle_grade=None
-            lecture.final_grade = None
-            lecture.real=False
-            if lecture.is_valid():
-                lecture.save()
-            #else :
+        form.save()
+        lecture = Takes()
+        lecture.student = User.get_student_by_id(request.user.student_id)
+        lecture.course=form
+        lecture.middle_grade=None
+        lecture.final_grade = None
+        lecture.real=False
+        lecture.save()
+        #else :
         #else :
         return redirect('lecture_list')
     else:
@@ -97,10 +95,9 @@ def lecture_edit(request, lecture_id):
     lecture = Course.get_course_by_id(lecture_id,231)
     if request.method == 'POST':
         form = Course(request.POST) 
-        if form.is_valid():
-            lecture = form.save(commit=False)
-            lecture.save()
-            return redirect('lecture_detail', lecture_id=lecture.course_id)
+        lecture = form.save(commit=False)
+        lecture.save()
+        return redirect('lecture_detail', lecture_id=lecture.course_id)
     else:
         return render(request, 'lecture_edit.html', {'form': form})
 

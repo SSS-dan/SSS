@@ -70,7 +70,7 @@ def get_takes_info_by_semester(cookies, semester):
     """
     semester_dict = {}
     semester_url = f"https://msaint.sogang.ac.kr/grade/g2.aspx?isposted=1&semesteridx={semester}"  # 수강신청 정보 주소
-    try:
+    try:    
         response: Response = requests.get(semester_url, cookies=cookies, verify=False)
         if response.status_code == 200:
             # BeautifulSoup 객체 생성

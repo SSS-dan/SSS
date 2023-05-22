@@ -1,7 +1,7 @@
 from django.contrib.auth.backends import ModelBackend
 from users.models import User
 from pybo.models import *
-from .crawl_saint import get_saint_cookies, pretty_print_takes_info, get_takes_info, get_student_info
+from .crawl_saint import get_saint_cookies, pretty_print_takes_info, get_takes_info, get_student_info, get_takes_info_by_semester
 
 class PasswordlessAuthBackend(ModelBackend):
     """Log in to Django without providing a password.
@@ -29,6 +29,19 @@ class PasswordlessAuthBackend(ModelBackend):
         user.login_cookie = cookies
         user.save()
         print(f"{user.student_id} 정보 업데이트 함.")
+        info = get_takes_info_by_semester(cookies,'2023010')
+        takes = User.get_takes(student_id=student_id)
+        for i in takes.all():
+            if i.real is True :
+                print(i)
+                Takes.delete_takes(i)
+        print(info)
+        for key,value in info.items():
+            take = Takes()
+            take.course = Course.get_course_by_id(value['course_number'],231)
+            take.student = user
+            take.real = True
+            take.save()
         return user
 
 

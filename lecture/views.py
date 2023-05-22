@@ -38,7 +38,7 @@ def lecture_detail(request, lecture_id):
     lecture.course=lec
     lecture.middle_grade=None
     lecture.final_grade = None
-    lecture.real=False
+    lecture.real=True
     lecture.save()
     return redirect('lecture_list')
 

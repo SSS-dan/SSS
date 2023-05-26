@@ -26,6 +26,7 @@ urlpatterns = [
     path('login/', my_login_view, name='login'),
     path('posts/', include('posts.urls')),
     path('offline/', offline, name='offline'),
+    path('sogang_gpt/', include('sogang_gpt.urls')),
     path(r'', mainpage, name='home'),
     path('', include('pwa.urls')),
 ]

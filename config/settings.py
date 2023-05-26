@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_apscheduler',
     'pwa',
+    'sogang_gpt'
 ]
 
 MIDDLEWARE = [
@@ -61,7 +62,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR/ 'pybo/templates', BASE_DIR/ 'lecture/templates', BASE_DIR/ 'posts/templates', BASE_DIR/ 'users/templates', BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR/ 'pybo/templates', BASE_DIR/ 'lecture/templates', BASE_DIR/ 'posts/templates', BASE_DIR/ 'users/templates', BASE_DIR/ 'sogang_gpt/templates', BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

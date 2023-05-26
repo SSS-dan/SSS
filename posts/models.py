@@ -8,6 +8,12 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, default='', related_name='posts')
 
+    upvote = models.ManyToManyField(User, related_name='upvoted_posts')
+    upvote_num = models.IntegerField(default=0)
+
+    view = models.ManyToManyField(User, related_name='viewed_posts')
+    view_num = models.IntegerField(default=0)
+
     def delete_post(self):
         self.delete()
 

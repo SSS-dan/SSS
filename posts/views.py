@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from users.models import User
 from .models import Post, Comment
+from users.models import User
 from .forms import PostForm, CommentForm, NicknameForm
 
 
@@ -32,6 +33,11 @@ def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     # 게시글의 댓글들을 가져옵니다.
     comments = post.comments.all()
+
+    if not post.view.filter(student_id=request.user.student_id).exists():
+        post.view.add(request.user)
+        post.view_num += 1
+        post.save()
 
     if request.method == 'POST':
         # 댓글 폼을 제출한 경우
@@ -79,3 +85,16 @@ def delete_comment(request, item_id):
     post_id = item.post.id
     item.delete_comment()
     return redirect('post_detail', post_id)  # 삭제 성공 후 리다이렉션할 URL을 지정합니다.
+
+
+def upvote_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    user_profile = request.user
+
+    already_upvoted = post.upvote.filter(student_id=user_profile.student_id).exists()
+    if not already_upvoted:
+        post.upvote.add(user_profile)
+        post.upvote_num += 1
+        post.save()
+
+    return redirect('post_detail', post_id=post.id)

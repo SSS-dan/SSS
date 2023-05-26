@@ -1,5 +1,6 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/output.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 <div class="post bg-white shadow p-4 rounded mb-6">
   <h2 class="text-2xl font-bold mb-2">{{ post.title }}</h2>
@@ -7,11 +8,24 @@
   <p class="text-gray-700">{{ post.content }}</p>
 </div>
 
-<a href="{% url 'delete_post' post.id %}">삭제</a>
+<a href="{% url 'upvote_post' post_id=post.id %}">추천</a><a href="{% url 'delete_post' post.id %}">&emsp;&emsp; 삭제</a>
 
 <hr class="my-4">
 
 <h3 class="text-xl font-bold mb-2">댓글</h3>
+
+{% if already_upvoted %}
+    <div class="message-box">
+    <p class="message">이미 추천한 글입니다.</p>
+    <button class="btn btn-primary" id="close-button">확인</button>
+    </div>
+{% endif %}
+
+<script>
+    document.getElementById('close-button').addEventListener('click', function() {
+        document.querySelector('.message-box').style.display = 'none';
+    });
+</script>
 
 <div class="space-y-4">
 {% for comment in comments %}

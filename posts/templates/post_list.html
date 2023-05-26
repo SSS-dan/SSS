@@ -17,7 +17,8 @@
 <div class="space-y-4">
 {% for post in posts %}
   <div class="post bg-white shadow p-4 rounded">
-    <h2 class="text-2xl font-bold"><a class="text-indigo-600 hover:text-indigo-900" href="{% url 'post_detail' post_id=post.id %}">{{ post.title }}   &emsp;&emsp;&emsp;&emsp;  </a> 작성자: {{ post.author.nickname }}</h2>
+    <h2 class="text-2xl font-bold"><a class="text-indigo-600 hover:text-indigo-900" href="{% url 'post_detail' post_id=post.id %}">{{ post.title }} </a> </h2>
+      <h2> {{ post.author.nickname }} | 조회: {{ post.view_num }} | 추천: {{ post.upvote_num }} | {{ post.created_at }} </h2>
   </div>
 {% empty %}
   <p class="text-gray-500">게시글이 없습니다.</p>

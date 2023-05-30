@@ -9,6 +9,21 @@ from bs4 import BeautifulSoup
 from pybo.models import *
 from config.crawl_courses import crawl_courses
 from users.models import User
+from django.shortcuts import render, redirect
+from .forms import UserProfileForm
+
+
+def upload_profile_picture(request):
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            user_profile = form.save(commit=False)
+            user_profile.user = request.user
+            user_profile.save()
+            return redirect('home')
+    else:
+        form = UserProfileForm()
+    return render(request, 'upload_profile_picture.html', {'form': form})
 
 
 def generate_qr_code(id):

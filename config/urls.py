@@ -27,6 +27,6 @@ urlpatterns = [
     path('posts/', include('posts.urls')),
     path('offline/', offline, name='offline'),
     path('sogang_gpt/', include('sogang_gpt.urls')),
-    path('', mainpage, name='home'),
-    #path('', include('pwa.urls')),
+    path(r'', mainpage, name='home'),
+    path('', include('pwa.urls')),
 ]

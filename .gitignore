@@ -244,3 +244,5 @@ cython_debug/
 
 !/.idea/SSS.iml
 !/.idea/misc.xml
+
+node_modules/

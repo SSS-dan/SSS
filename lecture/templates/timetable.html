@@ -168,56 +168,56 @@
               </div>
               <div class="frame-frame291">
                 <img
-                  src="../static/public/external/line21613-edhf.svg"
+                  src="../static/public/external/line21294-dqq.svg"
                   alt="Line21613"
                   class="frame-line21"
                 />
               </div>
               <div class="frame-frame30">
                 <img
-                  src="../static/public/external/line21614-mvbi.svg"
+                  src="../static/public/external/line21294-dqq.svg"
                   alt="Line21614"
                   class="frame-line22"
                 />
               </div>
               <div class="frame-frame31">
                 <img
-                  src="../static/public/external/line21615-df9.svg"
+                  src="../static/public/external/line21294-dqq.svg"
                   alt="Line21615"
                   class="frame-line23"
                 />
               </div>
               <div class="frame-frame32">
                 <img
-                  src="../static/public/external/line21615-yn9.svg"
+                  src="../static/public/external/line21294-dqq.svg"
                   alt="Line21615"
                   class="frame-line24"
                 />
               </div>
               <div class="frame-frame33">
                 <img
-                  src="../static/public/external/line21615-un35.svg"
+                  src="../static/public/external/line21294-dqq.svg"
                   alt="Line21615"
                   class="frame-line25"
                 />
               </div>
               <div class="frame-frame34">
                 <img
-                  src="../static/public/external/line21615-nv2s.svg"
+                  src="../static/public/external/line21294-dqq.svg"
                   alt="Line21615"
                   class="frame-line26"
                 />
               </div>
               <div class="frame-frame35">
                 <img
-                  src="../static/public/external/line21615-1ty.svg"
+                  src="../static/public/external/line21294-dqq.svg"
                   alt="Line21615"
                   class="frame-line27"
                 />
               </div>
               <div class="frame-frame36">
                 <img
-                  src="../static/public/external/line21616-7ylk.svg"
+                  src="../static/public/external/line21294-dqq.svg"
                   alt="Line21616"
                   class="frame-line28"
                 />
@@ -231,25 +231,25 @@
                   class="frame-line10"
                 />
               </div>
-              <div class="frame-frame292">
+              <div class="frame-frame311">
                 <img
                   src="../static/public/external/line101618-x2pr.svg"
                   alt="Line101618"
-                  class="frame-line101"
+                  class="frame-line10"
                 />
               </div>
-              <div class="frame-frame302">
+              <div class="frame-frame311">
                 <img
-                  src="../static/public/external/line101619-le6.svg"
+                  src="../static/public/external/line101210-0mq.svg"
                   alt="Line101619"
-                  class="frame-line102"
+                  class="frame-line10"
                 />
               </div>
               <div class="frame-frame311">
                 <img
                   src="../static/public/external/line101619-u5wb.svg"
                   alt="Line101619"
-                  class="frame-line103"
+                  class="frame-line10"
                 />
               </div>
             </div>
@@ -354,11 +354,23 @@
       var lname = JSON.parse('{{ lname|safe }}');
       var lplace = JSON.parse('{{ lplace|safe }}');
       // 배열 값 사용 예시:
+      var cond = 0;
       for (var i = 0; i < runtime.length; i++) {
-        if (day[i]>4) continue;
+        if (day[i]>80) continue;
         var div = document.createElement("div");
+        var date = day[i];
+        if (day[i]>10) {
+          if (cond==0) {
+            date = Math.floor(day[i]/10);
+            cond = 1;
+          }
+          else {
+            date = day[i]%10;
+            cond = 0;
+          }
+        }
         div.id = "myDiv" + i;
-        var container = document.getElementById("container"+day[i].toString());
+        var container = document.getElementById("container"+(date-1).toString());
         var spanContainer = document.createElement("div"); // span 요소들을 감싸는 컨테이너 div 요소를 생성합니다.
         spanContainer.className = "frame-text37";
         var span1 = document.createElement("span"); // 첫 번째 span 요소를 생성합니다.
@@ -373,12 +385,14 @@
         spanContainer.appendChild(document.createElement("br")); // 줄 바꿈을 위한 <br> 요소를 추가합니다.
         spanContainer.appendChild(span3); // 세 번째 span 요소를 컨테이너에 추가합니다.
         div.style.height = runtime[i].toString()+"px";
+        console.log(time[i]);
         div.style.top = (time[i] + 32).toString()+"px";
         if (day[i]==4) div.style.width="57px"; 
-        if (day[i]%2==0) div.classList.add("frame-frame64");
+        if (day[i]%2==1) div.classList.add("frame-frame64");
         else div.classList.add("frame-frame641");
         div.appendChild(spanContainer);
         container.appendChild(div);
+        if (cond==1) i--;
       }
       console.log("1\n");
     </script>

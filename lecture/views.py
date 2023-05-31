@@ -26,6 +26,10 @@ def lecture_list(request):
             et = i.course.end_time
             st = i.course.start_time
             runtime.append(((et.hour-st.hour)*60+et.minute-st.minute)*1.083333333333333)
+            print(i.course.name)
+            print(st.hour)
+            print(st.minute)
+            print(((st.hour-9)*60+st.minute)*1.083333333333333)
             time.append(((st.hour-9)*60+st.minute)*1.083333333333333)
             day.append(i.course.day)
             adv.append(i.course.advisor)

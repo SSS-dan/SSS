@@ -304,7 +304,7 @@
   justify-content: center;
 }
 .frame-frame18 {
-  gap: 24px;
+  gap: 22.5px;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -631,16 +631,16 @@
 }
 .frame-frame301 {
   gap: 40px;
-  top: 30px;
+  top: -30px;
   left: 67px;
   width: 285px;
   height: 800px;
   display: flex;
   overflow: hidden;
   position: absolute;
-  align-items: flex-start;
+  justify-content: flex-start;
   flex-shrink: 0;
-  justify-content: center;
+  flex-direction: row;
 }
 .frame-frame281 {
   gap: 32px;
@@ -648,14 +648,15 @@
   height: 700px;
   display: flex;
   padding: 10px;
+  padding-left: 54px;
   overflow: hidden;
-  align-items: center;
+  align-items: flex-start;
   flex-shrink: 0;
   flex-direction: column;
 }
 .frame-line10 {
-  width: 700px;
-  height: 1px;
+  width: 2px;
+  height: 700px;
 }
 .frame-frame292 {
   gap: 32px;
@@ -716,11 +717,9 @@
   gap: 0px;
   width: 60px;
   height: 546px;
-  display: flex;
   padding: 32px 0 0;
   overflow: hidden;
   position: relative;
-  align-items: flex-start;
   flex-shrink: 0;
 }
 .frame-frame64 {
@@ -1155,11 +1154,7 @@
     line-height: normal;
     text-decoration: none;
   }
-  .frame-frame281 {
-    top: 0px;
-    left: 43px;
-    position: absolute;
-  }
+
   .frame-rectangle4 {
     width: 698px;
   }

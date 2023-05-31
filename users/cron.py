@@ -3,7 +3,7 @@ from config.crawl_courses import crawl_courses
 from pybo.models import *
 from datetime import datetime,time
 
-daytoint = {'월':0, '화':1, '수':2, '목':3, '금':4, '토':5, '일':6}
+daytoint = {'월':1, '화':2, '수':3, '목':4, '금':5, '토':6, '일':7}
 
 def get_current_courses():
   #반복되는 함수 course를 받아와서 데이터베이스에 저장해줌
@@ -20,9 +20,11 @@ def get_current_courses():
         course.course_id = crawls['과목번호'][i]
         #print(crawls['요일1'][i])
         if len(crawls['요일1'][i]) == 0 or len(crawls['요일1'][i])>5:
-           day = 7
+           day = 88
         else :
            day = daytoint[crawls['요일1'][i].split(',')[0]]
+           if len(crawls['요일1'][i].split(','))>1:
+              day = day*10 + daytoint[crawls['요일1'][i].split(',')[1]]
         course.day = day
         if len(crawls['종료시간1'][i]) == 0 :
           course.end_time = datetime.strptime('09:00', '%H:%M').time()

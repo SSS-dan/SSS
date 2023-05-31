@@ -22,3 +22,6 @@
 
 <!-- 게시글 작성 버튼 -->
 <a class="inline-block bg-blue-500 text-white px-4 py-2 rounded text-decoration-none hover:bg-blue-700 mt-4" href="{% url 'create_post' %}">게시글 작성</a>
+
+{% include "partials/tabbar.html" %}
+{% block content %}{% endblock %}

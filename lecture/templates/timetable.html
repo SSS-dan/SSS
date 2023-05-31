@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="english">
+{% load static %}
   <head>
     <title>exported project</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -61,6 +62,7 @@
               <span></span>
             </span>
           </span>
+        <!--
           <div class="frame-frame10">
             <button class="frame-frame6button">
               <img
@@ -103,6 +105,7 @@
               <span class="frame-text09">설정</span>
             </button>
           </div>
+          -->
           <div class="frame-frame101">
             <div class="frame-frame17">
               <div class="frame-frame12">
@@ -266,6 +269,7 @@
               </div>
             </div>
           </div>
+
           <img
             src="../static/public/external/rectangle41619-06vd-1900w.png"
             alt="Rectangle41619"
@@ -396,5 +400,9 @@
       }
       console.log("1\n");
     </script>
+
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    {% include "partials/tabbar.html" %}
+    {% block content %}{% endblock %}
   </body>
 </html>

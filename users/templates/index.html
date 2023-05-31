@@ -16,7 +16,6 @@
 <body class="bg-gray-200 flex flex-col items-center justify-center h-screen m-0">
 
     {% include "partials/nav.html" %}
-    {% block content %}{% endblock %}
 
     <div class="bg-white p-10 rounded shadow-md text-center">
         <h1 class="mb-8 text-3xl">학생 정보</h1>
@@ -38,5 +37,7 @@
                href="{% url 'login' %}">로그인 페이지 이동</a>
         {% endif %}
     </div>
+    {% include "partials/tabbar.html" %}
+    {% block content %}{% endblock %}
 </body>
 </html>

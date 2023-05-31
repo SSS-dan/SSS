@@ -7,6 +7,7 @@ class Post(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, default='', related_name='posts')
+    mod = models.IntegerField()
 
     upvote = models.ManyToManyField(User, related_name='upvoted_posts')
     upvote_num = models.IntegerField(default=0)

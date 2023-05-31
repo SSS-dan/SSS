@@ -8,24 +8,25 @@ from users.models import User
 
 
 def lecture_list(request):
-    times = ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00']
-    for i in range(len(times)):
-        times[i] = datetime.strptime(times[i], '%H:%M').time()
-    # days 리스트 정의
-    days = [0 , 1, 2, 3, 4]
-    # lectures 쿼리셋 객체 생성
     user = request.user
     print(user.student_id)
     lectures = User.get_takes(user.student_id)
+    value = '231'
+    if request.method == 'POST':
+        value = request.POST['value']
+        print(value)
     lec = []
     for i in lectures.all():
-        temp = {}
-        temp['day'] = i.course.day
-        temp['start_time'] = i.course.start_time
-        temp['end_time'] = i.course.end_time
-        temp['name'] = i.course.name
-        lec.append(temp)
-    context = {'lectures' : lec,'times': times, 'days': days}
+        if i.course.semester == int(value):
+            temp = {}
+            temp['day'] = i.course.day
+            temp['start_time'] = i.course.start_time
+            temp['during_time'] = i.course.end_time
+            temp['name'] = i.course.name
+            lec.append(temp)
+    print(lec)
+    context = {'semester' : value, 'lecutres' : lec}
+    #context = {'lectures' : lec,'times': times, 'days': days}
     return render(request, 'timetable.html', context)
 
 

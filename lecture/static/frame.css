@@ -713,11 +713,11 @@
   flex-shrink: 0;
 }
 .frame-frame59input {
-  gap: 10px;
+  gap: 0px;
   width: 60px;
   height: 546px;
   display: flex;
-  padding: 125px 0 0;
+  padding: 32px 0 0;
   overflow: hidden;
   align-items: flex-start;
   flex-shrink: 0;
@@ -725,8 +725,8 @@
 }
 .frame-frame64 {
   gap: 10px;
-  width: 60px;
-  height: 75px;
+  width: calc(60rem/16);
+  height: 1rem;
   display: flex;
   overflow: hidden;
   align-items: center;
@@ -754,7 +754,7 @@
   width: 60px;
   height: 546px;
   display: flex;
-  padding: 220px 0 0;
+  padding: 32px 0 0;
   overflow: hidden;
   align-items: flex-start;
   flex-shrink: 0;
@@ -791,7 +791,7 @@
   width: 60px;
   height: 546px;
   display: flex;
-  padding: 125px 0 10px;
+  padding: 32px 0 10px;
   overflow: hidden;
   align-items: flex-start;
   flex-shrink: 0;
@@ -828,7 +828,7 @@
   width: 60px;
   height: 546px;
   display: flex;
-  padding: 220px 0 0;
+  padding: 32px 0 0;
   overflow: hidden;
   align-items: flex-start;
   flex-shrink: 0;
@@ -865,7 +865,7 @@
   width: 57px;
   height: 546px;
   display: flex;
-  padding: 125px 0 0;
+  padding: 32px 0 0;
   overflow: hidden;
   align-items: flex-start;
   flex-shrink: 0;

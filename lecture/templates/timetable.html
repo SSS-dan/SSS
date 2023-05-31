@@ -252,6 +252,17 @@
                     </span>
                   </span>
                 </div>
+                <div class="frame-frame64">
+                  <span class="frame-text37">
+                    <span>
+                      <span>프로그래밍 언어</span>
+                      <br />
+                      <span>낭종호</span>
+                      <br />
+                      <span>K301</span>
+                    </span>
+                  </span>
+                </div>
               </div>
               <div class="frame-frame60input">
                 <div class="frame-frame641">
@@ -319,21 +330,71 @@
             class="frame-rectangle4"
           />
           <div class="frame-frame38">
-            <button class="frame-frame8button">
-              <span class="frame-text78"><span>2023-1</span></span>
-            </button>
-            <button class="frame-frame13button">
-              <span class="frame-text80"><span>2022-2</span></span>
-            </button>
-            <button class="frame-frame10button">
-              <span class="frame-text82"><span>2022-1</span></span>
-            </button>
-            <button class="frame-frame11button">
-              <span class="frame-text84"><span>2021-2</span></span>
-            </button>
-            <button class="frame-frame12button">
-              <span class="frame-text86"><span>2021-1</span></span>
-            </button>
+            <form action="{% url 'lecture_list' %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="value" value="231">
+              {% if semester == "231" %}
+                <button type="submit" class="frame-frame8button">
+                  <span class="frame-text78"><span>2023-1</span></span>
+                </button>
+              {% else %}
+                <button type="submit" class="frame-frame13button">
+                  <span class="frame-text80"><span>2023-1</span></span>
+                </button>
+              {% endif %}
+            </form>
+            <form action="{% url 'lecture_list' %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="value" value="222">
+              {% if semester == "222" %}
+                <button type="submit" class="frame-frame8button">
+                  <span class="frame-text78"><span>2022-2</span></span>
+                </button>
+              {% else %}
+                <button type="submit" class="frame-frame13button">
+                  <span class="frame-text80"><span>2022-2</span></span>
+                </button>
+              {% endif %}
+            </form>
+            <form action="{% url 'lecture_list' %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="value" value="221">
+              {% if semester == "221" %}
+                <button type="submit" class="frame-frame8button">
+                  <span class="frame-text78"><span>2022-1</span></span>
+                </button>
+              {% else %}
+                <button type="submit" class="frame-frame13button">
+                  <span class="frame-text80"><span>2022-1</span></span>
+                </button>
+              {% endif %}
+            </form>
+            <form action="{% url 'lecture_list' %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="value" value="212">
+              {% if semester == "212" %}
+                <button type="submit" class="frame-frame8button">
+                  <span class="frame-text78"><span>2021-2</span></span>
+                </button>
+              {% else %}
+                <button type="submit" class="frame-frame13button">
+                  <span class="frame-text80"><span>2021-2</span></span>
+                </button>
+              {% endif %}
+            </form>
+            <form action="{% url 'lecture_list' %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="value" value="211">
+              {% if semester == "211" %}
+                <button type="submit" class="frame-frame8button">
+                  <span class="frame-text78"><span>2021-1</span></span>
+                </button>
+              {% else %}
+                <button type="submit" class="frame-frame13button">
+                  <span class="frame-text80"><span>2021-1</span></span>
+                </button>
+              {% endif %}
+            </form>
           </div>
           <img
             src="../static/public/external/svgiconarrowcircleleftbutton1914-ddnp.svg"

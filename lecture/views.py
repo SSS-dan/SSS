@@ -26,7 +26,7 @@ def lecture_list(request):
         temp['name'] = i.course.name
         lec.append(temp)
     context = {'lectures' : lec,'times': times, 'days': days}
-    return render(request, 'index.html', context)
+    return render(request, 'timetable.html', context)
 
 
 def lecture_detail(request, lecture_id):

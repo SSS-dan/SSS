@@ -5,7 +5,7 @@ from django.contrib import messages
 from pybo.models import *
 from datetime import datetime,time
 from users.models import User
-
+import json
 
 def lecture_list(request):
     user = request.user
@@ -15,17 +15,23 @@ def lecture_list(request):
     if request.method == 'POST':
         value = request.POST['value']
         print(value)
-    lec = []
+    runtime = []
+    time = []
+    day = []
+    adv = []
+    lname = []
+    lplace = []
     for i in lectures.all():
         if i.course.semester == int(value):
-            temp = {}
-            temp['day'] = i.course.day
-            temp['start_time'] = i.course.start_time
-            temp['during_time'] = i.course.end_time
-            temp['name'] = i.course.name
-            lec.append(temp)
-    print(lec)
-    context = {'semester' : value, 'lecutres' : lec}
+            et = i.course.end_time
+            st = i.course.start_time
+            runtime.append(((et.hour-st.hour)*60+et.minute-st.minute)*1.083333333333333)
+            time.append(((st.hour-9)*60+st.minute)*1.083333333333333)
+            day.append(i.course.day)
+            adv.append(i.course.advisor)
+            lname.append(i.course.name)
+            lplace.append(i.course.classroom)
+    context = {'semester' : value, 'runtime' : runtime, 'time' : time, 'day' : day, 'adv' : json.dumps(adv), 'lname' : json.dumps(lname), 'lplace' : json.dumps(lplace)}
     #context = {'lectures' : lec,'times': times, 'days': days}
     return render(request, 'timetable.html', context)
 

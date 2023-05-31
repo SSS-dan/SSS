@@ -42,7 +42,21 @@
         <div class="frame-frame">
           <span class="frame-text">
             <span>
-              <span>2023년 1학기</span>
+              {%if semester == "231" %}
+                <span>2023년 1학기</span>
+              {%endif%}
+              {%if semester == "222" %}
+                <span>2022년 2학기</span>
+              {%endif%}
+              {%if semester == "221" %}
+                <span>2022년 1학기</span>
+              {%endif%}
+              {%if semester == "212" %}
+                <span>2021년 2학기</span>
+              {%endif%}
+              {%if semester == "211" %}
+                <span>2021년 1학기</span>
+              {%endif%}
               <br />
               <span></span>
             </span>
@@ -240,87 +254,15 @@
               </div>
             </div>
             <div class="frame-frame58">
-              <div class="frame-frame59input">
-                <div class="frame-frame64">
-                  <span class="frame-text37">
-                    <span>
-                      <span>프로그래밍 언어</span>
-                      <br />
-                      <span>낭종호</span>
-                      <br />
-                      <span>K301</span>
-                    </span>
-                  </span>
-                </div>
-                <div class="frame-frame64">
-                  <span class="frame-text37">
-                    <span>
-                      <span>프로그래밍 언어</span>
-                      <br />
-                      <span>낭종호</span>
-                      <br />
-                      <span>K301</span>
-                    </span>
-                  </span>
-                </div>
+              <div id = "container0", class="frame-frame59input">
               </div>
-              <div class="frame-frame60input">
-                <div class="frame-frame641">
-                  <span class="frame-text44">
-                    <span>
-                      <span>기초컴퓨터</span>
-                      <br />
-                      <span>그래픽스</span>
-                      <br />
-                      <span>임인성</span>
-                      <br />
-                      <span>R404</span>
-                    </span>
-                  </span>
-                </div>
+              <div id = "container1", class="frame-frame60input">
               </div>
-              <div class="frame-frame61input">
-                <div class="frame-frame65">
-                  <span class="frame-text53">
-                    <span>
-                      <span>프로그래밍 언어</span>
-                      <br />
-                      <span>낭종호</span>
-                      <br />
-                      <span>K301</span>
-                    </span>
-                  </span>
-                </div>
+              <div id = "container2", class="frame-frame61input">
               </div>
-              <div class="frame-frame62input">
-                <div class="frame-frame642">
-                  <span class="frame-text60">
-                    <span>
-                      <span>기초컴퓨터</span>
-                      <br />
-                      <span>그래픽스</span>
-                      <br />
-                      <span>임인성</span>
-                      <br />
-                      <span>R404</span>
-                    </span>
-                  </span>
-                </div>
+              <div id = "container3", class="frame-frame62input">
               </div>
-              <div class="frame-frame63input">
-                <div class="frame-frame651">
-                  <span class="frame-text69">
-                    <span>
-                      <span>캡스톤</span>
-                      <br />
-                      <span>디자인I</span>
-                      <br />
-                      <span>정영민</span>
-                      <br />
-                      <span>K307</span>
-                    </span>
-                  </span>
-                </div>
+              <div id = "container4", class="frame-frame63input">
               </div>
             </div>
           </div>
@@ -404,5 +346,41 @@
         </div>
       </div>
     </div>
+    <script>
+      var runtime = JSON.parse('{{ runtime|safe }}'); // 컨텍스트 변수의 배열 값을 JavaScript 변수로 할당합니다.
+      var time = JSON.parse('{{ time|safe }}');
+      var day = JSON.parse('{{ day|safe }}');
+      var adv = JSON.parse('{{ adv|safe }}');
+      var lname = JSON.parse('{{ lname|safe }}');
+      var lplace = JSON.parse('{{ lplace|safe }}');
+      // 배열 값 사용 예시:
+      for (var i = 0; i < runtime.length; i++) {
+        if (day[i]>4) continue;
+        var div = document.createElement("div");
+        div.id = "myDiv" + i;
+        var container = document.getElementById("container"+day[i].toString());
+        var spanContainer = document.createElement("div"); // span 요소들을 감싸는 컨테이너 div 요소를 생성합니다.
+        spanContainer.className = "frame-text37";
+        var span1 = document.createElement("span"); // 첫 번째 span 요소를 생성합니다.
+        var span2 = document.createElement("span"); // 두 번째 span 요소를 생성합니다.
+        var span3 = document.createElement("span"); // 세 번째 span 요소를 생성합니다.
+        span1.textContent = lname[i];
+        span2.textContent = adv[i];
+        span3.textContent = lplace[i];
+        spanContainer.appendChild(span1); // 첫 번째 span 요소를 컨테이너에 추가합니다.
+        spanContainer.appendChild(document.createElement("br")); // 줄 바꿈을 위한 <br> 요소를 추가합니다.
+        spanContainer.appendChild(span2); // 두 번째 span 요소를 컨테이너에 추가합니다.
+        spanContainer.appendChild(document.createElement("br")); // 줄 바꿈을 위한 <br> 요소를 추가합니다.
+        spanContainer.appendChild(span3); // 세 번째 span 요소를 컨테이너에 추가합니다.
+        div.style.height = runtime[i].toString()+"px";
+        div.style.top = (time[i] + 32).toString()+"px";
+        if (day[i]==4) div.style.width="57px"; 
+        if (day[i]%2==0) div.classList.add("frame-frame64");
+        else div.classList.add("frame-frame641");
+        div.appendChild(spanContainer);
+        container.appendChild(div);
+      }
+      console.log("1\n");
+    </script>
   </body>
 </html>

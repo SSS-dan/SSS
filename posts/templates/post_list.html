@@ -2,17 +2,18 @@
 <link rel="stylesheet" href="{% static 'css/output.css' %}">
 <!-- 게시글 목록 -->
 
-<a href="{% url 'post_list' mod = 0 %}" class="btn">전체 게시판</a>
-<a href="{% url 'post_list' mod = 1 %}" class="btn">자유 게시판</a>
-<a href="{% url 'post_list' mod = 2 %}" class="btn">익명 게시판</a>
-<a href="{% url 'post_list' mod = 3 %}" class="btn">질의응답 게시판</a>
-<a href="{% url 'post_list' mod = 4 %}" class="btn">자료실</a>
+<a href="{% url 'post_list' mod=0 %}" class="btn">전체게시판</a>
+<a href="{% url 'post_list' mod=1 %}" class="btn">자유게시판</a>
+<a href="{% url 'post_list' mod=2 %}" class="btn">익명게시판</a>
+<a href="{% url 'post_list' mod=3 %}" class="btn">질의응답</a>
+<a href="{% url 'post_list' mod=4 %}" class="btn">자료실</a>
+<a href="{% url 'post_list' mod=5 %}" class="btn">학식</a>
 
 <div class="space-y-4">
 {% for post in posts %}
   <div class="post bg-white shadow p-4 rounded">
-    <h2 class="text-2xl font-bold"><a class="text-indigo-600 hover:text-indigo-900" href="{% url 'post_detail' post_id=post.id %}">{{ post.title }} </a> </h2>
-      <h2> {{ post.author.nickname }} | 조회: {{ post.view_num }} | 추천: {{ post.upvote_num }} | {{ post.created_at }} </h2>
+    <h2 class="text-2xl"><a class="text-indigo-600 hover:text-indigo-900" href="{% url 'post_detail' post_id=post.id %}">{{ post.title }} </a> [{{ post.comments.count }}] </h2>
+      <h2> {% if post.mod == 2 %}익명{% else %}{{ post.author.nickname }}{% endif %} | 조회: {{ post.view_num }} | 추천: {{ post.upvote_num }} | {{ post.created_at }} </h2>
   </div>
 {% empty %}
   <p class="text-gray-500">게시글이 없습니다.</p>

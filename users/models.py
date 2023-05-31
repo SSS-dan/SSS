@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.core.validators import RegexValidator
+from PIL import Image
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -61,3 +62,16 @@ class User(AbstractBaseUser, PermissionsMixin):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = models.ImageField(upload_to='profile_pictures/')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        img = Image.open(self.profile_picture.path)
+        if img.width != img.height:
+            size = min(img.width, img.height)
+            left = (img.width - size) // 2
+            top = (img.height - size) // 2
+            right = (img.width + size) // 2
+            bottom = (img.height + size) // 2
+            img = img.crop((left, top, right, bottom))
+            img.save(self.profile_picture.path)

@@ -7,12 +7,12 @@ from .forms import PostForm, CommentForm, NicknameForm
 
 def create_post(request):
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user  # 현재 인증된 사용자를 작성자로 설정
             post.save()
-            return redirect('post_list', mod=post.mod)
+            return redirect('post_detail', post_id=post.id)
     else:
         form = PostForm()
 
@@ -25,9 +25,9 @@ def post_list(request, mod):
         return nickname(request)
 
     if mod == 0:
-        posts = Post.objects.all()
+        posts = reversed(Post.objects.all())
     else:
-        posts = Post.objects.filter(mod=mod)
+        posts = reversed(Post.objects.filter(mod=mod))
 
     return render(request, 'post_list.html', {'posts': posts})
 
@@ -71,7 +71,7 @@ def nickname(request):
             # 닉네임을 활용한 추가 동작 수행
             # 예: 사용자 모델에 닉네임 저장
 
-            return redirect('post_list')
+            return redirect('post_list', mod=0)
     else:
         form = NicknameForm()
 
@@ -80,8 +80,9 @@ def nickname(request):
 
 def delete_post(request, item_id):
     item = get_object_or_404(Post, pk=item_id)  # 삭제할 데이터베이스 객체를 가져옵니다.
+    temp = item.mod
     item.delete_post()
-    return redirect('post_list')  # 삭제 성공 후 리다이렉션할 URL을 지정합니다.
+    return redirect('post_list', mod=temp)  # 삭제 성공 후 리다이렉션할 URL을 지정합니다.
 
 
 def delete_comment(request, item_id):

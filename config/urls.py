@@ -18,6 +18,8 @@ from django.urls import path
 from django.urls import include
 from config.views import my_login_view, offline
 from users.views import mainpage  # import your view at the top
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,3 +32,6 @@ urlpatterns = [
     path(r'', mainpage, name='home'),
     #path('', include('pwa.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

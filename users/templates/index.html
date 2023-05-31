@@ -29,6 +29,7 @@
             <p class="text-xl">지도교수: {{ student.advisor }}</p>
             <p class="text-xl">학년: {{ student.year }}</p>
             <p class="text-xl">학기: {{ student.semester }}</p>
+            {% if student.userprofile %}<img src="{{ PROFILE_MEDIA_URL }}{{ student.userprofile.profile_picture.url }}" alt="Image">{% endif %}
 
             <img class="mt-4 w-36 h-36" src="{{ qr_code }}" alt="QR Code">
         {% else %}

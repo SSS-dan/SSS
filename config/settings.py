@@ -141,6 +141,9 @@ CRONJOBS = [
     ('*/5 * * * *', 'users.cron.get_current_courses')
 ]
 
+PROFILE_MEDIA_URL = '/profile_pictures/'
+POST_MEDIA_URL = '/post_pictures/'
+
 PWA_APP_NAME = 'Sogang Portal'
 PWA_APP_DESCRIPTION = "Sogang University Undergraduates' Portal"
 PWA_APP_THEME_COLOR = '#000000'

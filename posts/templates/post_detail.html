@@ -4,34 +4,22 @@
 
 <div class="post bg-white shadow p-4 rounded mb-6">
   <h2 class="text-2xl font-bold mb-2">{{ post.title }}</h2>
-  <p class="text-gray-700">작성자: {{ post.author.nickname }} &emsp;&emsp; {{ post.created_at }}</p>
-  <p class="text-gray-700">{{ post.content }}</p>
+  <p class="text-gray-700">{% if post.mod == 2 %}익명{% else %}{{ post.author.nickname }}{% endif %} | 조회: {{ post.view_num }} | 추천: {{ post.upvote_num }} | {{ post.created_at }}</p>
+    {% if post.image %}<img src="{{ POST_MEDIA_URL }}{{ post.image.url }}" alt="Image">{% endif %}
+    <p class="text-gray-700">{{ post.content }}</p>
 </div>
 
-<a href="{% url 'upvote_post' post_id=post.id %}">추천</a><a href="{% url 'delete_post' post.id %}">&emsp;&emsp; 삭제</a>
+<a href="{% url 'upvote_post' post_id=post.id %}">추천 </a>{% if request.user == post.author %}<a href="{% url 'delete_post' post.id %}">&emsp;&emsp; 삭제</a>{% endif %}
 
 <hr class="my-4">
 
 <h3 class="text-xl font-bold mb-2">댓글</h3>
 
-{% if already_upvoted %}
-    <div class="message-box">
-    <p class="message">이미 추천한 글입니다.</p>
-    <button class="btn btn-primary" id="close-button">확인</button>
-    </div>
-{% endif %}
-
-<script>
-    document.getElementById('close-button').addEventListener('click', function() {
-        document.querySelector('.message-box').style.display = 'none';
-    });
-</script>
-
 <div class="space-y-4">
 {% for comment in comments %}
   <div class="comment bg-gray-100 p-4 rounded">
     <p class="text-gray-700">{{ comment.content }}</p>
-    <p class="text-sm text-gray-500">작성자: {{ comment.author.nickname }}</p>
+    <p class="text-sm text-gray-500">{% if comment.post.mod == 2 %}익명{% else %}{{ comment.author.nickname }}{% endif %}</p>
     <p class="text-sm text-gray-500">{{ comment.created_at }}</p>
     <a href="{% url 'delete_comment' comment.id %}">삭제</a>
   </div>
@@ -50,6 +38,6 @@
 </form>
 
 <!-- 목록 버튼 -->
-<form method="get" class="mt-4" action="{% url 'post_list' %}">
+<form method="get" class="mt-4" action="{% url 'post_list' mod=post.mod %}">
   <button type="submit" class="bg-gray-500 text-white px-4 py-2 rounded text-decoration-none hover:bg-gray-700">목록</button>
 </form>

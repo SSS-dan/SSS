@@ -12,19 +12,23 @@ def create_post(request):
             post = form.save(commit=False)
             post.author = request.user  # 현재 인증된 사용자를 작성자로 설정
             post.save()
-            return redirect('post_list')
+            return redirect('post_list', mod=post.mod)
     else:
         form = PostForm()
 
     return render(request, 'create_post.html', {'form': form})
 
 
-def post_list(request):
+def post_list(request, mod):
     # 모든 게시글을 가져와서 템플릿에 전달합니다.
     if request.user.nickname == '':
         return nickname(request)
 
-    posts = Post.objects.all()
+    if mod == 0:
+        posts = Post.objects.all()
+    else:
+        posts = Post.objects.filter(mod=mod)
+
     return render(request, 'post_list.html', {'posts': posts})
 
 
@@ -67,7 +71,7 @@ def nickname(request):
             # 닉네임을 활용한 추가 동작 수행
             # 예: 사용자 모델에 닉네임 저장
 
-            return redirect('post_list')  # 닉네임 입력 후 create_post 페이지로 이동
+            return redirect('post_list')
     else:
         form = NicknameForm()
 

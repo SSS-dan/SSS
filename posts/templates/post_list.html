@@ -2,17 +2,11 @@
 <link rel="stylesheet" href="{% static 'css/output.css' %}">
 <!-- 게시글 목록 -->
 
-<div id='iphone14-1' class='iphone14-1'>
-<div id='frame1' class='frame1'>
-<div id='익명게시판' class='익명게시판'>
-익명게시판</div>
-</div>
-<div id='frame8' class='frame8'>
-<div id='자유게시판' class='자유게시판'>
-자유게시판</div>
-</div>
-
-
+<a href="{% url 'post_list' mod = 0 %}" class="btn">전체 게시판</a>
+<a href="{% url 'post_list' mod = 1 %}" class="btn">자유 게시판</a>
+<a href="{% url 'post_list' mod = 2 %}" class="btn">익명 게시판</a>
+<a href="{% url 'post_list' mod = 3 %}" class="btn">질의응답 게시판</a>
+<a href="{% url 'post_list' mod = 4 %}" class="btn">자료실</a>
 
 <div class="space-y-4">
 {% for post in posts %}
@@ -27,37 +21,3 @@
 
 <!-- 게시글 작성 버튼 -->
 <a class="inline-block bg-blue-500 text-white px-4 py-2 rounded text-decoration-none hover:bg-blue-700 mt-4" href="{% url 'create_post' %}">게시글 작성</a>
-
-<div id='frame7' class='frame7'>
-<div id='frame6' class='frame6'>
-<img id='🦆icon"gridthreeup"' class='🦆icon"gridthreeup"' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAhCAYAAABX5MJvAAAACXBIWXMAAAsTAAALEwEAmpwYAAABaklEQVR4Ae2XwU3DMBSG/5eYExdGgA0YIRvQDcgGqJcWQRE5NEhVD9ANwgZlg3YDOgHtCByQKCR+PFQ5TdI6vubgX4qsF31R/ij2/2wajvmKCZewiELMJ7e0MrWLP2Fk6Yg2ph488TUY5zb+5xczBUKPgNgGcY61DKu9q3a+YCxlKE2QFpYQ2fhThSxAB+RNGHkTRp0woWQNz2Xdr20AKbzXbjh4Rfio4QEyeWZh479yfMKrS6L/bJdojWyAln86vaOlqV28ApJa70j5kVp6xzZHXwkQSbbHNkheuJChNOHiC41XVHvHjo9svPSOxOeEkTdh5E0YqYCQMe+X4AGAeu67+LDRO4IAifAXNt73js6JhinfSL/vtTAvkxG9mcLFa0J/ek/lHmQw5mc5IljPKTLnYrkEaMl2mVRZ41YrH2qcVWty8PJBPidKeRNG3oSR0sAs3G3Jjmpb1M8dLv67yUtuNJdtVekDbf4A3FuABIay9wIAAAAASUVORK5CYII='/>
-</img>
-<div id='기능' class='기능'>
-기능</div>
-</div>
-<div id='frame5' class='frame5'>
-<img id='🦆icon"list"' class='🦆icon"list"' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAdCAYAAAAkXAW5AAAACXBIWXMAAAsTAAALEwEAmpwYAAABjklEQVR4Ae2WUU7CQBCG/1kp+tgb2BvIDcQT6A3UE1geUBI0qTEo4gveAG/ADeQGlhtwhD6q0B1nly5WEh+3ksiXtN1MJ+lkd/brEoT4gaNdjWNmZINrekEJ866ucQpPMGFSMwMp4FUeERHQ7nH41KVnlxQw9iWcwBeMRMlHG6YAF1OEE1SMms8xk+fMBTRjjIohc+vIurP0BGlM+zc0KSdU0RPYsknYnrDrnuNChum6J676fIAFYngiB8a1OOHQeoKW2/Syx9GgS7cuSWuEsm3P4AklO1MFgf145IIirCYqRokdU5Q8IVt1hIqx2iaFI71AQ6Yme1zzxPwT070A5/DFDt6wZZOwnnAu0IS0/Bsvv4MnVp6Q0dh4QhrTeCL8155IXeAvPEFu0LnjZq6QFUWtMMslnvB22uKtJzYN2xPtez4kRixX9rFAa5hQ5hIKTwzhCQZG1hOKi8OmlFSvwRTQckmFJ5rwx8R5YoX8URuomKUn+PvYnWt/U/8bPzzxniMt94PBemLH4+zUMPsC90qgk3eXQM4AAAAASUVORK5CYII='/>
-</img>
-<div id='시간표' class='시간표'>
-시간표</div>
-</div>
-<div id='frame2' class='frame2'>
-<img id='🦆icon"home"' class='🦆icon"home"' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAcCAYAAAAAwr0iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABFElEQVR4Ae2VTWrDMBCF37SBbH0E9ya9QY9Sb4qhLdSF/pBFIDdKbpDcIM4Nsg4hk3H+SGLLoxEx2egDg5Bsz+M9jUQIJCs46ffwxTJerfE9KmiJAAgBZP+c9jcYyzA9TJVrxvPwkxYw8gAj+S+/SvHpWfGK9BGYvckajHg7cLRcvsja3mPGyBKJl4AGyzW8I1EjcFiu4R2J0wFfyzW0SBoFBFiu4YykFkGg5RrOSE4O3MpyjetIdgI6sFzjFAnlP/wiMgp5kr3EjkUQJlIjqY5wYhS1TZj/8bxDEeXgg57OJ8xH8a2JAqKAuwvowQqhbF03trBZwOD9so+vkbuEYSDugSggCmhqw5na621U970Lrv93C8ANehnkCQzWAAAAAElFTkSuQmCC'/>
-</img>
-<div id='홈' class='홈'>
-홈</div>
-</div>
-<div id='frame3' class='frame3'>
-<img id='🦆icon"commentsquare"' class='🦆icon"commentsquare"' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAhCAYAAABX5MJvAAAACXBIWXMAAAsTAAALEwEAmpwYAAAApElEQVR4Ae3XvQ3CMBCG4e+OFJRswgiIDRiFCgoKQoGE6BiBUbIWPz6U4hoUJ2lyTvG9Ezyy7yxZjjdb2xc7FOr1xqNqAQLUKNRygUYxg4jwiPCI8IjwiPCI8IjwiPCI8IjwZoGoVPHEBw0mKik2Q18KQUCHq51zEEnYhlzH/SQX6zmNsJnog4QOZg4Svh1dkCIr+g8J2Y5c7dZomu55GN2+ttUPsEoojXmHQDgAAAAASUVORK5CYII='/>
-</img>
-<div id='게시판3' class='게시판3'>
-게시판</div>
-</div>
-<div id='frame4' class='frame4'>
-<img id='🦆icon"cog"' class='🦆icon"cog"' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAhCAYAAABX5MJvAAAACXBIWXMAAAsTAAALEwEAmpwYAAADC0lEQVR4AbVY603bYBQ91zikUn+UTtB0groTECaADcgGRKooSKHCSIQCLRJMQJigMAHZoGECzAbuv/KIb+81CTL29SOucqTIyffyue/7hVAT3e/cWoywPv3NQPijR2eoAUJNbPX5XB6d5Nj9I96f+hRiRjioAdVCmoBisYEN1EAuia7PS1/2+YM114ywa25idHVf3nmYhYRuWHRx7RJGW/t8bpBpW/uIoPtWk+eI2TbkjGsZv9065E/mvjwCcqD3aoIxlNWX8lyTZxv5CORzKo66JId35fuLBpgRkov20TbdFJJQ1iUv+S8okQbg9XfobjqWMQeTSDxHiIbDJAGTxMMjasV6ZXBWyAyJOM55ftpwAd8YyyJy4DtlRMRsHGHkEG7ECd/FfqROWwTGIG2KXBKPhLumOBASnp1AOGZ0fvboKjV+ti1JTIj9ku+eyYHiyMkgG6JyUHMsmY/i8MpiAV46xNLIizB+Fqx7vEMXJonNA152IrFXQXiK2v3jHu2hBBON/IatSUUghPwxMDwR85Amp2YDtwUbXuAyWpZNLVgFzkIkmnHeNOOXlxIQLYyqEphgVGWRBIBXuYpqksEMEAn/VF1bvZSLKTADHA3bqmv/3scSDiqsbanzoirKcoZCco045+VLdKhHR4xl4jijtXIOHh7t0ApKICG6GldcG5qRL+U9F4ffaPjMxcDXPu+SkV6feRSHaZxnIlzDFiSQFvBzugXM7TElxDhvTtPvk5A5SURL3IdIe5fuIVBBAFsTB7wu6hqgBEJzJAeEcQNDseTFoZ5jTjM6hICdstPrtPuSDDvpwpbKN6BtOXeGxGaf9UAPc4KUhk5mzBio1bZXhZhuLd15O8aiAHOEZt637utEliGh3svZ8FTn8/WGBZT4izifFjrpHTrI9quBzLXTNSg3RONcoU43xt40qUxR1JFThJXk+klZ3xUhvIZkUasI1rqL6oVGHqfGVHDUo4+YEbXuomIW7YwyVZXZzrJzITHpyAep4eDhCVeoARc1QQtyP0m8dOwgrPO3gOIfJbU46YvxEf8AAAAASUVORK5CYII='/>
-</img>
-<div id='설정' class='설정'>
-설정</div>
-</div>
-</div>
-</div>

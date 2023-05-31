@@ -1,5 +1,15 @@
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
+    <div class="dropdown">
+    <button class="btn">게시판 선택</button>
+    <div class="dropdown-content">
+      <a href="#" data-board="전체게시판">전체 게시판</a>
+      <a href="#" data-board="자유게시판">자유 게시판</a>
+      <a href="#" data-board="익명게시판">익명 게시판</a>
+      <a href="#" data-board="질의응답게시판">질의응답 게시판</a>
+      <a href="#" data-board="자료실게시판">자료실 게시판</a>
+    </div>
+    </div>
   {{ form.as_p }}
   <button type="submit">작성</button>
 </form>

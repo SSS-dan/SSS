@@ -180,7 +180,7 @@
   left: 0px;
   right: 0px;
   width: 391px;
-  height: 587px;
+  height: 1000px;
   margin: auto;
   display: flex;
   overflow: hidden;
@@ -707,16 +707,17 @@
   top: 37px;
   left: 61px;
   width: 297px;
+  height: 1000px;
   display: flex;
   overflow: hidden;
   position: absolute;
-  align-items: center;
+  align-items:flex-start;
   flex-shrink: 0;
 }
 .frame-frame59input {
   gap: 0px;
   width: 60px;
-  height: 546px;
+  height: 1000px;
   padding: 32px 0 0;
   overflow: hidden;
   position: relative;
@@ -752,7 +753,7 @@
 .frame-frame60input {
   gap: 10px;
   width: 60px;
-  height: 546px;
+  height: 1000px;
   display: flex;
   padding: 32px 0 0;
   overflow: hidden;
@@ -790,7 +791,7 @@
 .frame-frame61input {
   gap: 10px;
   width: 60px;
-  height: 546px;
+  height: 1000px;
   display: flex;
   padding: 32px 0 0;
   overflow: hidden;
@@ -827,7 +828,7 @@
 .frame-frame62input {
   gap: 10px;
   width: 60px;
-  height: 546px;
+  height: 1000px;
   display: flex;
   padding: 32px 0 0;
   overflow: hidden;
@@ -864,7 +865,7 @@
 .frame-frame63input {
   gap: 10px;
   width: 60px;
-  height: 546px;
+  height: 1000px;
   display: flex;
   padding: 32px 0 0;
   overflow: hidden;

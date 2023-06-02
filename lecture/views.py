@@ -9,12 +9,12 @@ import json
 
 def lecture_list(request):
     user = request.user
-    print(user.student_id)
+    #print(user.student_id)
     lectures = User.get_takes(user.student_id)
     value = '231'
     if request.method == 'POST':
         value = request.POST['value']
-        print(value)
+        #print(value)
     runtime = []
     time = []
     day = []
@@ -26,10 +26,7 @@ def lecture_list(request):
             et = i.course.end_time
             st = i.course.start_time
             runtime.append(((et.hour-st.hour)*60+et.minute-st.minute)*1.083333333333333)
-            print(i.course.name)
-            print(st.hour)
-            print(st.minute)
-            print(((st.hour-9)*60+st.minute)*1.083333333333333)
+            #print(((st.hour-9)*60+st.minute)*1.083333333333333)
             time.append(((st.hour-9)*60+st.minute)*1.083333333333333)
             day.append(i.course.day)
             adv.append(i.course.advisor)
@@ -114,6 +111,9 @@ def lecture_edit(request, lecture_id):
 
 
 def lecture_delete(request, lecture_id):
+    user = request.user
+    lectures = User.get_takes(user.student_id)
+    lectures.all()[int(lecture_id)].delete()
     #lecture = Course.get_course_by_id(lecture_id,231)
     #lecture.delete()
     return redirect('lecture_list')

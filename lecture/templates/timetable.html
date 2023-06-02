@@ -361,6 +361,10 @@
       <div class="modal_window">
       </div>
     </div>
+    <div id = "model_add_feed" class="modal_overlay">
+      <div class="modal_window">
+      </div>
+    </div>
     <script>
       var runtime = JSON.parse('{{ runtime|safe }}'); // 컨텍스트 변수의 배열 값을 JavaScript 변수로 할당합니다.
       var time = JSON.parse('{{ time|safe }}');
@@ -373,31 +377,20 @@
       var cond = 0;
       for (var i = 0; i < runtime.length; i++) {
         if (day[i]>80) continue;
-</div>
-<script>
-    var runtime = JSON.parse('{{ runtime|safe }}'); // 컨텍스트 변수의 배열 값을 JavaScript 변수로 할당합니다.
-    var time = JSON.parse('{{ time|safe }}');
-    var day = JSON.parse('{{ day|safe }}');
-    var adv = JSON.parse('{{ adv|safe }}');
-    var lname = JSON.parse('{{ lname|safe }}');
-    var lplace = JSON.parse('{{ lplace|safe }}');
-    // 배열 값 사용 예시:
-    var cond = 0;
-    for (var i = 0; i < runtime.length; i++) {
-        if (day[i] > 80) continue;
         var div = document.createElement("div");
         var date = day[i];
-        if (day[i] > 10) {
-            if (cond == 0) {
-                date = Math.floor(day[i] / 10);
-                cond = 1;
-            } else {
-                date = day[i] % 10;
-                cond = 0;
-            }
+        if (day[i]>10) {
+          if (cond==0) {
+            date = Math.floor(day[i]/10);
+            cond = 1;
+          }
+          else {
+            date = day[i]%10;
+            cond = 0;
+          }
         }
         div.id = "myDiv" + i;
-        var container = document.getElementById("container" + (date - 1).toString());
+        var container = document.getElementById("container"+(date-1).toString());
         var spanContainer = document.createElement("div"); // span 요소들을 감싸는 컨테이너 div 요소를 생성합니다.
         spanContainer.className = "frame-text37";
         var span1 = document.createElement("span"); // 첫 번째 span 요소를 생성합니다.
@@ -411,21 +404,21 @@
         spanContainer.appendChild(span2); // 두 번째 span 요소를 컨테이너에 추가합니다.
         spanContainer.appendChild(document.createElement("br")); // 줄 바꿈을 위한 <br> 요소를 추가합니다.
         spanContainer.appendChild(span3); // 세 번째 span 요소를 컨테이너에 추가합니다.
-        div.style.height = runtime[i].toString() + "px";
+        div.style.height = runtime[i].toString()+"px";
         console.log(time[i]);
-        div.style.top = (time[i] + 32).toString() + "px";
-        if (day[i] == 5) div.style.width = "57px";
-        if (day[i] % 2 == 1) div.classList.add("frame-frame64");
+        div.style.top = (time[i] + 32).toString()+"px";
+        if (day[i]==5) div.style.width="57px";
+        if (day[i]%2==1) div.classList.add("frame-frame64");
         else div.classList.add("frame-frame641");
         div.appendChild(spanContainer);
         div.addEventListener("click", e=> {
             modal.style.display = "flex";
         })
         container.appendChild(div);
-        if (cond == 1) i--;
-    }
-    console.log("1\n");
-</script>
+        if (cond==1) i--;
+      }
+      console.log("1\n");
+    </script>
 
 <link rel="stylesheet" href="{% static 'css/output.css' %}">
 {% include "partials/tabbar.html" %}

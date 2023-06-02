@@ -39,7 +39,7 @@ def get_current_courses():
 
 
 def run():
-    get_current_courses()
+    #get_current_courses()
     #sched = BackgroundScheduler()
     #sched.add_job(get_current_courses,'interval', seconds=300000, id='test')
     #sched.start()

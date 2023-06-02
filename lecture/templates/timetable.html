@@ -357,6 +357,22 @@
             <!-- 상단바 끝 -->
         </div>
     </div>
+    <div id = "model_add_feed" class="modal_overlay">
+      <div class="modal_window">
+      </div>
+    </div>
+    <script>
+      var runtime = JSON.parse('{{ runtime|safe }}'); // 컨텍스트 변수의 배열 값을 JavaScript 변수로 할당합니다.
+      var time = JSON.parse('{{ time|safe }}');
+      var day = JSON.parse('{{ day|safe }}');
+      var adv = JSON.parse('{{ adv|safe }}');
+      var lname = JSON.parse('{{ lname|safe }}');
+      var lplace = JSON.parse('{{ lplace|safe }}');
+      const modal = document.getElementById("model_add_feed");
+      // 배열 값 사용 예시:
+      var cond = 0;
+      for (var i = 0; i < runtime.length; i++) {
+        if (day[i]>80) continue;
 </div>
 <script>
     var runtime = JSON.parse('{{ runtime|safe }}'); // 컨텍스트 변수의 배열 값을 JavaScript 변수로 할당합니다.
@@ -398,10 +414,13 @@
         div.style.height = runtime[i].toString() + "px";
         console.log(time[i]);
         div.style.top = (time[i] + 32).toString() + "px";
-        if (day[i] == 4) div.style.width = "57px";
+        if (day[i] == 5) div.style.width = "57px";
         if (day[i] % 2 == 1) div.classList.add("frame-frame64");
         else div.classList.add("frame-frame641");
         div.appendChild(spanContainer);
+        div.addEventListener("click", e=> {
+            modal.style.display = "flex";
+        })
         container.appendChild(div);
         if (cond == 1) i--;
     }

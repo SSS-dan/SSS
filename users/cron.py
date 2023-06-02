@@ -12,12 +12,13 @@ def get_current_courses():
   print(crawls)
   if crawls is not None :
     for i in range(len(crawls)) :
-        course = Course.get_course_by_id(crawls['과목번호'][i],231)
+        course = Course.get_course_by_id(crawls['과목번호'][i]+'-'+crawls['분반'][i],231)
+        #print(crawls['subject_id'][i])
         if course is None :
           course = Course()
         course.advisor = crawls['교수진'][i]
         course.classroom = crawls['강의실'][i]
-        course.course_id = crawls['과목번호'][i]
+        course.course_id = crawls['과목번호'][i]+'-'+crawls['분반'][i]
         #print(crawls['요일1'][i])
         if len(crawls['요일1'][i]) == 0 or len(crawls['요일1'][i])>5:
            day = 88

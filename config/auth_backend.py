@@ -38,7 +38,8 @@ class PasswordlessAuthBackend(ModelBackend):
         print(info)
         for key,value in info.items():
             take = Takes()
-            take.course = Course.get_course_by_id(value['course_number'],231)
+            print(value)
+            take.course = Course.get_course_by_id(value['course_number']+'-'+value['course_class'],231)            
             take.student = user
             take.real = True
             take.save()

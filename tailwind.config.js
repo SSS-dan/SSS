@@ -14,6 +14,8 @@ module.exports = {
         },
         sogang: "#b30000",
         sogang_bold: "#7d0000",
+        sogang_blue: "#523CD8",
+        sogang_light: "#7785FF",
       },
     },
   },

@@ -1,380 +1,387 @@
 <!DOCTYPE html>
 <html lang="english">
 {% load static %}
-  <head>
+<head>
     <title>exported project</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta charset="utf-8" />
-    <meta property="twitter:card" content="summary_large_image" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8"/>
+    <meta property="twitter:card" content="summary_large_image"/>
 
     <style data-tag="reset-style-sheet">
       html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
     </style>
     <style data-tag="default-style-sheet">
-      html {
-        font-family: Inter;
-        font-size: 16px;
-      }
+        html {
+            font-family: Inter;
+            font-size: 16px;
+        }
 
-      body {
-        font-weight: 400;
-        font-style:normal;
-        text-decoration: none;
-        text-transform: none;
-        letter-spacing: normal;
-        line-height: 1.15;
-        color: var(--dl-color-gray-black);
-        background-color: var(--dl-color-gray-white);
+        body {
+            font-weight: 400;
+            font-style: normal;
+            text-decoration: none;
+            text-transform: none;
+            letter-spacing: normal;
+            line-height: 1.15;
+            color: var(--dl-color-gray-black);
+            background-color: var(--dl-color-gray-white);
 
-      }
+        }
     </style>
     <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-      data-tag="font"
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+            data-tag="font"
     />
-    <link rel="stylesheet" href="../static/style.css" />
-  </head>
-  <body>
-    <div>
-      <link href="../static/frame.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../static/style.css"/>
+</head>
+<body>
+<!--
+  <div class="flex items-center bg-sogang_blue fixed top-0 left-0 z-50 w-full h-16 dark:border-gray-600 mb-16">
+    <li class="mr-3 pl-4 pr-1 cursor-pointer list-none"  onClick="javascript:history.go(-1);">
+        <i class="fa-solid fa-circle-arrow-left fa-xl text-white"></i>
+    </li>
+    <ul class="flex items-center overflow-x-auto whitespace-nowrap ml-3">
+        <li class="mr-3 px-1">
+            <span class="inline-block rounded-full py-1 px-3 {% if mod == 0 %}bg-sogang_light text-white{% else %}
+    bg-white text-sogang_blue hover:bg-gray-200{% endif %}"
+               href="{% url 'post_list' mod=0 %}">2023년 1학기</span>
+        </li>
+        <li class="mr-3 px-1">
+            <a class="inline-block rounded-full py-1 px-3 {% if mod == 1 %}bg-sogang_light text-white{% else %}
+    bg-white text-sogang_blue hover:bg-gray-200{% endif %}"
+               href="{% url 'post_list' mod=1 %}">자유게시판</a>
+        </li>
 
-      <div class="frame-container">
+        <li class="mr-3 px-1">
+            <a class="inline-block rounded-full py-1 px-3 {% if mod == 2 %}bg-sogang_light text-white{% else %}
+    bg-white text-sogang_blue hover:bg-gray-200{% endif %}"
+               href="{% url 'post_list' mod=2 %}">익명게시판</a>
+        </li>
+        <li class="mr-3 px-1">
+            <a class="inline-block rounded-full py-1 px-3 {% if mod == 3 %}bg-sogang_light text-white{% else %}
+    bg-white text-sogang_blue hover:bg-gray-200{% endif %}"
+               href="{% url 'post_list' mod=3 %}">질의응답</a>
+        </li>
+        <li class="mr-3 px-1">
+            <a class="inline-block rounded-full py-1 px-3 {% if mod == 4 %}bg-sogang_light text-white{% else %}
+    bg-white text-sogang_blue hover:bg-gray-200{% endif %}"
+               href="{% url 'post_list' mod=4 %}">자료실</a>
+        </li>
+        <li class="mr-3 px-1">
+            <a class="inline-block rounded-full py-1 px-3 {% if mod == 5 %}bg-sogang_light text-white{% else %}
+    bg-white text-sogang_blue hover:bg-gray-200{% endif %}"
+               href="{% url 'post_list' mod=5 %}">학식</a>
+        </li>
+    </ul>
+    </div>
+    -->
+<div>
+    <link href="../static/frame.css" rel="stylesheet"/>
+
+    <div class="frame-container">
         <div class="frame-frame">
           <span class="frame-text">
             <span>
-              {%if semester == "231" %}
-                <span>2023년 1학기</span>
-              {%endif%}
-              {%if semester == "222" %}
-                <span>2022년 2학기</span>
-              {%endif%}
-              {%if semester == "221" %}
-                <span>2022년 1학기</span>
-              {%endif%}
-              {%if semester == "212" %}
-                <span>2021년 2학기</span>
-              {%endif%}
-              {%if semester == "211" %}
-                <span>2021년 1학기</span>
-              {%endif%}
-              <br />
+              {% if semester == "231" %}
+                  <span>2023년 1학기</span>
+              {% endif %}
+                {% if semester == "222" %}
+                    <span>2022년 2학기</span>
+                {% endif %}
+                {% if semester == "221" %}
+                    <span>2022년 1학기</span>
+                {% endif %}
+                {% if semester == "212" %}
+                    <span>2021년 2학기</span>
+                {% endif %}
+                {% if semester == "211" %}
+                    <span>2021년 1학기</span>
+                {% endif %}
+                <br/>
               <span></span>
             </span>
           </span>
-        <!--
-          <div class="frame-frame10">
-            <button class="frame-frame6button">
-              <img
-                src="../static/public/external/svgicongridthreeup1621-dmzp.svg"
-                alt="SVGicongridthreeup1621"
-                class="frame-s-gicongridthreeup"
-              />
-              <span class="frame-text05">기능</span>
-            </button>
-            <button class="frame-frame5button">
-              <img
-                src="../static/public/external/svgiconlist1621-ri4.svg"
-                alt="SVGiconlist1621"
-                class="frame-s-giconlist"
-              />
-              <span class="frame-text06">시간표</span>
-            </button>
-            <button class="frame-frame2button">
-              <img
-                src="../static/public/external/svgiconhome1621-lpvw.svg"
-                alt="SVGiconhome1621"
-                class="frame-s-giconhome"
-              />
-              <span class="frame-text07">홈</span>
-            </button>
-            <button class="frame-frame3button">
-              <img
-                src="../static/public/external/svgiconcommentsquare1622-93e1.svg"
-                alt="SVGiconcommentsquare1622"
-                class="frame-s-giconcommentsquare"
-              />
-              <span class="frame-text08">게시판</span>
-            </button>
-            <button class="frame-frame4button">
-              <img
-                src="../static/public/external/svgiconcog1622-sseg.svg"
-                alt="SVGiconcog1622"
-                class="frame-s-giconcog"
-              />
-              <span class="frame-text09">설정</span>
-            </button>
-          </div>
-          -->
-          <div class="frame-frame101">
-            <div class="frame-frame17">
-              <div class="frame-frame12">
-                <span class="frame-text10">월</span>
+            <!--
+              <div class="frame-frame10">
+                <button class="frame-frame6button">
+                  <img
+                    src="../static/public/external/svgicongridthreeup1621-dmzp.svg"
+                    alt="SVGicongridthreeup1621"
+                    class="frame-s-gicongridthreeup"
+                  />
+                  <span class="frame-text05">기능</span>
+                </button>
+                <button class="frame-frame5button">
+                  <img
+                    src="../static/public/external/svgiconlist1621-ri4.svg"
+                    alt="SVGiconlist1621"
+                    class="frame-s-giconlist"
+                  />
+                  <span class="frame-text06">시간표</span>
+                </button>
+                <button class="frame-frame2button">
+                  <img
+                    src="../static/public/external/svgiconhome1621-lpvw.svg"
+                    alt="SVGiconhome1621"
+                    class="frame-s-giconhome"
+                  />
+                  <span class="frame-text07">홈</span>
+                </button>
+                <button class="frame-frame3button">
+                  <img
+                    src="../static/public/external/svgiconcommentsquare1622-93e1.svg"
+                    alt="SVGiconcommentsquare1622"
+                    class="frame-s-giconcommentsquare"
+                  />
+                  <span class="frame-text08">게시판</span>
+                </button>
+                <button class="frame-frame4button">
+                  <img
+                    src="../static/public/external/svgiconcog1622-sseg.svg"
+                    alt="SVGiconcog1622"
+                    class="frame-s-giconcog"
+                  />
+                  <span class="frame-text09">설정</span>
+                </button>
               </div>
-              <div class="frame-frame13">
-                <span class="frame-text11">화</span>
-              </div>
-              <div class="frame-frame14">
+              -->
+            <div class="frame-frame101">
+                <div class="frame-frame17">
+                    <div class="frame-frame12">
+                        <span class="frame-text10">월</span>
+                    </div>
+                    <div class="frame-frame13">
+                        <span class="frame-text11">화</span>
+                    </div>
+                    <div class="frame-frame14">
                 <span class="frame-text12">
                   <span>
                     <span>수</span>
-                    <br />
+                    <br/>
                     <span></span>
                   </span>
                 </span>
-              </div>
-              <div class="frame-frame15">
-                <span class="frame-text17">목</span>
-              </div>
-              <div class="frame-frame16">
-                <span class="frame-text18">금</span>
-              </div>
+                    </div>
+                    <div class="frame-frame15">
+                        <span class="frame-text17">목</span>
+                    </div>
+                    <div class="frame-frame16">
+                        <span class="frame-text18">금</span>
+                    </div>
+                </div>
+                <div class="frame-frame11">
+                    <div class="frame-frame18">
+                        <div class="frame-frame19">
+                            <span class="frame-text19"><span>09</span></span>
+                        </div>
+                        <div class="frame-frame20">
+                            <span class="frame-text21"><span>10</span></span>
+                        </div>
+                        <div class="frame-frame21">
+                            <span class="frame-text23"><span>11</span></span>
+                        </div>
+                        <div class="frame-frame22">
+                            <span class="frame-text25"><span>12</span></span>
+                        </div>
+                        <div class="frame-frame23">
+                            <span class="frame-text27"><span>13</span></span>
+                        </div>
+                        <div class="frame-frame24">
+                            <span class="frame-text29"><span>14</span></span>
+                        </div>
+                        <div class="frame-frame25">
+                            <span class="frame-text31"><span>15</span></span>
+                        </div>
+                        <div class="frame-frame26">
+                            <span class="frame-text33"><span>16</span></span>
+                        </div>
+                        <div class="frame-frame27">
+                            <span class="frame-text35"><span>17</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="frame-frame29">
+                    <div class="frame-frame28">
+                        <img
+                                src="../static/public/external/line21294-dqq.svg"
+                                alt="Line21294"
+                                class="frame-line2"
+                        />
+                    </div>
+                    <div class="frame-frame291">
+                        <img
+                                src="../static/public/external/line21294-dqq.svg"
+                                alt="Line21613"
+                                class="frame-line21"
+                        />
+                    </div>
+                    <div class="frame-frame30">
+                        <img
+                                src="../static/public/external/line21294-dqq.svg"
+                                alt="Line21614"
+                                class="frame-line22"
+                        />
+                    </div>
+                    <div class="frame-frame31">
+                        <img
+                                src="../static/public/external/line21294-dqq.svg"
+                                alt="Line21615"
+                                class="frame-line23"
+                        />
+                    </div>
+                    <div class="frame-frame32">
+                        <img
+                                src="../static/public/external/line21294-dqq.svg"
+                                alt="Line21615"
+                                class="frame-line24"
+                        />
+                    </div>
+                    <div class="frame-frame33">
+                        <img
+                                src="../static/public/external/line21294-dqq.svg"
+                                alt="Line21615"
+                                class="frame-line25"
+                        />
+                    </div>
+                    <div class="frame-frame34">
+                        <img
+                                src="../static/public/external/line21294-dqq.svg"
+                                alt="Line21615"
+                                class="frame-line26"
+                        />
+                    </div>
+                    <div class="frame-frame35">
+                        <img
+                                src="../static/public/external/line21294-dqq.svg"
+                                alt="Line21615"
+                                class="frame-line27"
+                        />
+                    </div>
+                    <div class="frame-frame36">
+                        <img
+                                src="../static/public/external/line21294-dqq.svg"
+                                alt="Line21616"
+                                class="frame-line28"
+                        />
+                    </div>
+                </div>
+                <div class="frame-frame301">
+                    <div class="frame-frame281">
+                        <img
+                                src="../static/public/external/line101210-0mq.svg"
+                                alt="Line101210"
+                                class="frame-line10"
+                        />
+                    </div>
+                    <div class="frame-frame311">
+                        <img
+                                src="../static/public/external/line101618-x2pr.svg"
+                                alt="Line101618"
+                                class="frame-line10"
+                        />
+                    </div>
+                    <div class="frame-frame311">
+                        <img
+                                src="../static/public/external/line101210-0mq.svg"
+                                alt="Line101619"
+                                class="frame-line10"
+                        />
+                    </div>
+                    <div class="frame-frame311">
+                        <img
+                                src="../static/public/external/line101619-u5wb.svg"
+                                alt="Line101619"
+                                class="frame-line10"
+                        />
+                    </div>
+                </div>
+                <div class="frame-frame58">
+                    <div id="container0" , class="frame-frame59input">
+                    </div>
+                    <div id="container1" , class="frame-frame60input">
+                    </div>
+                    <div id="container2" , class="frame-frame61input">
+                    </div>
+                    <div id="container3" , class="frame-frame62input">
+                    </div>
+                    <div id="container4" , class="frame-frame63input">
+                    </div>
+                </div>
             </div>
-            <div class="frame-frame11">
-              <div class="frame-frame18">
-                <div class="frame-frame19">
-                  <span class="frame-text19"><span>09</span></span>
-                </div>
-                <div class="frame-frame20">
-                  <span class="frame-text21"><span>10</span></span>
-                </div>
-                <div class="frame-frame21">
-                  <span class="frame-text23"><span>11</span></span>
-                </div>
-                <div class="frame-frame22">
-                  <span class="frame-text25"><span>12</span></span>
-                </div>
-                <div class="frame-frame23">
-                  <span class="frame-text27"><span>13</span></span>
-                </div>
-                <div class="frame-frame24">
-                  <span class="frame-text29"><span>14</span></span>
-                </div>
-                <div class="frame-frame25">
-                  <span class="frame-text31"><span>15</span></span>
-                </div>
-                <div class="frame-frame26">
-                  <span class="frame-text33"><span>16</span></span>
-                </div>
-                <div class="frame-frame27">
-                  <span class="frame-text35"><span>17</span></span>
-                </div>
-              </div>
-            </div>
-            <div class="frame-frame29">
-              <div class="frame-frame28">
-                <img
-                  src="../static/public/external/line21294-dqq.svg"
-                  alt="Line21294"
-                  class="frame-line2"
-                />
-              </div>
-              <div class="frame-frame291">
-                <img
-                  src="../static/public/external/line21294-dqq.svg"
-                  alt="Line21613"
-                  class="frame-line21"
-                />
-              </div>
-              <div class="frame-frame30">
-                <img
-                  src="../static/public/external/line21294-dqq.svg"
-                  alt="Line21614"
-                  class="frame-line22"
-                />
-              </div>
-              <div class="frame-frame31">
-                <img
-                  src="../static/public/external/line21294-dqq.svg"
-                  alt="Line21615"
-                  class="frame-line23"
-                />
-              </div>
-              <div class="frame-frame32">
-                <img
-                  src="../static/public/external/line21294-dqq.svg"
-                  alt="Line21615"
-                  class="frame-line24"
-                />
-              </div>
-              <div class="frame-frame33">
-                <img
-                  src="../static/public/external/line21294-dqq.svg"
-                  alt="Line21615"
-                  class="frame-line25"
-                />
-              </div>
-              <div class="frame-frame34">
-                <img
-                  src="../static/public/external/line21294-dqq.svg"
-                  alt="Line21615"
-                  class="frame-line26"
-                />
-              </div>
-              <div class="frame-frame35">
-                <img
-                  src="../static/public/external/line21294-dqq.svg"
-                  alt="Line21615"
-                  class="frame-line27"
-                />
-              </div>
-              <div class="frame-frame36">
-                <img
-                  src="../static/public/external/line21294-dqq.svg"
-                  alt="Line21616"
-                  class="frame-line28"
-                />
-              </div>
-            </div>
-            <div class="frame-frame301">
-              <div class="frame-frame281">
-                <img
-                  src="../static/public/external/line101210-0mq.svg"
-                  alt="Line101210"
-                  class="frame-line10"
-                />
-              </div>
-              <div class="frame-frame311">
-                <img
-                  src="../static/public/external/line101618-x2pr.svg"
-                  alt="Line101618"
-                  class="frame-line10"
-                />
-              </div>
-              <div class="frame-frame311">
-                <img
-                  src="../static/public/external/line101210-0mq.svg"
-                  alt="Line101619"
-                  class="frame-line10"
-                />
-              </div>
-              <div class="frame-frame311">
-                <img
-                  src="../static/public/external/line101619-u5wb.svg"
-                  alt="Line101619"
-                  class="frame-line10"
-                />
-              </div>
-            </div>
-            <div class="frame-frame58">
-              <div id = "container0", class="frame-frame59input">
-              </div>
-              <div id = "container1", class="frame-frame60input">
-              </div>
-              <div id = "container2", class="frame-frame61input">
-              </div>
-              <div id = "container3", class="frame-frame62input">
-              </div>
-              <div id = "container4", class="frame-frame63input">
-              </div>
-            </div>
-          </div>
 
-          <img
-            src="../static/public/external/rectangle41619-06vd-1900w.png"
-            alt="Rectangle41619"
-            class="frame-rectangle4"
-          />
-          <div class="frame-frame38">
-            <form action="{% url 'lecture_list' %}" method="POST">
-              {% csrf_token %}
-              <input type="hidden" name="value" value="231">
-              {% if semester == "231" %}
-                <button type="submit" class="frame-frame8button">
-                  <span class="frame-text78"><span>2023-1</span></span>
-                </button>
-              {% else %}
-                <button type="submit" class="frame-frame13button">
-                  <span class="frame-text80"><span>2023-1</span></span>
-                </button>
-              {% endif %}
-            </form>
-            <form action="{% url 'lecture_list' %}" method="POST">
-              {% csrf_token %}
-              <input type="hidden" name="value" value="222">
-              {% if semester == "222" %}
-                <button type="submit" class="frame-frame8button">
-                  <span class="frame-text78"><span>2022-2</span></span>
-                </button>
-              {% else %}
-                <button type="submit" class="frame-frame13button">
-                  <span class="frame-text80"><span>2022-2</span></span>
-                </button>
-              {% endif %}
-            </form>
-            <form action="{% url 'lecture_list' %}" method="POST">
-              {% csrf_token %}
-              <input type="hidden" name="value" value="221">
-              {% if semester == "221" %}
-                <button type="submit" class="frame-frame8button">
-                  <span class="frame-text78"><span>2022-1</span></span>
-                </button>
-              {% else %}
-                <button type="submit" class="frame-frame13button">
-                  <span class="frame-text80"><span>2022-1</span></span>
-                </button>
-              {% endif %}
-            </form>
-            <form action="{% url 'lecture_list' %}" method="POST">
-              {% csrf_token %}
-              <input type="hidden" name="value" value="212">
-              {% if semester == "212" %}
-                <button type="submit" class="frame-frame8button">
-                  <span class="frame-text78"><span>2021-2</span></span>
-                </button>
-              {% else %}
-                <button type="submit" class="frame-frame13button">
-                  <span class="frame-text80"><span>2021-2</span></span>
-                </button>
-              {% endif %}
-            </form>
-            <form action="{% url 'lecture_list' %}" method="POST">
-              {% csrf_token %}
-              <input type="hidden" name="value" value="211">
-              {% if semester == "211" %}
-                <button type="submit" class="frame-frame8button">
-                  <span class="frame-text78"><span>2021-1</span></span>
-                </button>
-              {% else %}
-                <button type="submit" class="frame-frame13button">
-                  <span class="frame-text80"><span>2021-1</span></span>
-                </button>
-              {% endif %}
-            </form>
-          </div>
-          <img
-            src="../static/public/external/svgiconarrowcircleleftbutton1914-ddnp.svg"
-            alt="SVGiconArrowCircleLeftbutton1914"
-            class="frame-s-gicon-arrow-circle-leftbutton"
-          />
+            <!-- 상단바 (학기)-->
+            <div class="flex items-center bg-sogang_blue fixed top-0 left-0 z-50 w-full h-16 dark:border-gray-600 mb-16">
+                <li class="mr-3 pl-4 pr-1 cursor-pointer list-none"  onClick="javascript:history.go(-1);">
+                    <i class="fa-solid fa-circle-arrow-left fa-xl text-white"></i>
+                </li>
+                <div class="flex items-center overflow-x-auto whitespace-nowrap ml-3">
+                    <form action="{% url 'lecture_list' %}" method="POST" class="mr-3 px-1">
+                        {% csrf_token %}
+                        <input type="hidden" name="value" value="231">
+                        <button type="submit" class="inline-block rounded-full py-1 px-3 {% if semester == "231" %}bg-sogang_light text-white{% else %}bg-white text-sogang_blue hover:bg-gray-200{% endif %}">
+                            <span>2023-1</span>
+                        </button>
+
+                    </form>
+                    <form action="{% url 'lecture_list' %}" method="POST" class="mr-3 px-1">
+                        {% csrf_token %}
+                        <input type="hidden" name="value" value="222">
+                        <button type="submit" class="inline-block rounded-full py-1 px-3 {% if semester == "222" %}bg-sogang_light text-white{% else %}bg-white text-sogang_blue hover:bg-gray-200{% endif %}">
+                            <span>2022-2</span>
+                        </button>
+                    </form>
+                    <form action="{% url 'lecture_list' %}" method="POST" class="mr-3 px-1">
+                        {% csrf_token %}
+                        <input type="hidden" name="value" value="221">
+                        <button type="submit" class="inline-block rounded-full py-1 px-3 {% if semester == "221" %}bg-sogang_light text-white{% else %}bg-white text-sogang_blue hover:bg-gray-200{% endif %}">
+                            <span>2022-1</span>
+                        </button>
+                    </form>
+                    <form action="{% url 'lecture_list' %}" method="POST" class="mr-3 px-1">
+                        {% csrf_token %}
+                        <input type="hidden" name="value" value="212">
+                        <button type="submit" class="inline-block rounded-full py-1 px-3 {% if semester == "212" %}bg-sogang_light text-white{% else %}bg-white text-sogang_blue hover:bg-gray-200{% endif %}">
+                            <span>2021-2</span>
+                        </button>
+                    </form>
+                    <form action="{% url 'lecture_list' %}" method="POST" class="mr-3 px-1">
+                        {% csrf_token %}
+                        <input type="hidden" name="value" value="211">
+                        <button type="submit" class="inline-block rounded-full py-1 px-3 {% if semester == "212" %}bg-sogang_light text-white{% else %}bg-white text-sogang_blue hover:bg-gray-200{% endif %}">
+                            <span>2021-1</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <!-- 상단바 끝 -->
         </div>
-      </div>
     </div>
-    <script>
-      var runtime = JSON.parse('{{ runtime|safe }}'); // 컨텍스트 변수의 배열 값을 JavaScript 변수로 할당합니다.
-      var time = JSON.parse('{{ time|safe }}');
-      var day = JSON.parse('{{ day|safe }}');
-      var adv = JSON.parse('{{ adv|safe }}');
-      var lname = JSON.parse('{{ lname|safe }}');
-      var lplace = JSON.parse('{{ lplace|safe }}');
-      // 배열 값 사용 예시:
-      var cond = 0;
-      for (var i = 0; i < runtime.length; i++) {
-        if (day[i]>80) continue;
+</div>
+<script>
+    var runtime = JSON.parse('{{ runtime|safe }}'); // 컨텍스트 변수의 배열 값을 JavaScript 변수로 할당합니다.
+    var time = JSON.parse('{{ time|safe }}');
+    var day = JSON.parse('{{ day|safe }}');
+    var adv = JSON.parse('{{ adv|safe }}');
+    var lname = JSON.parse('{{ lname|safe }}');
+    var lplace = JSON.parse('{{ lplace|safe }}');
+    // 배열 값 사용 예시:
+    var cond = 0;
+    for (var i = 0; i < runtime.length; i++) {
+        if (day[i] > 80) continue;
         var div = document.createElement("div");
         var date = day[i];
-        if (day[i]>10) {
-          if (cond==0) {
-            date = Math.floor(day[i]/10);
-            cond = 1;
-          }
-          else {
-            date = day[i]%10;
-            cond = 0;
-          }
+        if (day[i] > 10) {
+            if (cond == 0) {
+                date = Math.floor(day[i] / 10);
+                cond = 1;
+            } else {
+                date = day[i] % 10;
+                cond = 0;
+            }
         }
         div.id = "myDiv" + i;
-        var container = document.getElementById("container"+(date-1).toString());
+        var container = document.getElementById("container" + (date - 1).toString());
         var spanContainer = document.createElement("div"); // span 요소들을 감싸는 컨테이너 div 요소를 생성합니다.
         spanContainer.className = "frame-text37";
         var span1 = document.createElement("span"); // 첫 번째 span 요소를 생성합니다.
@@ -388,21 +395,21 @@
         spanContainer.appendChild(span2); // 두 번째 span 요소를 컨테이너에 추가합니다.
         spanContainer.appendChild(document.createElement("br")); // 줄 바꿈을 위한 <br> 요소를 추가합니다.
         spanContainer.appendChild(span3); // 세 번째 span 요소를 컨테이너에 추가합니다.
-        div.style.height = runtime[i].toString()+"px";
+        div.style.height = runtime[i].toString() + "px";
         console.log(time[i]);
-        div.style.top = (time[i] + 32).toString()+"px";
-        if (day[i]==4) div.style.width="57px"; 
-        if (day[i]%2==1) div.classList.add("frame-frame64");
+        div.style.top = (time[i] + 32).toString() + "px";
+        if (day[i] == 4) div.style.width = "57px";
+        if (day[i] % 2 == 1) div.classList.add("frame-frame64");
         else div.classList.add("frame-frame641");
         div.appendChild(spanContainer);
         container.appendChild(div);
-        if (cond==1) i--;
-      }
-      console.log("1\n");
-    </script>
+        if (cond == 1) i--;
+    }
+    console.log("1\n");
+</script>
 
-    <link rel="stylesheet" href="{% static 'css/output.css' %}">
-    {% include "partials/tabbar.html" %}
-    {% block content %}{% endblock %}
-  </body>
+<link rel="stylesheet" href="{% static 'css/output.css' %}">
+{% include "partials/tabbar.html" %}
+{% block content %}{% endblock %}
+</body>
 </html>

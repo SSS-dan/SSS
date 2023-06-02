@@ -29,7 +29,7 @@ def post_list(request, mod):
     else:
         posts = reversed(Post.objects.filter(mod=mod))
 
-    return render(request, 'post_list.html', {'posts': posts})
+    return render(request, 'post_list.html', {'posts': posts, 'mod': mod})
 
 
 def post_detail(request, post_id):

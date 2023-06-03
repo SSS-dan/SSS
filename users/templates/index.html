@@ -13,32 +13,105 @@
 
 
 </head>
-<body class="bg-gray-200 flex flex-col items-center justify-center h-screen m-0">
+<body class="bg-gray-200 flex flex-col items-center  h-screen m-0">
 
-    {% include "partials/nav.html" %}
-
-    <div class="bg-white p-10 rounded shadow-md text-center">
-        <h1 class="mb-8 text-3xl">학생 정보</h1>
+    {# include "partials/nav.html" #}
+    <nav class="flex items-center bg-sogang_blue fixed top-0 left-0 z-50 w-full h-16 dark:border-gray-600 mb-16">
+        <li class="cursor-pointer mr-3 pl-4 pr-1 cursor-pointer list-none z-50"   onClick="javascript:history.go(-1);">
+            <i class="fa-solid fa-circle-arrow-left fa-xl text-white"></i>
+        </li>
+        <span class="font-bold text-white text-xl justify-center absolute w-full mx-auto text-center">Sogang Link</span>
+    </nav>
+    <div class="flex w-11/12 xl:w-1/3 flex-wrap justify-center">
         {% csrf_token %}
-        {% if user.is_authenticated %}
-            <p class="text-green-500">LOGGED IN!!!</p>
-            <p class="text-xl">학번 : {{ username }}</p>
-            <p class="text-xl">{{ student.name }}</p>
-            <p class="text-xl">전공: {{ student.major }}</p>
-            <p class="text-xl">지도교수: {{ student.advisor }}</p>
-            <p class="text-xl">학년: {{ student.year }}</p>
-            <p class="text-xl">학기: {{ student.semester }}</p>
-            {% if student.userprofile %}
-                <img src="{{ PROFILE_MEDIA_URL }}{{ student.userprofile.profile_picture.url }}" alt="Image" class="w-36 h-36 rounded-full shadow-lg">
-            {% endif %}
 
-            <img class="mt-4 w-36 h-36" src="{{ qr_code }}" alt="QR Code">
-        {% else %}
+        <a class="w-full mt-24 bg-white p-8 rounded-xl shadow-md text-center flex flex-col" href="{% url 'qr_code' %}">
+            {% if user.is_authenticated %}
+                <div class="flex">
+                    {% if student.userprofile %}
+                        <img src="{{ PROFILE_MEDIA_URL }}{{ student.userprofile.profile_picture.url }}" alt="Image" class="w-24 h-24 rounded-3xl shadow-md">
+                    {% else %}
+                        <img src="{% static 'images/default_profile.jpg' %}" alt="Image" class="w-36 h-36 rounded-3xl shadow-md">
+                    {% endif %}
+                    <div class="text-start px-6">
+                        <p class="text-lg font-bold">모바일 학생증</p>
+                        <p class="text-sm">이름: {{ student.name }}</p>
+                        <p class="text-sm">전공: {{ student.major }}</p>
+                        <p class="text-sm">학번 : {{ username }}</p>
+                    </div>
+                </div>
+            {% else %}
             <p class="text-red-500">NOT LOGGED IN!!!</p>
             <a class="inline-block bg-sogang text-white px-4 py-2 rounded text-decoration-none"
                href="{% url 'login' %}">로그인 페이지 이동</a>
         {% endif %}
+        </a>
+
+        <div class="w-full my-4 bg-white p-8 rounded-xl shadow-md flex flex-col">
+            <span class="font-bold text-lg">공지</span>
+            <span class="truncate ... text-sm">[수업] 2023학년도 1학기 강의실 배정 안내</span>
+            <span class="truncate ... text-sm">[학부]23-1 편입생 학점인정 이의신청 결과발표</span>
+            <span class="truncate ... text-sm">[공지]2023학도 1학기 중간시험 일정 및 개방강의실 안내 ㅇㄴ마ㅣㅓㅠㄹㅁㅇ너ㅣ랑ㅍㅁㄴ러ㅏㅁㅇㄴㅍㄹ;ㅏㅁㅇㄴㄹㅍ마;ㄴ유러;ㅁㅇㄴㅍㄹㅁㅇㄴ;ㅓ롬ㄴㅇ</span>
+        </div>
+
+        <div class="w-full my-4 bg-white p-8 rounded-xl shadow-md flex flex-col">
+            <span class="font-bold text-lg">과제 목록</span>
+            <table class="table-auto">
+              <thead>
+                <tr class="text-xs text-left bg-gray-100">
+                  <th>과제명</th>
+                  <th>마감 기한</th>
+                  <th>제출</th>
+                </tr>
+              </thead>
+              <tbody class="text-sm">
+                <tr>
+                  <td>[기초컴퓨터그래픽스] OpenGL..</td>
+                  <td>5/24 18:00</td>
+                  <td class="text-green-500 font-bold">O</td>
+                </tr>
+                <tr>
+                  <td>[캡스톤디자인I] 중간고사 리포트</td>
+                  <td>5/22 10:30</td>
+                  <td class="text-red-500 font-bold">X</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+        <div class="w-full my-4 bg-white p-8 rounded-xl shadow-md flex flex-col">
+            <span class="font-bold text-lg">오늘 시간표</span>
+            <table class="table-auto">
+              <thead>
+                <tr class="text-xs text-left bg-gray-100">
+                  <th>강의시간</th>
+                  <th>과목</th>
+                  <th>강의실</th>
+                </tr>
+              </thead>
+              <tbody class="text-sm">
+                <tr>
+                  <td>12:00</td>
+                  <td>기초컴퓨터그래픽스(CSE4170-01)</td>
+                  <td>R404</td>
+                </tr>
+                <tr>
+                  <td>15:00</td>
+                  <td>멀티코어프로그래밍(CSE4100-01)</td>
+                  <td>AS414</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
     </div>
+
+    <p class="text-xl">지도교수: {{ student.advisor }}</p>
+                <p class="text-xl">학년: {{ student.year }}</p>
+                <p class="text-xl">학기: {{ student.semester }}</p>
+
+                <img class="mt-4 w-36 h-36" src="{{ qr_code }}" alt="QR Code">
+
     {% include "partials/tabbar.html" %}
     {% block content %}{% endblock %}
 </body>

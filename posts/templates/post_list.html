@@ -6,7 +6,7 @@
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0"
 />
 <!-- 게시글 목록 -->
-<div class="flex items-center bg-sogang_blue fixed top-0 left-0 z-50 w-full h-16 dark:border-gray-600 mb-16">
+<nav class="flex items-center bg-sogang_blue fixed top-0 left-0 z-50 w-full h-16 dark:border-gray-600 mb-16">
     <li class="mr-3 pl-4 pr-1 cursor-pointer list-none"  onClick="javascript:history.go(-1);">
         <i class="fa-solid fa-circle-arrow-left fa-xl text-white"></i>
     </li>
@@ -37,7 +37,7 @@
                href="{% url 'post_list' mod=5 %}">학식</a>
         </li>
     </ul>
-</div>
+</nav>
 
 <style>
     .image-container {

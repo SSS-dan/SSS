@@ -49,7 +49,11 @@ def generate_qr_code(id):
 def qr_code(request):
     if request.user.is_authenticated:
         image_bytes = generate_qr_code(request.user.student_id)
-        context = {'qr_code': 'data:image/png;base64,' + base64.b64encode(image_bytes).decode()}
+        context = {
+            'username': request.user.student_id,
+            'student': User.objects.get(student_id=request.user.student_id),
+            'qr_code': 'data:image/png;base64,' + base64.b64encode(image_bytes).decode()
+        }
         # print(crawl_courses('23', '1'))
         return render(request, 'qr_code.html', context=context)
     return render(request, 'index.html')

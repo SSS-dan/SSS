@@ -30,6 +30,10 @@ def crawl_notice(src):
         # Extract text from columns
         num = cols[0].get_text(strip=True)
         title = cols[1].find('a').get_text(strip=True)
+
+        link = "http://www.sogang.ac.kr" + cols[1].find('a')['href']
+        link = link.replace('¤', '&curren')
+
         writer = cols[2].get_text(strip=True)
         files = [link.get_text(strip=True) for link in cols[3].find_all('a')]
         date = cols[4].get_text(strip=True)
@@ -38,6 +42,7 @@ def crawl_notice(src):
         data.append({
             'Number': num,
             'Title': title,
+            'Link': link,
             'Writer': writer,
             'Files': files,
             'Date': date,
@@ -46,8 +51,11 @@ def crawl_notice(src):
 
         print('Number:', num)
         print('Title:', title)
+        print('Link:', link)
         print('Writer:', writer)
         print('Files:', files)
         print('Date:', date)
         print('Views:', views)
-        print('---'*10)
+        print('---' * 10)
+
+    return data

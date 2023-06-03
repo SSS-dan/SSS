@@ -55,7 +55,7 @@ class Takes(models.Model):
 
 
 class Notice(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='notice')
+    mod = models.IntegerField()
     num = models.IntegerField()
     title = models.CharField(max_length=100, null=True)
     writer = models.CharField(max_length=100, null=True)

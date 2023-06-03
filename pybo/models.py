@@ -4,6 +4,7 @@ from users.models import User
 
 # Create your models here.
 
+
 class Course(models.Model):
     course_id = models.CharField(max_length=10, null=True)
     semester = models.IntegerField()
@@ -18,7 +19,7 @@ class Course(models.Model):
 
     @classmethod
     def get_course_by_id(cls, course_id, semester):
-        try :
+        try:
             return cls.objects.get(course_id=course_id, semester=semester)
         except cls.DoesNotExist:
             return None
@@ -53,4 +54,13 @@ class Takes(models.Model):
         self.delete()
 
 
-__all__ = ['Course', 'Takes']
+class Notice(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='notice')
+    num = models.IntegerField()
+    title = models.CharField(max_length=100, null=True)
+    writer = models.CharField(max_length=100, null=True)
+    date = models.DateField()
+    view = models.IntegerField()
+
+
+__all__ = ['Course', 'Takes', "Notice"]

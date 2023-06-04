@@ -21,6 +21,8 @@ def lecture_list(request):
     adv = []
     lname = []
     lplace = []
+    lecture = []
+    lec_id = []
     for i in lectures.all():
         if i.course.semester == int(value):
             et = i.course.end_time
@@ -32,14 +34,24 @@ def lecture_list(request):
             adv.append(i.course.advisor)
             lname.append(i.course.name)
             lplace.append(i.course.classroom)
-    context = {'semester' : value, 'runtime' : runtime, 'time' : time, 'day' : day, 'adv' : json.dumps(adv), 'lname' : json.dumps(lname), 'lplace' : json.dumps(lplace)}
-    #context = {'lectures' : lec,'times': times, 'days': days}
+    lec = Course.objects.filter(semester = '231')
+    for i in lec.all():
+        lecture.append(i.name)
+        lec_id.append(i.course_id)
+    context = {'semester' : value, 'runtime' : runtime, 'time' : time, 'day' : day, 'adv' : json.dumps(adv), 'lname' : json.dumps(lname), 'lplace' : json.dumps(lplace), 'lecture': json.dumps(lecture), 'lec_id': json.dumps(lec_id)}    #context = {'lectures' : lec,'times': times, 'days': days}
     return render(request, 'timetable.html', context)
 
 
-def lecture_detail(request, lecture_id):
+def lecture_select(request, lecture_id):
     print(lecture_id)
     lec = Course.get_course_by_id(lecture_id, 231)
+    takes=User.get_takes(request.user.student_id)
+    for i in takes.all():
+        if i.course.semester == lec.semester:
+            if i.course.start_time < lec.end_time and i.course.start_time >= lec.start_time:
+                return redirect('lecture_list')
+            if i.course.end_time <= lec.end_time and i.course.end_time > lec.start_time:
+                return redirect('lecture_list')
     lecture = Takes()
     lecture.student = User.get_student_by_id(request.user.student_id)
     print(lec)
@@ -79,24 +91,6 @@ def lecture_new(request):
     else:
         form = Takes()
     return render(request, 'lecture/create.html', {'form': form})
-
-def lecture_select(request):
-    form = Course.objects.all()
-    lec = []
-    for i in form.all():
-        if i.course_id is not None :
-            temp = {}
-            temp['day'] = i.day
-            temp['start_time'] = i.start_time
-            temp['end_time'] = i.end_time
-            temp['name'] = i.name
-            temp['id']=i.course_id
-            lec.append(temp)
-    if request.method == 'POST':
-        return redirect('lecture_list')
-    else:
-        form = Course.objects.all()
-    return render(request, 'lecture_select.html', {'lectures':lec})
 
 
 def lecture_edit(request, lecture_id):

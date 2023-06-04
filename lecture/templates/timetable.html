@@ -309,7 +309,13 @@
                     </div>
                 </div>
             </div>
-
+            <div class="frame-frame102"> 
+              <span id="textab", class="frame-textab">
+                <span>
+                  추가
+                </span>
+              </span>
+            </div>
             <!-- 상단바 (학기)-->
             <div class="flex items-center bg-sogang_blue fixed top-0 left-0 z-50 w-full h-16 dark:border-gray-600 mb-16">
                 <li class="mr-3 pl-4 pr-1 cursor-pointer list-none"  onClick="javascript:history.go(-1);">
@@ -368,8 +374,11 @@
       var adv = JSON.parse('{{ adv|safe }}');
       var lname = JSON.parse('{{ lname|safe }}');
       var lplace = JSON.parse('{{ lplace|safe }}');
+      var lecture = JSON.parse('{{ lecture|safe }}');
+      var lec_id = JSON.parse('{{ lec_id|safe }}');
       const modal = document.getElementById("model_add_feed");
       const modalw = document.getElementById("model_window");
+      const addtext = document.getElementById("textab");
       // 배열 값 사용 예시:
       var cond = 0;
       for (var i = 0; i < runtime.length; i++) {
@@ -409,6 +418,7 @@
         else div.classList.add("frame-frame641");
         div.appendChild(spanContainer);
         div.addEventListener("click", e=> {
+            event.stopPropagation();
             var target = e.target;
             if (e.target.className == "") target = e.target.parentNode.parentNode;
             console.log(target.id);
@@ -435,6 +445,71 @@
         container.appendChild(div);
         if (cond==1) i--;
       }
+      var comp = ""
+      addtext.addEventListener("click",e=> {
+        event.stopPropagation();
+        var input = document.createElement("input");
+        input.type = "text";
+        input.id = "search-input";
+        modalw.appendChild(input);
+        var button = document.createElement("button");
+        button.textContent = "검색";
+        button.addEventListener("click", f=> {
+            event.stopPropagation();
+            comp = document.getElementById("search-input").value;
+            console.log(comp);
+            var children = modalw.children;
+            for (var i = children.length-1; i>=3; i--) {
+                modalw.removeChild(children[i]);
+            }
+            for (var i = 0; i < lecture.length; i++) {
+                if (comp != "") {
+                    if (!lecture[i].includes(comp)) continue;
+                }
+                var span = document.createElement("span");
+                span.id = "span"+i.toString();
+                span.textContent = lecture[i];
+                span.addEventListener("click", g=> {
+                    window.location.href = '/lecture/select/'+lec_id[Number(g.target.id.slice(4))];
+                })
+                modalw.appendChild(span);
+                modalw.appendChild(document.createElement("br"));
+                modal.style.display = "flex";
+            }
+        })
+        modalw.appendChild(button);
+        modalw.appendChild(document.createElement("br"));
+        //modalw.appendChild(document.createElement("/button"));
+        for (var i = 0; i < lecture.length; i++) {
+            if (comp != "") {
+                if (!lecture[i].includes(comp)) continue;
+            }
+            var span = document.createElement("span");
+            span.id = "span"+i.toString();
+            span.textContent = lecture[i];
+            span.appendChild(document.createElement("br"));
+            span.addEventListener("click", g=> {
+                window.location.href = '/lecture/select/'+lec_id[Number(g.target.id.slice(4))];
+            })
+            modalw.appendChild(span);
+            modal.style.display = "flex";
+        }
+      })
+      document.addEventListener("click", function(event) {
+          event.stopPropagation();
+          var target = event.target;
+          
+          // 부모 프레임 외의 영역을 클릭한 경우
+          if (target !== modalw && !modalw.contains(target) && modal.style.display == "flex") {
+            // 외부 클릭 이벤트에 대한 동작을 여기에 작성합니다.
+            var children = modalw.children;
+            for (var i = children.length-1; i>=0; i--) {
+                modalw.removeChild(children[i]);
+            }
+            console.log("외부 클릭");
+            modal.style.display = "none";
+          }
+        })
       console.log("1\n");
     </script>
 

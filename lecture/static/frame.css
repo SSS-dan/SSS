@@ -34,6 +34,19 @@
   font-stretch: normal;
   text-decoration: none;
 }
+.frame-textab {
+  top: 87px;
+  right : 50px;
+  color: rgba(119, 132, 255, 1);
+  width: auto;
+  height: auto;
+  position: absolute;
+  font-size: 14px;
+  font-style: Bold;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 700;
+}
 .frame-frame10 {
   gap: var(--dl-space-space-sixunits);
   width: 100%;
@@ -187,6 +200,16 @@
   position: absolute;
   align-items: flex-start;
   flex-shrink: 0;
+}
+.frame-frame102 {
+  top: 120px;
+  left: 0px;
+  right: 0px;
+  width : 100%;
+  height : 100%;
+  margin: auto;
+  align-items: flex-start;
+  justify-content: flex-end;
 }
 .frame-frame17 {
   gap: 20px;
@@ -1034,7 +1057,7 @@
   display: none;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: end;
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(1.5px);
   -webkit-backdrop-filter: blur(1.5px);
@@ -1046,162 +1069,10 @@
   -webkit-backdrop-filter: blur(13.5px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  width: 800px;
+  width: 90%;
   height: 600px;
   position: relative;
+  overflow: auto;
   padding: 10px;
-}
-@media(max-width: 991px) {
-  .frame-frame {
-    top: 0px;
-    left: 0px;
-    width: 858px;
-    height: 100%;
-    position: absolute;
-  }
-  .frame-frame10 {
-    width: 100%;
-    z-index: 1;
-    position: static;
-    align-self: flex-end;
-    align-items: flex-end;
-    justify-content: center;
-  }
-  .frame-frame6button {
-    position: static;
-  }
-  .frame-text05 {
-    color: rgb(119, 132, 255);
-    font-size: 11px;
-    font-family: Inter;
-    font-weight: 400;
-    line-height: normal;
-    text-decoration: none;
-  }
-  .frame-frame5button {
-    left: var(--dl-space-space-threeunits);
-    position: static;
-  }
-  .frame-text06 {
-    color: rgb(119, 132, 255);
-    font-size: 11px;
-    font-family: Inter;
-    font-weight: 400;
-    line-height: normal;
-    text-decoration: none;
-  }
-  .frame-frame2button {
-    position: static;
-  }
-  .frame-text07 {
-    color: rgb(119, 132, 255);
-    font-size: 11px;
-    font-family: Inter;
-    font-weight: 400;
-    line-height: normal;
-    text-decoration: none;
-  }
-  .frame-frame3button {
-    position: static;
-  }
-  .frame-text08 {
-    color: rgb(119, 132, 255);
-    font-size: 11px;
-    font-family: Inter;
-    font-weight: 400;
-    line-height: normal;
-    text-decoration: none;
-  }
-  .frame-frame4button {
-    position: static;
-  }
-  .frame-text09 {
-    color: rgb(119, 132, 255);
-    font-size: 11px;
-    font-family: Inter;
-    font-weight: 400;
-    line-height: normal;
-    text-decoration: none;
-  }
-  .frame-frame101 {
-    top: 120px;
-    left: 0px;
-    right: 0px;
-    margin: auto;
-  }
-}
-@media(max-width: 767px) {
-  .frame-frame {
-    width: 100%;
-  }
-  .frame-frame10 {
-    gap: var(--dl-space-space-fourunits);
-    left: 0px;
-    right: 0px;
-    width: 100%;
-    bottom: 0px;
-    align-self: flex-end;
-    margin-top: 0px;
-    align-items: flex-end;
-    margin-bottom: 0px;
-    justify-content: center;
-  }
-  .frame-frame6button {
-    position: 0px;
-    align-self: flex-end;
-  }
-  .frame-text05 {
-    color: rgb(119, 132, 255);
-    font-size: 11px;
-    text-align: center;
-    font-family: Inter;
-    font-weight: 400;
-    line-height: normal;
-    text-decoration: none;
-  }
-  .frame-text06 {
-    font-size: 11px;
-  }
-  .frame-text07 {
-    font-size: 11px;
-  }
-  .frame-text08 {
-    color: rgb(119, 132, 255);
-    font-size: 11px;
-    font-family: Inter;
-    font-weight: 400;
-    line-height: normal;
-    text-decoration: none;
-  }
-  .frame-text09 {
-    color: rgb(119, 132, 255);
-    font-size: 11px;
-    font-family: Inter;
-    font-weight: 400;
-    line-height: normal;
-    text-decoration: none;
-  }
-
-  .frame-rectangle4 {
-    width: 698px;
-  }
-}
-@media(max-width: 479px) {
-  .frame-frame {
-    width: 100%;
-    height: 100%;
-    margin-bottom: 0px;
-    padding-bottom: 0px;
-  }
-  .frame-frame10 {
-    gap: var(--dl-space-space-twounits);
-    flex: 1;
-    flex-wrap: wrap;
-    align-self: flex-end;
-    align-items: flex-end;
-    justify-content: center;
-  }
-  .frame-frame6button {
-    position: 0px;
-  }
+  bottom: 50px;
 }

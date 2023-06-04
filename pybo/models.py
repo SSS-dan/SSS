@@ -59,8 +59,10 @@ class Notice(models.Model):
     num = models.IntegerField()
     title = models.CharField(max_length=100, null=True)
     writer = models.CharField(max_length=100, null=True)
+    file = models.URLField() # 링크 넣는곳
     date = models.DateField()
     view = models.IntegerField()
+    objects = models.Manager()
 
 
 __all__ = ['Course', 'Takes', "Notice"]

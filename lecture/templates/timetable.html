@@ -376,6 +376,7 @@
       var lplace = JSON.parse('{{ lplace|safe }}');
       var lecture = JSON.parse('{{ lecture|safe }}');
       var lec_id = JSON.parse('{{ lec_id|safe }}');
+      var real = JSON.parse('{{ real|safe }}');
       const modal = document.getElementById("model_add_feed");
       const modalw = document.getElementById("model_window");
       const addtext = document.getElementById("textab");
@@ -429,10 +430,83 @@
             span4.textContent = lname[i];
             modalw.appendChild(span4);
             modalw.appendChild(document.createElement("br"));
-            var span5 = document.createElement("span");
-            span5.textContent = "수정";
-            modalw.appendChild(span5);
-            modalw.appendChild(document.createElement("br"));
+            if (real[i]==0) {
+                var span5 = document.createElement("span");
+                span5.textContent = "수정";
+                span5.addEventListener("click", d=> {
+                    event.stopPropagation();
+                    var children = modalw.children;
+                    for (var j = children.length-1; j>=0; j--) {
+                        modalw.removeChild(children[j]);
+                    }
+                    var classNameInput = document.createElement('input');
+                    classNameInput.type = 'text';
+                    classNameInput.placeholder = '수업명';
+                    classNameInput.value = lname[i];
+                    modalw.appendChild(classNameInput);
+                    modalw.appendChild(document.createElement("br"));
+                    var professorNameInput = document.createElement('input');
+                    professorNameInput.type = 'text';
+                    professorNameInput.placeholder = '교수명';
+                    professorNameInput.value = adv[i];
+                    modalw.appendChild(professorNameInput);
+                    modalw.appendChild(document.createElement("br"));    
+                    var dayOfWeekLabel = document.createElement('label');
+                    var classroomInput = document.createElement('input');
+                    classroomInput.type = 'text';
+                    classroomInput.placeholder = '교실';
+                    classroomInput.value = lplace[i];
+                    modalw.appendChild(classroomInput);
+                    modalw.appendChild(document.createElement("br"));    
+                    var dayOfWeekLabel = document.createElement('label');
+                    dayOfWeekLabel.textContent = '요일';
+                    modalw.appendChild(dayOfWeekLabel);
+                
+                    var dayOfWeekSelect = document.createElement('select');
+                    dayOfWeekSelect.name = 'dayOfWeek';
+                    dayOfWeekSelect.id = 'dayOfWeek';
+                    modalw.appendChild(dayOfWeekSelect);
+
+                    var daysOfWeek = ['월요일', '화요일', '수요일', '목요일', '금요일'];
+                    for (var j = 0; j < daysOfWeek.length; j++) {
+                      var option = document.createElement('option');
+                      option.value = daysOfWeek[j];
+                      option.textContent = daysOfWeek[j];
+                      dayOfWeekSelect.appendChild(option);
+                    }
+                    modalw.appendChild(document.createElement("br"));   
+                    var startTimeLabel = document.createElement('label');
+                    startTimeLabel.textContent = '시작 시간 ';
+                    modalw.appendChild(startTimeLabel);
+                    var startTimeInput = document.createElement('input');
+                    startTimeInput.type = 'time';
+                    startTimeInput.placeholder = '시작 시간';
+                    modalw.appendChild(startTimeInput);
+                    modalw.appendChild(document.createElement("br"));  
+                    var endTimeLabel = document.createElement('label');
+                    endTimeLabel.textContent = '종료 시간 ';
+                    modalw.appendChild(endTimeLabel);
+                    var endTimeInput = document.createElement('input');
+                    endTimeInput.type = 'time';
+                    endTimeInput.placeholder = '종료 시간';
+                    modalw.appendChild(endTimeInput);
+                    modalw.appendChild(document.createElement("br"));
+                    var button3 = document.createElement("span");
+                    button3.textContent = "수정";
+                    button3.addEventListener("click",g=>{
+                        var children = modalw.children;
+                        //console.log(children[5].value);
+                        if (!children[0].value || !children[2].value || !children[4].value || !children[7].value || !children[10].value || !children[13].value) {
+                            alert('입력되지 않은 값이 있습니다. 다시 입력해 주세요.');
+                            event.preventDefault(); // 폼 제출 막기
+                        }
+                        else window.location.href = '/lecture/edit/' + i + '/' + children[0].value +'/' + children[2].value +'/' + children[4].value +'/'+ children[7].value +'/' + children[10].value + '/' + children[13].value;
+                    })
+                    modalw.appendChild(button3);
+                })
+                modalw.appendChild(span5);
+                modalw.appendChild(document.createElement("br"));
+            }
             var span6 = document.createElement("span");
             span6.textContent = "삭제";
             span6.addEventListener("click", d=> {
@@ -468,7 +542,7 @@
                 }
                 var span = document.createElement("span");
                 span.id = "span"+i.toString();
-                span.textContent = lecture[i];
+                span.textContent = lecture[i] + " " + lec_id[i];
                 span.addEventListener("click", g=> {
                     window.location.href = '/lecture/select/'+lec_id[Number(g.target.id.slice(4))];
                 })
@@ -478,6 +552,79 @@
             }
         })
         modalw.appendChild(button);
+        var button1 = document.createElement("span");
+        button1.textContent = "직접 추가";
+        button1.style.right = "30px";
+        button1.style.position = "absolute";
+        button1.addEventListener("click" , g => {
+            event.stopPropagation();
+            var children = modalw.children;
+            for (var i = children.length-1; i>=0; i--) {
+                modalw.removeChild(children[i]);
+            }
+            var classNameInput = document.createElement('input');
+            classNameInput.type = 'text';
+            classNameInput.placeholder = '수업명';
+            modalw.appendChild(classNameInput);
+            modalw.appendChild(document.createElement("br"));
+            var professorNameInput = document.createElement('input');
+            professorNameInput.type = 'text';
+            professorNameInput.placeholder = '교수명';
+            modalw.appendChild(professorNameInput);
+            modalw.appendChild(document.createElement("br"));    
+            var dayOfWeekLabel = document.createElement('label');
+            var classroomInput = document.createElement('input');
+            classroomInput.type = 'text';
+            classroomInput.placeholder = '교실';
+            modalw.appendChild(classroomInput);
+            modalw.appendChild(document.createElement("br"));    
+            var dayOfWeekLabel = document.createElement('label');
+            dayOfWeekLabel.textContent = '요일';
+            modalw.appendChild(dayOfWeekLabel);
+
+            var dayOfWeekSelect = document.createElement('select');
+            dayOfWeekSelect.name = 'dayOfWeek';
+            dayOfWeekSelect.id = 'dayOfWeek';
+            modalw.appendChild(dayOfWeekSelect);
+            
+            var daysOfWeek = ['월요일', '화요일', '수요일', '목요일', '금요일'];
+            for (var i = 0; i < daysOfWeek.length; i++) {
+              var option = document.createElement('option');
+              option.value = daysOfWeek[i];
+              option.textContent = daysOfWeek[i];
+              dayOfWeekSelect.appendChild(option);
+            }
+            modalw.appendChild(document.createElement("br"));   
+            var startTimeLabel = document.createElement('label');
+            startTimeLabel.textContent = '시작 시간 ';
+            modalw.appendChild(startTimeLabel);
+            var startTimeInput = document.createElement('input');
+            startTimeInput.type = 'time';
+            startTimeInput.placeholder = '시작 시간';
+            modalw.appendChild(startTimeInput);
+            modalw.appendChild(document.createElement("br"));  
+            var endTimeLabel = document.createElement('label');
+            endTimeLabel.textContent = '종료 시간 ';
+            modalw.appendChild(endTimeLabel);
+            var endTimeInput = document.createElement('input');
+            endTimeInput.type = 'time';
+            endTimeInput.placeholder = '종료 시간';
+            modalw.appendChild(endTimeInput);
+            modalw.appendChild(document.createElement("br"));
+            var button3 = document.createElement("span");
+            button3.textContent = "추가";
+            button3.addEventListener("click",g=>{
+                var children = modalw.children;
+                //console.log(children[5].value);
+                if (!children[0].value || !children[2].value || !children[4].value || !children[7].value || !children[10].value || !children[13].value) {
+                    alert('입력되지 않은 값이 있습니다. 다시 입력해 주세요.');
+                    event.preventDefault(); // 폼 제출 막기
+                }
+                else window.location.href = '/lecture/new/' + children[0].value +'/' + children[2].value +'/' + children[4].value +'/'+ children[7].value +'/' + children[10].value + '/' + children[13].value;
+            })
+            modalw.appendChild(button3);
+        })
+        modalw.appendChild(button1);
         modalw.appendChild(document.createElement("br"));
         //modalw.appendChild(document.createElement("/button"));
         for (var i = 0; i < lecture.length; i++) {
@@ -486,7 +633,7 @@
             }
             var span = document.createElement("span");
             span.id = "span"+i.toString();
-            span.textContent = lecture[i];
+            span.textContent = lecture[i] + " " + lec_id[i];
             span.appendChild(document.createElement("br"));
             span.addEventListener("click", g=> {
                 window.location.href = '/lecture/select/'+lec_id[Number(g.target.id.slice(4))];

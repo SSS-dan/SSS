@@ -40,15 +40,16 @@ def get_current_courses():
   crawls = crawl_notice('1')
   print(crawls)
   if crawls is not None :
-     for i in crawls:
+      for i in crawls:
         if Notice.objects.filter(mod=0,title=i['Title'],writer=i['Writer'],date=datetime.strptime(i['Date'], "%Y.%m.%d")) :
-           continue
+            continue
         notice=Notice()
         #print(i['Number'])
         if i['Number'] == 'TOP':
            i['Number'] = '132'
         notice.num = (int)(i['Number'])
         notice.title = i['Title']
+        notice.url = i['Link']
         notice.writer = i['Writer']
         notice.view = (int)(i['Views'].replace(",",""))
         notice.date = datetime.strptime(i['Date'], "%Y.%m.%d")

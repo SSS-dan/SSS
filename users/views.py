@@ -66,7 +66,8 @@ def mainpage(request):
         context = {
             'username': request.user.student_id,
             'student': User.objects.get(student_id=request.user.student_id),
-            'qr_code': 'data:image/png;base64,' + base64.b64encode(image_bytes).decode()
+            'qr_code': 'data:image/png;base64,' + base64.b64encode(image_bytes).decode(),
+            'notices': Notice.objects.all().order_by('-id')[:5],
         }
         return render(request, 'index.html', context=context)
     else:

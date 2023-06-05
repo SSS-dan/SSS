@@ -31,7 +31,7 @@ def crawl_notice(src):
         num = cols[0].get_text(strip=True)
         title = cols[1].find('a').get_text(strip=True)
 
-        link = "http://www.sogang.ac.kr" + cols[1].find('a')['href']
+        link = "m.sogang.ac.kr" + cols[1].find('a')['href']
         link = link.replace('¤', '&curren')
 
         writer = cols[2].get_text(strip=True)

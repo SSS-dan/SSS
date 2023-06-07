@@ -24,6 +24,7 @@ def lecture_list(request):
     lecture = []
     lec_id = []
     real = []
+    advi = []
     for i in lectures.all():
         if i.course.semester == int(value):
             et = i.course.end_time
@@ -41,7 +42,8 @@ def lecture_list(request):
     for i in lec.all():
         lecture.append(i.name)
         lec_id.append(i.course_id)
-    context = {'semester' : value, 'runtime' : runtime, 'time' : time, 'day' : day, 'adv' : json.dumps(adv), 'lname' : json.dumps(lname), 'lplace' : json.dumps(lplace), 'lecture': json.dumps(lecture), 'lec_id': json.dumps(lec_id), 'real':real}    #context = {'lectures' : lec,'times': times, 'days': days}
+        advi.append(i.advisor)
+    context = {'semester' : value, 'runtime' : runtime, 'time' : time, 'day' : day, 'adv' : json.dumps(adv), 'lname' : json.dumps(lname), 'lplace' : json.dumps(lplace), 'lecture': json.dumps(lecture), 'lec_id': json.dumps(lec_id), 'real':real, 'advi': json.dumps(advi)}    #context = {'lectures' : lec,'times': times, 'days': days}
     return render(request, 'timetable.html', context)
 
 

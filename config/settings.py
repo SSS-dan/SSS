@@ -121,6 +121,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+ALLOWED_HOSTS = ["10.1.219.96"]
+
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]

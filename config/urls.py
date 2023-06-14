@@ -20,6 +20,8 @@ from config.views import my_login_view, offline
 from users.views import mainpage  # import your view at the top
 from django.conf.urls.static import static
 from django.conf import settings
+from users.views import setting
+from users.views import upload_profile_picture
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +31,8 @@ urlpatterns = [
     path('posts/', include('posts.urls')),
     path('offline/', offline, name='offline'),
     path('sogang_gpt/', include('sogang_gpt.urls')),
+    path('setting/', setting),
+    path('upp/', upload_profile_picture),
     path(r'', mainpage, name='home'),
     #path('', include('pwa.urls')),
 ]

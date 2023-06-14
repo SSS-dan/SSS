@@ -1,9 +1,30 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/output.css' %}">
 <meta
         name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0"
 />
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">저장</button>
-</form>
+<body class="bg-gray-200 flex flex-col items-center  h-screen m-0">
+    <nav class="flex items-center bg-sogang_blue fixed top-0 left-0 z-50 w-full h-16 dark:border-gray-600 mb-16">
+        <li class="mr-3 pl-4 pr-1 cursor-pointer list-none"  onClick="javascript:history.go(-1);">
+            <i class="fa-solid fa-circle-arrow-left fa-xl text-white"></i>
+        </li>
+        <span class="text-white text-large justify-center absolute w-full mx-auto text-center">닉네임 생성</span>
+    </nav>
+    <div class="justify-center my-auto px-[15px] py-25">
+        <form method="post">
+            <div class="flex flex-col justify-start items-center relative gap-[18px]">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="my-button">
+                      <div class="px-[15px] py-2.5 rounded-[10px] bg-[#7585ff] border border-white"</div>
+                      <p class="text-base text-left text-white">작성</p>
+                    </div>
+                  </button>
+            </div>
+        </form>
+    </div>
+</body>
+
+{% include "partials/tabbar.html" %}
+{% block content %}{% endblock %}

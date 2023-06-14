@@ -17,6 +17,7 @@ module.exports = {
         sogang_blue: "#523CD8",
         sogang_light: "#7785FF",
       },
+
     },
   },
   plugins: [],

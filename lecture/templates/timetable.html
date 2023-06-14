@@ -378,6 +378,7 @@
       var lec_id = JSON.parse('{{ lec_id|safe }}');
       var real = JSON.parse('{{ real|safe }}');
       var advi = JSON.parse('{{ advi|safe }}');
+      var lec_idj = JSON.parse('{{ lec_idj | safe }}');
       const modal = document.getElementById("model_add_feed");
       const modalw = document.getElementById("model_window");
       const addtext = document.getElementById("textab");
@@ -430,6 +431,43 @@
             var span4 = document.createElement("span");
             span4.textContent = lname[i];
             modalw.appendChild(span4);
+            modalw.appendChild(document.createElement("br"));
+            var span7 = document.createElement("span");
+            span7.textContent = "강의 정보";
+            modalw.appendChild(span7);
+            span7.addEventListener("click", j=> {
+                event.stopPropagation();
+                var children = modalw.children;
+                for (var j = children.length-1; j>=0; j--) {
+                    modalw.removeChild(children[j]);
+                }
+                var span11 = document.createElement("span");
+                span11.textContent = "과목명 : " + lname[i];
+                modalw.appendChild(span11);
+                modalw.appendChild(document.createElement("br"));
+                var span12 = document.createElement("span");
+                span12.textContent = "교수명 : " + adv[i];
+                modalw.appendChild(span12);
+                modalw.appendChild(document.createElement("br"));
+                var span13 = document.createElement("span");
+                span13.textContent = "학기 : " + "2023년 1학기";
+                modalw.appendChild(span13);
+                modalw.appendChild(document.createElement("br"));
+                if (real[i]) {
+                    var span14 = document.createElement("span");
+                    span14.textContent = "과목코드 : " + lec_idj[i];
+                    modalw.appendChild(span14);
+                    modalw.appendChild(document.createElement("br"));
+                }
+                var span15 = document.createElement("span");
+                span15.textContent = "강의실 : " + lplace[i];
+                modalw.appendChild(span15);
+                modalw.appendChild(document.createElement("br"));
+                var span16 = document.createElement("span");
+                span16.textContent = "성적 : " + "Nan";
+                modalw.appendChild(span16);
+                modalw.appendChild(document.createElement("br"));
+            })
             modalw.appendChild(document.createElement("br"));
             if (real[i]==0) {
                 var span5 = document.createElement("span");

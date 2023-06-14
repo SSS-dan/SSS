@@ -38,8 +38,8 @@
                         <p class="text-sm">이름: {{ student.name }}</p>
                         <p class="text-sm">전공: {{ student.major }}</p>
                         <p class="text-sm">학번 : {{ username }}</p>
-                        <p class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mt-4"
-                            href="{% url 'upload_profile_picture' %}">사진 변경</p>
+                        <a class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mt-4"
+                            href="{% url 'upload_profile_picture' %}">사진 변경</a>
                     </div>
                 </div>
             {% else %}

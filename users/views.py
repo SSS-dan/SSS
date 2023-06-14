@@ -36,7 +36,11 @@ def upload_profile_picture(request):
 
 
 def setting(request):
-    return render(request, 'setting.html', {})
+    context = {
+        'username': request.user.student_id,
+        'student': User.objects.get(student_id=request.user.student_id),
+    }
+    return render(request, 'setting.html', context=context)
 
 
 def generate_qr_code(id):

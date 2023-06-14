@@ -5,58 +5,42 @@
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0"
 />
 <body class="bg-gray-200 flex flex-col items-center  h-screen m-0">
-    <nav class="flex items-center bg-sogang_blue fixed top-0 left-0 z-50 w-full h-16 dark:border-gray-600 mb-16">
-        <li class="mr-3 pl-4 pr-1 cursor-pointer list-none"  onClick="javascript:history.go(-1);">
-            <i class="fa-solid fa-circle-arrow-left fa-xl text-white"></i>
-        </li>
-        <span class="text-white text-large justify-center absolute w-full mx-auto text-center">게시글 작성</span>
-    </nav>
-    <div class="flex w-11/12 xl:w-1/3 justify-center my-auto h-4/6">
-        <form method="post" enctype="multipart/form-data" class="my-form">
-          {% csrf_token %}
-          <div class="flex flex-col justify-center items-center top-200">
-              <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-[127px]">
-                <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-3">
-                  <div
-                        class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2.5 px-[15px] py-2.5 rounded-[10px] bg-[#7585ff] border border-white"
-                      >
-                  {{ form.mod.errors }}
-                  {{ form.mod }}
-                  </div>
-                    <div
-                class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2.5 px-[15px] py-2.5 rounded-[10px] bg-[#7585ff] border border-white"
-              >
-                <p class="flex-grow-0 flex-shrink-0 text-base text-left text-white">{{ form.image }}</p>
-              </div>
+<nav class="flex items-center bg-sogang_blue fixed top-0 left-0 z-50 w-full h-16 dark:border-gray-600 mb-16">
+    <li class="mr-3 pl-4 pr-1 cursor-pointer list-none z-50" onClick="javascript:history.go(-1);">
+        <i class="fa-solid fa-circle-arrow-left fa-xl text-white"></i>
+    </li>
+    <span class="text-white text-large justify-center absolute w-full mx-auto text-center">게시글 작성</span>
+</nav>
 
+    <div class="w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 px-4 pt-24">
+        <form method="post" enctype="multipart/form-data" class="space-y-4">
+            {% csrf_token %}
 
-          <button type="submit" class="my-button"><div
-              class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2.5 px-[15px] py-2.5 rounded-[10px] bg-[#7585ff] border border-white"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-base text-left text-white">작성</p>
+            <div class="w-full">
+                <div class="text-red-500">{{ form.mod.errors }}</div>
+                <div class="w-full p-2 border border-gray-300 rounded bg-sogang_light">{{ form.mod }}</div>
             </div>
-          </button>
 
-                    <div
-            class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2.5 p-2.5"
-          >
-            <div
-              class="flex-grow-0 flex-shrink-0 w-[363px] h-[30px] rounded-[10px] bg-white border border-[#7575ff]"
-            >{{ form.title.errors }}
-          {{ form.title }}</div>
-          </div>
+            <div class="w-full p-2 border border-gray-300 rounded bg-sogang_light">
+                <div class="text-white">{{ form.image }}</div>
+            </div>
 
-            <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 relative gap-2.5 p-2.5">
-            <div
-              class="flex-grow-0 flex-shrink-0 w-[363px] h-[618px] bg-white border border-[#7575ff]"
-            >{{ form.content.errors }}
-          {{ form.content }}</div>
-          </div>
 
-          </div></div></div>
+            <div class="w-full">
+                <div class="text-red-500">{{ form.title.errors }}</div>
+                <div class="w-full p-2 border border-gray-300 rounded">{{ form.title }}</div>
+            </div>
+
+            <div class="w-full">
+                <div class="text-red-500">{{ form.content.errors }}</div>
+                <div class="w-full p-2 border border-gray-300 rounded">{{ form.content }}</div>
+            </div>
+            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                작성
+            </button>
         </form>
     </div>
-</body>
 
-{% include "partials/tabbar.html" %}
-{% block content %}{% endblock %}
+    {% include "partials/tabbar.html" %}
+    {% block content %}{% endblock %}
+</body>

@@ -49,6 +49,8 @@ def get_current_courses():
            i['Number'] = '132'
         notice.num = (int)(i['Number'])
         notice.title = i['Title']
+
+
         notice.url = i['Link']
         notice.writer = i['Writer']
         notice.view = (int)(i['Views'].replace(",",""))
@@ -59,8 +61,8 @@ def get_current_courses():
 
 
 def run():
-    #get_current_courses()
-    #sched = BackgroundScheduler()
-    #sched.add_job(get_current_courses,'interval', seconds=300000, id='test')
-    #sched.start()
+    # get_current_courses()
+    # sched = BackgroundScheduler()
+    # sched.add_job(get_current_courses,'interval', seconds=300000, id='test')
+    # sched.start()
     pass

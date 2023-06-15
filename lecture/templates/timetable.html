@@ -563,6 +563,7 @@
         event.stopPropagation();
         var input = document.createElement("input");
         input.type = "text";
+        input.className = "border"
         input.id = "search-input";
         input.addEventListener("keydown", function(evnet){
             if (event.keyCode === 13) { // Check if the Enter key was pressed (key code 13)
@@ -592,6 +593,8 @@
         modalw.appendChild(input);
         var button = document.createElement("button");
         button.textContent = "검색";
+        button.className = "inline-block bg-blue-500 text-white px-4 py-2 rounded text-decoration-none hover:bg-blue-700 mt-4";
+        button.style= "margin-top: 0px;"
         button.addEventListener("click", f=> {
             event.stopPropagation();
             comp = document.getElementById("search-input").value;
@@ -618,6 +621,9 @@
         modalw.appendChild(button);
         var button1 = document.createElement("span");
         button1.textContent = "직접 추가";
+        button1.className = "inline-block bg-blue-500 text-white px-4 py-2 rounded text-decoration-none hover:bg-blue-700 mt-4";
+        button1.style.marginLeft = "5px";
+        button1.style.marginTop = "0px";
         button1.style.right = "30px";
         button1.style.position = "absolute";
         button1.addEventListener("click" , g => {

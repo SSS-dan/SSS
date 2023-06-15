@@ -212,7 +212,7 @@
   justify-content: flex-end;
 }
 .frame-frame17 {
-  gap: 20px;
+  gap: 19.4px;
   top: -4px;
   left: 72px;
   width: 275px;
@@ -654,7 +654,7 @@
 }
 .frame-frame301 {
   gap: 40px;
-  top: -30px;
+  top: 24px;
   left: 67px;
   width: 285px;
   height: 800px;
@@ -667,11 +667,10 @@
 }
 .frame-frame281 {
   gap: 32px;
-  width: 20px;
   height: 700px;
   display: flex;
   padding: 10px;
-  padding-left: 54px;
+  padding-left: 53px;
   overflow: hidden;
   align-items: flex-start;
   flex-shrink: 0;
@@ -713,10 +712,9 @@
 }
 .frame-frame311 {
   gap: 32px;
-  width: 20px;
   height: 700px;
   display: flex;
-  padding: 10px;
+  padding: 8.7px;
   overflow: hidden;
   align-items: flex-start;
   flex-shrink: 0;

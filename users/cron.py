@@ -41,7 +41,7 @@ def get_current_courses():
   print(crawls)
   if crawls is not None :
     for i in range(len(crawls)) :
-        course = Course.get_course_by_id(crawls['과목번호'][i]+'-'+crawls['분반'][i],231)
+        course = Course.get_course_by_id(crawls['과목번호'][i]+'-'+crawls['분반'][i],222)
         #print(crawls['subject_id'][i])
         if course is None :
           course = Course()

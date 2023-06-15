@@ -1,35 +1,36 @@
+<!DOCTYPE html>
+<html>
+{% load pwa %}
+{% load static %}
+<head>
+    {% progressive_web_app_meta %}
+    <title>Sogang Link</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
 
-{% block title %} Home {% endblock %}
-{% block content %}
-<div class="row justify-content-center my-4">
-    <div class="col-md-7 mt-4">
-        <div class="card">
-            <h1 class="card-header text-center">A.I WEB ASSISTANT</h1>
-            <div class="card-body">
-              <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-primary mb-3" onclick="location.href='{% url 'new_chat' %}'">New Chat +</button>
-              </div>
-              <div class="chat-history mb-3">
-                {% for message in messages %}
-                  <div class="card mb-2 {% if message.role == 'assistant' %}bg-success text-white{% endif %}">
-                    <div class="card-body p-2">
-                      <strong>{{ message.role|title }}:</strong> {{ message.content|linebreaksbr }}
-                    </div>
-                  </div>
-                {% endfor %}
-              </div>
-              <form action="." method="POST">
-                <!-- this secures the form from malicious attacks during submission -->
-                {% csrf_token %}
-                <input class="form-control mb-2" required type="text" autofocus="autofocus" name="prompt" value="{{ prompt }}" id="">
-                <label for="temperature" class="form-label">Temperature:</label>
-                <input class="form-control mb-2" type="number" step="0.01" min="0" max="2" name="temperature" value="{{ temperature }}" id="temperature">
-                <button class="btn btn-success fw-bold" type="submit">
-                     GENERATE
-                </button>
-              </form>
-            </div>
-        </div>
-    </div>
-</div>
-{% endblock %}
+<body class="bg-gray-200 flex flex-col items-center  h-screen m-0">
+
+{# include "partials/nav.html" #}
+<nav class="flex items-center bg-sogang_blue fixed top-0 left-0 z-50 w-full h-16 dark:border-gray-600 mb-16">
+    <li class="cursor-pointer mr-3 pl-4 pr-1 cursor-pointer list-none z-50" onClick="javascript:history.go(-1);">
+        <i class="fa-solid fa-circle-arrow-left fa-xl text-white"></i>
+    </li>
+    <span class="font-bold text-white text-xl justify-center absolute w-full mx-auto text-center">Sogang Link</span>
+</nav>
+
+
+    {% csrf_token %}
+    <iframe id="iframe-id" src="https://www.chatpdf.com/share/Kp6HgeTrXOKqrwII8M4Jh?noheaderfooter" style="height:100%;width:100%; margin-top: 1rem; margin-bottom: 4rem; overflow: hidden;">
+ </iframe>
+
+
+
+{% include "partials/tabbar.html" %}
+{% block content %}{% endblock %}
+</body>
+</html>

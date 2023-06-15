@@ -38,8 +38,9 @@
                         <p class="text-sm">이름: {{ student.name }}</p>
                         <p class="text-sm">전공: {{ student.major }}</p>
                         <p class="text-sm">학번 : {{ username }}</p>
-                        <a class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mt-4"
-                            href="{% url 'upload_profile_picture' %}">사진 변경</a>
+                        <p class="text-sm">학기: {{ student.semester }}학기</p>
+                        <p class="text-sm">지도교수: {{ student.advisor }}</p>
+                        <p class="text-sm">닉네임: {{ student.nickname }}</p>
                     </div>
                 </div>
             {% else %}
@@ -51,6 +52,8 @@
 
         <div class="w-full my-4 bg-white p-8 rounded-xl shadow-md flex flex-col">
             <span class="font-bold text-lg">설정</span>
+            <button class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mt-4 " onclick="location.href='{% url 'upload_profile_picture' %}'">사진 변경</button>
+                        <button class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mt-4 " onclick="location.href='{% url 'nickname' %}'">닉네임 변경</button>
         </div>
 
     {% include "partials/tabbar.html" %}

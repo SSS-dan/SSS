@@ -35,6 +35,14 @@ def upload_profile_picture(request):
     return render(request, 'upload_profile_picture.html', {'form': form})
 
 
+def functions(request):
+    context = {
+        'username': request.user.student_id,
+        'student': User.objects.get(student_id=request.user.student_id),
+    }
+    return render(request, 'functions.html', context=context)
+
+
 def setting(request):
     context = {
         'username': request.user.student_id,

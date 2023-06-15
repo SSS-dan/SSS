@@ -6,6 +6,7 @@
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0"
 />
 <!-- 게시글 목록 -->
+<body class="bg-gray-200">
 <nav class="flex items-center bg-sogang_blue fixed top-0 left-0 z-50 w-full h-16 dark:border-gray-600 mb-16">
     <li class="mr-3 pl-4 pr-1 cursor-pointer list-none"  onClick="javascript:history.go(-1);">
         <i class="fa-solid fa-circle-arrow-left fa-xl text-white"></i>
@@ -52,10 +53,10 @@
 </style>
 
 
-<div class="pt-24 space-y-4">
+<div class="pt-24 px-2 space-y-6">
     {% for post in posts %}
-        <a href="{% url 'post_detail' post_id=post.id %}">
-            <div class="flex flex-col justify-start items-start overflow-hidden gap-2.5 px-2 py-[11px] rounded-[90px] bg-white border border-[#523cd8]">
+        <a href="{% url 'post_detail' post_id=post.id %}" class="block">
+            <div class="flex flex-col justify-start items-start overflow-hidden gap-2.5 px-2 py-[11px] bg-white bg-white rounded-xl shadow-md">
                 <div class="flex flex-col justify-center items-start flex-grow-0 flex-shrink-0 w-[373px] relative gap-2.5 pl-2.5 pr-4">
                     <p class="font-medium flex-grow-0 flex-shrink-0 w-[373px] text-2xl text-left hover:text-indigo-600">
                         <span class="flex-grow-0 flex-shrink-0 w-[373px] text-2xl text-left text-black hover:text-indigo-600">{{ post.title }} </span>
@@ -73,7 +74,7 @@
     {% empty %}
         <p class="text-gray-500">게시글이 없습니다.</p>
     {% endfor %}
-<!-- 게시글 작성 버튼 -->
+    <!-- 게시글 작성 버튼 -->
     <a class="inline-block bg-blue-500 text-white px-4 py-2 rounded text-decoration-none hover:bg-blue-700 mt-4"
        href="{% url 'create_post' %}">게시글 작성</a>
 </div>
@@ -81,5 +82,7 @@
 
 
 
+
 {% include "partials/tabbar.html" %}
 {% block content %}{% endblock %}
+</body>

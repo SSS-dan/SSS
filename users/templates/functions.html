@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+{% load pwa %}
+{% load static %}
+<head>
+    {% progressive_web_app_meta %}
+    <title>Sogang Portal</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0"
+    />
+
+
+</head>
+<body class="bg-gray-200 flex flex-col items-center  h-screen m-0">
+
+{# include "partials/nav.html" #}
+<nav class="flex items-center bg-sogang_blue fixed top-0 left-0 z-50 w-full h-16 dark:border-gray-600 mb-16">
+    <li class="cursor-pointer mr-3 pl-4 pr-1 cursor-pointer list-none z-50" onClick="javascript:history.go(-1);">
+        <i class="fa-solid fa-circle-arrow-left fa-xl text-white"></i>
+    </li>
+    <span class="font-bold text-white text-xl justify-center absolute w-full mx-auto text-center">Sogang Link</span>
+</nav>
+
+<div class="flex w-11/12 xl:w-1/3 flex-wrap justify-center pt-48">
+    {% csrf_token %}
+
+    <!-- Chat Icon -->
+    <button class="text-xl flex flex-col  align-middle items-center mx-2 justify-center pt-12" onclick="location.href='{% url 'sogang_gpt' %}'">
+    <div class="flex items-center justify-center bg-white w-24 h-24 rounded-xl shadow-md ">
+        <i class="fas fa-comments fa-xl text-teal-600"></i>
+    </div>
+    <span class="pt-4 text-xs">Sogang GPT</span>
+    </button>
+
+
+    <!-- Map Icon -->
+    <button class="text-xl flex flex-col  align-middle items-center mx-2 justify-center pt-12" onclick="location.href='https://m.sogang.ac.kr/intro/campus/c_campusmap.html'">
+        <div class="flex items-center justify-center bg-white w-24 h-24 rounded-xl shadow-md">
+            <i class="fas fa-map-marker-alt fa-xl text-blue-400"></i>
+        </div>
+        <span class="pt-4 text-xs">안내도</span>
+    </button>
+
+    <!-- Library Icon -->
+    <button class="text-xl flex flex-col  align-middle items-center mx-2 justify-center pt-12" onclick="location.href='http://libseat.sogang.ac.kr/seat/domian5m.asp'">
+        <div class="flex items-center justify-center bg-white w-24 h-24 rounded-xl shadow-md">
+            <i class="fas fa-book fa-xl text-red-400"></i>
+        </div>
+        <span class="pt-4 text-xs">열람실 현황</span>
+    </button>
+
+    <!-- Home Icon -->
+    <button class="text-xl flex flex-col  align-middle items-center mx-2 justify-center pt-12" onclick="location.href='https://m.sogang.ac.kr/index.do'">
+        <div class="flex items-center justify-center bg-white w-24 h-24 rounded-xl shadow-md">
+            <i class="fas fa-home fa-xl text-purple-400"></i>
+        </div>
+        <span class="pt-4 text-xs">학교 홈페이지</span>
+    </button>
+
+    <!-- Calendar Icon -->
+    <button class="text-xl flex flex-col  align-middle items-center mx-2 justify-center pt-12" onclick="location.href='https://m.sogang.ac.kr/bachelor/sch_2023.html'">
+        <div class="flex items-center justify-center bg-white w-24 h-24 rounded-xl shadow-md">
+            <i class="fas fa-calendar-alt fa-xl text-orange-400"></i>
+        </div>
+        <span class="pt-4 text-xs">학사일정</span>
+    </button>
+
+    <!-- Webmail Icon -->
+    <button class="text-xl flex flex-col  align-middle items-center mx-2 justify-center pt-12" onclick="location.href='https://mail.sogang.ac.kr/'">
+        <div class="flex items-center justify-center bg-white w-24 h-24 rounded-xl shadow-md">
+            <i class="fas fa-envelope fa-xl text-lime-400"></i>
+        </div>
+        <span class="pt-4 text-xs">웹메일</span>
+    </button>
+
+    <!--
+    <div class="w-full my-4 bg-white p-8 rounded-xl shadow-md flex flex-col">
+
+    </div>
+
+    <div class="w-full my-4 bg-white p-8 rounded-xl shadow-md flex flex-col">
+
+    </div>
+    -->
+</div>
+
+
+{% include "partials/tabbar.html" %}
+{% block content %}{% endblock %}
+</body>
+</html>

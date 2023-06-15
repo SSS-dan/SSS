@@ -5,6 +5,6 @@ from . import views
 
 # a list of all the urls
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('', views.home, name='sogang_gpt'),
     path('new_chat/', views.new_chat, name='new_chat'),
 ]

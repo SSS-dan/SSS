@@ -8,12 +8,13 @@ from users.models import User
 import json
 
 value = '231'
+lec_idj = []
 
 def lecture_list(request):
     user = request.user
     #print(user.student_id)
-    lectures = User.get_takes(user.student_id)
     global value
+    lectures = User.get_takes(user.student_id)
     if request.method == 'POST':
         value = request.POST['value']
         #print(value)
@@ -27,6 +28,7 @@ def lecture_list(request):
     lec_id = []
     real = []
     advi = []
+    global lec_idj
     lec_idj = []
     for i in lectures.all():
         if i.course.semester == int(value):
@@ -44,7 +46,6 @@ def lecture_list(request):
             else: real.append(0)
     lec = Course.objects.filter(semester = value)
     for i in lec.all():
-        print(i.name)
         lecture.append(i.name)
         lec_id.append(i.course_id)
         advi.append(i.advisor)
@@ -53,7 +54,6 @@ def lecture_list(request):
 
 
 def lecture_select(request, lecture_id):
-    print(lecture_id)
     global value
     lec = Course.get_course_by_id(lecture_id, int(value))
     takes=User.get_takes(request.user.student_id)
@@ -147,8 +147,12 @@ def lecture_edit(request, lecture_id,name,advisor,classroom,day,start_time,end_t
 
 def lecture_delete(request, lecture_id):
     user = request.user
-    lectures = User.get_takes(user.student_id)
-    lectures.all()[int(lecture_id)].delete()
+    global lec_idj
+    Course().get_course_by_id(lec_idj[int(lecture_id)],int(value)).delete()
+    #lectures = User.get_takes(user.student_id)
+    #lectures = lectures.course.objects.filter(semster = int(value))
+    #lectures.all()[int(lecture_id)].delete()
+
     #lecture = Course.get_course_by_id(lecture_id,231)
     #lecture.delete()
     return redirect('lecture_list')

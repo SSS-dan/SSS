@@ -37,6 +37,34 @@ def get_current_courses():
         course.name = crawls['과목명'][i]
         course.semester = 231
         course.save()
+  crawls = crawl_courses('22','2')
+  print(crawls)
+  if crawls is not None :
+    for i in range(len(crawls)) :
+        course = Course.get_course_by_id(crawls['과목번호'][i]+'-'+crawls['분반'][i],231)
+        #print(crawls['subject_id'][i])
+        if course is None :
+          course = Course()
+        course.advisor = crawls['교수진'][i]
+        course.classroom = crawls['강의실'][i]
+        course.course_id = crawls['과목번호'][i]+'-'+crawls['분반'][i]
+        #print(crawls['요일1'][i])
+        if len(crawls['요일1'][i]) == 0 or len(crawls['요일1'][i])>5:
+           day = 88
+        else :
+           day = daytoint[crawls['요일1'][i].split(',')[0]]
+           if len(crawls['요일1'][i].split(','))>1:
+              day = day*10 + daytoint[crawls['요일1'][i].split(',')[1]]
+        course.day = day
+        if len(crawls['종료시간1'][i]) == 0 :
+          course.end_time = datetime.strptime('09:00', '%H:%M').time()
+          course.start_time = datetime.strptime('09:00', '%H:%M').time()
+        else :
+          course.end_time = datetime.strptime(crawls['종료시간1'][i], '%H:%M').time()
+          course.start_time = datetime.strptime(crawls['시작시간1'][i], '%H:%M').time()
+        course.name = crawls['과목명'][i]
+        course.semester = 222
+        course.save()
   crawls = crawl_notice('1')
   print(crawls)
   if crawls is not None :

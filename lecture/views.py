@@ -7,11 +7,13 @@ from datetime import datetime,time
 from users.models import User
 import json
 
+value = '231'
+
 def lecture_list(request):
     user = request.user
     #print(user.student_id)
     lectures = User.get_takes(user.student_id)
-    value = '231'
+    global value
     if request.method == 'POST':
         value = request.POST['value']
         #print(value)
@@ -40,8 +42,9 @@ def lecture_list(request):
             lec_idj.append(i.course.course_id)
             if i.real: real.append(1)
             else: real.append(0)
-    lec = Course.objects.filter(semester = '231')
+    lec = Course.objects.filter(semester = value)
     for i in lec.all():
+        print(i.name)
         lecture.append(i.name)
         lec_id.append(i.course_id)
         advi.append(i.advisor)
@@ -51,7 +54,8 @@ def lecture_list(request):
 
 def lecture_select(request, lecture_id):
     print(lecture_id)
-    lec = Course.get_course_by_id(lecture_id, 231)
+    global value
+    lec = Course.get_course_by_id(lecture_id, int(value))
     takes=User.get_takes(request.user.student_id)
     for i in takes.all():
         if i.course.semester == lec.semester:
@@ -73,10 +77,11 @@ def lecture_select(request, lecture_id):
 daytoint = {'월요일':1, '화요일':2, '수요일':3, '목요일':4, '금요일':5, '토요일':6, '일요일':7}
 @login_required
 def lecture_new(request,name,advisor,classroom,day,start_time,end_time):
+    global value
     print(request.user)
     form = Course()
     form.course_id = None
-    form.semester = 231
+    form.semester = int(value)
     form.name = name
     form.day = daytoint[day]
     form.start_time = datetime.strptime(start_time,"%H:%M").time()

@@ -43,17 +43,17 @@ class PasswordlessAuthBackend(ModelBackend):
             take.student = user
             take.real = True
             take.save()
-        info = get_takes_info_by_semester(cookies,'2022020')
+        info = get_takes_info_by_semester(cookies,'2019010')
         takes = User.get_takes(student_id=student_id)
         for i in takes.all() :
-            if i.real is True & i.course.semester == 222:
+            if i.real is True & i.course.semester == 191:
                 print(i)
                 Takes.delete_takes(i)
         print(info)
         for key,value in info.items():
             take = Takes()
             print(value)
-            take.course = Course.get_course_by_id(value['course_number']+'-'+value['course_class'],222)            
+            take.course = Course.get_course_by_id(value['course_number']+'-'+value['course_class'],191)            
             take.student = user
             take.real = True
             take.save()

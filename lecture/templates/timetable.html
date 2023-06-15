@@ -86,8 +86,8 @@
               {% if semester == "231" %}
                   <span>2023년 1학기</span>
               {% endif %}
-                {% if semester == "222" %}
-                    <span>2022년 2학기</span>
+                {% if semester == "191" %}
+                    <span>2019년 1학기</span>
                 {% endif %}
                 {% if semester == "221" %}
                     <span>2022년 1학기</span>
@@ -332,9 +332,9 @@
                     </form>
                     <form action="{% url 'lecture_list' %}" method="POST" class="mr-3 px-1">
                         {% csrf_token %}
-                        <input type="hidden" name="value" value="222">
-                        <button type="submit" class="inline-block rounded-full py-1 px-3 {% if semester == "222" %}bg-sogang_light text-white{% else %}bg-white text-sogang_blue hover:bg-gray-200{% endif %}">
-                            <span>2022-2</span>
+                        <input type="hidden" name="value" value="191">
+                        <button type="submit" class="inline-block rounded-full py-1 px-3 {% if semester == "191" %}bg-sogang_light text-white{% else %}bg-white text-sogang_blue hover:bg-gray-200{% endif %}">
+                            <span>2019-1</span>
                         </button>
                     </form>
                     <form action="{% url 'lecture_list' %}" method="POST" class="mr-3 px-1">

@@ -9,7 +9,7 @@ daytoint = {'월':1, '화':2, '수':3, '목':4, '금':5, '토':6, '일':7}
 def get_current_courses():
   #반복되는 함수 course를 받아와서 데이터베이스에 저장해줌
   crawls = None
-  #crawls = crawl_courses('23','1')
+  crawls = crawl_courses('23','1')
   print(crawls)
   if crawls is not None :
     for i in range(len(crawls)) :
@@ -65,7 +65,7 @@ def get_current_courses():
         course.name = crawls['과목명'][i]
         course.semester = 191
         course.save()
-  #crawls = crawl_notice('1')
+  crawls = crawl_notice('1')
   print(crawls)
   if crawls is not None :
       for i in crawls:
@@ -89,7 +89,7 @@ def get_current_courses():
 
 
 def run():
-    #get_current_courses()
+    # get_current_courses()
     # sched = BackgroundScheduler()
     # sched.add_job(get_current_courses,'interval', seconds=300000, id='test')
     # sched.start()

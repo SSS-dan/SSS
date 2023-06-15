@@ -15,7 +15,7 @@ class PostForm(forms.ModelForm):
         (2, '익명 게시판'),
         (3, '질의응답'),
         (4, '자료실'),
-        (5, '학식'),
+        (5, '맛집'),
     ]
     mod = forms.ChoiceField(choices=board_choices)
     image = forms.ImageField(required=False)

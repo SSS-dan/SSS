@@ -32,7 +32,7 @@ class PasswordlessAuthBackend(ModelBackend):
         info = get_takes_info_by_semester(cookies,'2023010')
         takes = User.get_takes(student_id=student_id)
         for i in takes.all():
-            if i.real is True and i.course.semester == 231:
+            if i.real is True & i.course.semester == 231:
                 print(i)
                 Takes.delete_takes(i)
         print(info)
@@ -46,7 +46,7 @@ class PasswordlessAuthBackend(ModelBackend):
         info = get_takes_info_by_semester(cookies,'2022020')
         takes = User.get_takes(student_id=student_id)
         for i in takes.all() :
-            if i.real is True and i.course.semester == 222:
+            if i.real is True & i.course.semester == 222:
                 print(i)
                 Takes.delete_takes(i)
         print(info)
